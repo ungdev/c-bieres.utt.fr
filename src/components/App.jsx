@@ -1,6 +1,20 @@
 import React from 'react';
 
+import AuthService from '../services/AuthService';
+
 export default class App extends React.Component {
+
+    constructor() {
+        super();
+
+        this.takePart = this.takePart.bind(this);
+    }
+
+    takePart() {
+        AuthService.getRedirectLink()
+            .then(response => console.log(response))
+            .catch(err => console.log(err));
+    }y
 
     render() {
         return (
@@ -13,7 +27,7 @@ export default class App extends React.Component {
                     <div className="banner-inner">
                         <h1>Club bières</h1><br />
                         <p>Prochaine dégustation le 17 mars.</p>
-                        <button>J'en suis <i className="fa fa-beer"></i></button>
+                        <button onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
                     </div>
                 </section>
 
