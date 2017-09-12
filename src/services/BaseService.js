@@ -18,7 +18,6 @@ export default class BaseService {
      * @return Promise
      */
      makeRequest(data) {
-         console.log(Object.assign(data, REQUEST_TEMPLATE));
          return new Promise((resolve, reject) => {
              axios(Object.assign(data, REQUEST_TEMPLATE))
                 .then(response => resolve(response))

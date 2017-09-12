@@ -12,7 +12,7 @@ export default class App extends React.Component {
 
     takePart() {
         AuthService.getRedirectLink()
-            .then(response => console.log(response))
+            .then(response => window.location.replace(response.data.redirectUri))
             .catch(err => console.log(err));
     }y
 
