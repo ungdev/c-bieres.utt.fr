@@ -2689,6 +2689,7 @@ html {
       line-height: 1.5; }
 
 .footer {
+    position: relative;
   background: #333;
   padding: 1em;
   width: 100%;
@@ -2704,8 +2705,12 @@ html {
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     font-size: 2em; }
-    .footer ul li a:focus, .footer ul li a:hover {
+    .footer ul li a:focus, .footer ul li a:hover, .footer .dashboard-link a:focus, .footer .dashboard-link a:hover {
       color: white; }
+     .footer .dashboard-link a {
+         color: rgba(255, 255, 255, 0.4);
+         text-decoration: none;
+     }
 
 body {
   overflow-x: hidden; }
@@ -2732,3 +2737,11 @@ body {
     display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */
+
+.dashboard-link {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    line-height: 50px;
+    vertical-align: middle;
+}
