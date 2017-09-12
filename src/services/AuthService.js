@@ -9,6 +9,14 @@ class AuthService extends BaseService {
         });
     }
 
+    sendAuthorizationCode(authorization_code) {
+        return this.makeRequest({
+            method: "post",
+            url: "http://localhost:3000/api/oauth/etuutt/callback",
+            data: {authorization_code}
+        });
+    }
+
 }
 
 export default new AuthService();

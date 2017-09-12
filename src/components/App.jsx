@@ -10,6 +10,28 @@ export default class App extends React.Component {
         this.takePart = this.takePart.bind(this);
     }
 
+    componentDidMount() {
+        // check if there is an authorization code
+       const fullUrl = window.location.href;
+       const searchPart = fullUrl.split('?')[1];
+
+       if (searchPart) {
+           const parameters = searchPart.split('&');
+
+           const authorization_code = parameters
+               .map(p => p.split('='))
+               .find(p => p[0] === "authorization_code");
+
+           // if there is an authorization_code, send it to get an access token
+           if (authorization_code) {
+               AuthService.sendAuthorizationCode(authorization_code[1])
+                    .then(response => console.log(response))
+                    .catch(err => console.log(err));
+           }
+       }
+
+    }
+
     takePart() {
         AuthService.getRedirectLink()
             .then(response => window.location.replace(response.data.redirectUri))
