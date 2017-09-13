@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import EventService from '../../../services/EventService';
 
 export default class Event extends React.Component {
@@ -17,7 +19,7 @@ export default class Event extends React.Component {
         this._toggleCreateForm = this._toggleCreateForm.bind(this);
         this._handleNameChange = this._handleNameChange.bind(this);
         this._handleDateChange = this._handleDateChange.bind(this);
-        this._submitForm = this._submitForm.bind(this);
+        this._submitCreateForm = this._submitCreateForm.bind(this);
         this._deleteEvent = this._deleteEvent.bind(this);
     }
 
@@ -31,7 +33,7 @@ export default class Event extends React.Component {
         this.setState({ showCreateForm: !this.state.showCreateForm });
     }
 
-    _submitForm() {
+    _submitCreateForm() {
         EventService.create({
             name: this.state.name,
             when: this.state.date
@@ -79,7 +81,7 @@ export default class Event extends React.Component {
                                         <label htmlFor="date">Date</label>
                                         <input type="date" onChange={this._handleDateChange} className="form-control" id="date" />
                                     </div>
-                                    <button type="submit" onClick={this._submitForm} className="btn btn-success btn-lg">Créer</button>
+                                    <button type="submit" onClick={this._submitCreateForm} className="btn btn-success btn-lg">Créer</button>
                                 </form>
                             </div>
                         :
@@ -104,8 +106,10 @@ export default class Event extends React.Component {
                                                 <td>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</td>
                                                 <td>
                                                     <div className="btn-group" role="group" aria-label="actions">
-                                                        <button type="button" className="btn btn-success">Modifier</button>
-                                                        <button type="button" onClick={_ => this._deleteEvent(event._id)} className="btn btn-danger">Supprimer</button>
+                                                        <Link className="btn btn-success"role="button" to={`/dashboard/event/${event._id}/update`}>Modifier</Link>
+                                                        <button type="button" onClick={_ => this._deleteEvent(event._id)} className="btn btn-danger">
+                                                            Supprimer
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
