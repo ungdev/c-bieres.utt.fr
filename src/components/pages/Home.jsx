@@ -103,7 +103,7 @@ export default class Home extends React.Component {
                         <li><a href="https://www.facebook.com/groups/806374509420087/?fref=ts"><i className="fa fa-facebook"></i></a></li>
                     </ul>
                     <span className="dashboard-link">
-                        <Link to={'dashboard'}>Admin</Link>
+                        <Link to={'dashboard/event'}>Admin</Link>
                     </span>
                 </footer>
             </div>

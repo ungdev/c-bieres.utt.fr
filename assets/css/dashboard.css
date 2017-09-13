@@ -36,6 +36,14 @@
   border-radius: 0;
 }
 
+
+
 .page-content {
     margin-top: 56px;
+}
+
+.custom-form-container {
+    padding: 10px;
+    background: #FAFAFA;
+    border: 1px solid #E0E0E0;
 }
