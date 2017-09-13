@@ -18,6 +18,7 @@ export default class Event extends React.Component {
         this._handleNameChange = this._handleNameChange.bind(this);
         this._handleDateChange = this._handleDateChange.bind(this);
         this._submitForm = this._submitForm.bind(this);
+        this._deleteEvent = this._deleteEvent.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,12 @@ export default class Event extends React.Component {
             events.push(response.data);
             this.setState({ events, showCreateForm: false })
         })
+        .catch(err => console.error(err));
+    }
+
+    _deleteEvent(id) {
+        EventService.delete(id)
+        .then(response => this.setState({ events: this.state.events.filter(event => event._id !== id) }))
         .catch(err => console.error(err));
     }
 
@@ -95,7 +102,12 @@ export default class Event extends React.Component {
                                     return  <tr key={event._id}>
                                                 <td>{event.name}</td>
                                                 <td>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</td>
-                                                <td></td>
+                                                <td>
+                                                    <div className="btn-group" role="group" aria-label="actions">
+                                                        <button type="button" className="btn btn-success">Modifier</button>
+                                                        <button type="button" onClick={_ => this._deleteEvent(event._id)} className="btn btn-danger">Supprimer</button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                 })
                             }

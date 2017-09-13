@@ -92,7 +92,7 @@ export default class BaseService {
      * @param id: the id of the object to delete
      * @returns {Promise}
      */
-    destroy(id) {
+    delete(id) {
         return this.makeRequest({
             method: 'delete',
             url: this._baseUrl + '/' + id
