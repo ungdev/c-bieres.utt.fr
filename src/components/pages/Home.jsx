@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 import AuthService from '../../services/AuthService';
 
+import '../../../assets/js/vendor/covervid.js';
+import '../../../assets/js/main.js';
+
 export default class Home extends React.Component {
 
     constructor() {
