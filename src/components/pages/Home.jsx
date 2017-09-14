@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import Beer from '../home/Beer.jsx';
 
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
@@ -16,7 +17,13 @@ export default class Home extends React.Component {
         super();
 
         this.state = {
-            nextEvent: null
+            nextEvent: null,
+            beers: [
+                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
+                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
+                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
+                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."}
+            ]
         };
 
         this.takePart = this.takePart.bind(this);
@@ -100,39 +107,9 @@ export default class Home extends React.Component {
                     <section>
                         <div id="beers" className="content">
                             <h1>Les bières</h1>
-
-                            <div className="side-image">
-                                <div className="images-wrapper"></div>
-                                <div className="side-image-content">
-                                    <h4>Mystère</h4>
-                                    <h1>Inconnue</h1>
-                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                                </div>
-                            </div>
-                            <div className="side-image">
-                                <div className="side-image-content">
-                                    <h4>Mystère</h4>
-                                    <h1>Inconnue</h1>
-                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                                </div>
-                                <div className="images-wrapper"></div>
-                            </div>
-                            <div className="side-image">
-                                <div className="images-wrapper"></div>
-                                <div className="side-image-content">
-                                    <h4>Mystère</h4>
-                                    <h1>Inconnue</h1>
-                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                                </div>
-                            </div>
-                            <div className="side-image">
-                                <div className="side-image-content">
-                                    <h4>Mystère</h4>
-                                    <h1>Inconnue</h1>
-                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                                </div>
-                                <div className="images-wrapper"></div>
-                            </div>
+                            {
+                                this.state.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
+                            }
                         </div>
                     </section>
                 }
