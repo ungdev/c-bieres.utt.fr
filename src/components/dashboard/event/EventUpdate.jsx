@@ -1,6 +1,7 @@
 import React from 'react';
 
-import EventService from '../../../services/EventService';
+import EventActions from '../../../actions/EventActions';
+import EventStore from '../../../stores/EventStore';
 
 export default class EventUpdate extends React.Component {
 
@@ -18,9 +19,18 @@ export default class EventUpdate extends React.Component {
     }
 
     componentDidMount() {
-        EventService.getById(this.state.id)
-            .then(response => this.setState({ event: response.data }))
-            .catch(err => console.error(err));
+        // listen the store change
+        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+        // trigger action for the store to load the event
+        EventActions.getEvent(this.state.id);
+    }
+
+    componentWillUnmount() {
+        EventStore.removeChangeListener(this._onEventStoreChange);
+    }
+
+    _onEventStoreChange() {
+        this.setState({ event: EventStore.getById(this.state.id) });
     }
 
     _handleNameChange(e) {
@@ -36,9 +46,7 @@ export default class EventUpdate extends React.Component {
     }
 
     _submitUpdateForm() {
-        EventService.update(this.state.id, this.state.event)
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+        EventActions.updateEvent(this.state.id, this.state.event);
     }
 
     render() {

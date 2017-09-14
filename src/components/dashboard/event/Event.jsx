@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import EventService from '../../../services/EventService';
+import EventActions from '../../../actions/EventActions';
+import EventStore from '../../../stores/EventStore';
 
 export default class Event extends React.Component {
 
@@ -24,9 +25,18 @@ export default class Event extends React.Component {
     }
 
     componentDidMount() {
-        EventService.get()
-            .then(response => this.setState({ events: response.data }))
-            .catch(err => console.error(err));
+        // listen the store change
+        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+        // trigger action for the store to load events
+        EventActions.getEvents();
+    }
+
+    componentWillUnmount() {
+        EventStore.removeChangeListener(this._onEventStoreChange);
+    }
+
+    _onEventStoreChange() {
+        this.setState({ events: EventStore.events });
     }
 
     _toggleCreateForm() {
@@ -34,22 +44,14 @@ export default class Event extends React.Component {
     }
 
     _submitCreateForm() {
-        EventService.create({
+        EventActions.createEvent({
             name: this.state.name,
             when: this.state.date
-        })
-        .then(response => {
-            let events = this.state.events;
-            events.push(response.data);
-            this.setState({ events, showCreateForm: false })
-        })
-        .catch(err => console.error(err));
+        });
     }
 
     _deleteEvent(id) {
-        EventService.delete(id)
-        .then(response => this.setState({ events: this.state.events.filter(event => event._id !== id) }))
-        .catch(err => console.error(err));
+        EventActions.deleteEvent(id)
     }
 
     _handleNameChange(event) {
