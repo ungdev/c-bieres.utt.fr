@@ -27,6 +27,19 @@ class EventStore extends BaseStore {
         return {};
     }
 
+    getNext() {
+        const now = new Date().getTime();
+        let next = null;
+        for (let e of this._data) {
+            let when = new Date(e.when).getTime();
+            console.log(e, e.when, when, now);
+            if (when > now && (next === null || when - now < new Date(next.when).getTime())) {
+                next = e;
+            }
+        }
+        return next;
+    }
+
     /**
      * Handle Actions from BottleTypeActions
      *

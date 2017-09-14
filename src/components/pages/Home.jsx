@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
+import EventActions from '../../actions/EventActions';
+import EventStore from '../../stores/EventStore';
+import { monthToString } from '../../helpers/dateHelper';
 import AuthService from '../../services/AuthService';
 
 import '../../../assets/js/vendor/covervid.js';
@@ -11,6 +14,10 @@ export default class Home extends React.Component {
 
     constructor() {
         super();
+
+        this.state = {
+            nextEvent: null
+        };
 
         this.takePart = this.takePart.bind(this);
     }
@@ -35,6 +42,19 @@ export default class Home extends React.Component {
            }
        }
 
+       // listen the store change
+       EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+       // trigger action for the store to load the event
+       EventActions.getNextEvent();
+
+    }
+
+    componentWillUnmount() {
+        EventStore.removeChangeListener(this._onEventStoreChange);
+    }
+
+    _onEventStoreChange() {
+        this.setState({ nextEvent: EventStore.getNext() })
     }
 
     takePart() {
@@ -44,6 +64,13 @@ export default class Home extends React.Component {
     }
 
     render() {
+
+        let nextEventDate = null;
+        if (this.state.nextEvent) {
+            let when = new Date(this.state.nextEvent.when);
+            nextEventDate = `${when.getDate()} ${monthToString(when.getMonth())}`;
+        }
+
         return (
             <div>
                 <section className="banner">
@@ -53,49 +80,62 @@ export default class Home extends React.Component {
                     </video>
                     <div className="banner-inner">
                         <h1>Club bières</h1><br />
-                        <p>Prochaine dégustation le 17 mars.</p>
-                        <button onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                        {
+                            nextEventDate
+                            ?
+                                <div>
+                                    <p>Prochaine dégustation le {nextEventDate}.</p>
+                                    <button onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                                </div>
+                            :
+                                <p>
+                                    Aucun évènement prévu pour le moment.
+                                </p>
+                        }
                     </div>
                 </section>
 
-                <section>
-                    <div id="beers" className="content">
-                        <h1>Les bières</h1>
+                {
+                    nextEventDate &&
+                    <section>
+                        <div id="beers" className="content">
+                            <h1>Les bières</h1>
 
-                        <div className="side-image">
-                            <div className="images-wrapper"></div>
-                            <div className="side-image-content">
-                                <h4>Mystère</h4>
-                                <h1>Inconnue</h1>
-                                <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
+                            <div className="side-image">
+                                <div className="images-wrapper"></div>
+                                <div className="side-image-content">
+                                    <h4>Mystère</h4>
+                                    <h1>Inconnue</h1>
+                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
+                                </div>
+                            </div>
+                            <div className="side-image">
+                                <div className="side-image-content">
+                                    <h4>Mystère</h4>
+                                    <h1>Inconnue</h1>
+                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
+                                </div>
+                                <div className="images-wrapper"></div>
+                            </div>
+                            <div className="side-image">
+                                <div className="images-wrapper"></div>
+                                <div className="side-image-content">
+                                    <h4>Mystère</h4>
+                                    <h1>Inconnue</h1>
+                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
+                                </div>
+                            </div>
+                            <div className="side-image">
+                                <div className="side-image-content">
+                                    <h4>Mystère</h4>
+                                    <h1>Inconnue</h1>
+                                    <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
+                                </div>
+                                <div className="images-wrapper"></div>
                             </div>
                         </div>
-                        <div className="side-image">
-                            <div className="side-image-content">
-                                <h4>Mystère</h4>
-                                <h1>Inconnue</h1>
-                                <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                            </div>
-                            <div className="images-wrapper"></div>
-                        </div>
-                        <div className="side-image">
-                            <div className="images-wrapper"></div>
-                            <div className="side-image-content">
-                                <h4>Mystère</h4>
-                                <h1>Inconnue</h1>
-                                <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                            </div>
-                        </div>
-                        <div className="side-image">
-                            <div className="side-image-content">
-                                <h4>Mystère</h4>
-                                <h1>Inconnue</h1>
-                                <p>Pas encore révélée ! Probablement meilleur qu'une Koenigs.</p>
-                            </div>
-                            <div className="images-wrapper"></div>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                }
 
                 <footer className="footer" role="contentinfo">
                     <ul className="footer-social">

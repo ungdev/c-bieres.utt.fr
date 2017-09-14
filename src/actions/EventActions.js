@@ -25,6 +25,17 @@ export default {
             .catch(err => console.log(err));
     },
 
+    getNextEvent() {
+        EventService.getNext()
+            .then(response => {
+                AppDispatcher.dispatch({
+                    type: 'GET_EVENT',
+                    event: response.data
+                });
+            })
+            .catch(err => console.log(err));
+    },
+
     createEvent(data) {
         EventService.create(data)
             .then(response => {
