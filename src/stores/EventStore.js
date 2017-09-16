@@ -6,35 +6,33 @@ class EventStore extends BaseStore {
     constructor() {
         super();
         this.subscribe(() => this._handleActions.bind(this));
-        this._data = [];
+        this._data = {};
     }
 
     get events() {
-        return this._data;
+        return Object.values(this._data);
     }
 
-    insertIfAbsent(newEvent) {
-        if (this._data.filter(event => event._id === newEvent._id).length === 0)
-            this._data.push(newEvent);
+    _insert(e) {
+        this._data[e._id] = e;
+    }
+
+    _remove(id) {
+        delete this.data[id];
     }
 
     getById(id) {
-        for (let e of this._data) {
-            if (e._id === id) {
-                return e;
-            }
-        }
-        return {};
+        return this._data[id];
     }
 
     getNext() {
-        const now = new Date().getTime();
+        const now_DateTime = new Date().getTime();
         let next = null;
-        for (let e of this._data) {
-            let when = new Date(e.when).getTime();
-            console.log(e, e.when, when, now);
-            if (when > now && (next === null || when - now < new Date(next.when).getTime())) {
-                next = e;
+        for (let event_id in this._data) {
+            const event_date = this._data[event_id].when;
+            const event_DateTime = new Date(event_date).getTime();
+            if (event_DateTime > now_DateTime && (next === null || event_date - now_DateTime < new Date(next.when).getTime())) {
+                next = this._data[event_id];
             }
         }
         return next;
@@ -48,23 +46,23 @@ class EventStore extends BaseStore {
     _handleActions(action) {
         switch(action.type) {
             case "GET_EVENTS":
-                this._data = action.events;
+                action.events.map(e => this._insert(e));
                 this.emitChange();
                 break;
             case "GET_EVENT":
-                this.insertIfAbsent(action.event);
+                this._insert(action.event);
                 this.emitChange();
                 break;
             case "CREATE_EVENT":
-                this._data.push(action.event);
+                this._insert(action.event);
                 this.emitChange();
                 break;
             case "DELETE_EVENT":
-                this._data = this._data.filter(event => event._id !== action.id);
+                this._remove(action.id);
                 this.emitChange();
                 break;
             case "CREATE_BEER":
-                this.
+                this._data[action.beer.event_id].beers.push(action.beer);
                 break;
         }
     }
