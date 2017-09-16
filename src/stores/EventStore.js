@@ -63,6 +63,7 @@ class EventStore extends BaseStore {
                 break;
             case "CREATE_BEER":
                 this._data[action.beer.event_id].beers.push(action.beer);
+                this.emitChange();
                 break;
         }
     }

@@ -36,6 +36,7 @@ export default class EventUpdate extends React.Component {
 
     _onEventStoreChange() {
         this.setState({ event: EventStore.getById(this.state.id) });
+        this._toggleBeerForm();
     }
 
     _handleNameChange(e) {
@@ -84,7 +85,7 @@ export default class EventUpdate extends React.Component {
                     {
                         this.state.showBeerForm
                         ?
-                            <AddBeer close={this._toggleBeerForm} />
+                            <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
                         :
                             <button type="button" onClick={this._toggleBeerForm} className="btn btn-link">Ajouter une bière</button>
                     }

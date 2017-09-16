@@ -8,9 +8,7 @@ export default class AddBeer extends React.Component {
         super(props);
 
         this.state = {
-            name: "",
-            type: "",
-            description: ""
+            event_id: this.props.eventId
         };
 
         this._submitCreateForm = this._submitCreateForm.bind(this);
@@ -18,11 +16,13 @@ export default class AddBeer extends React.Component {
     }
 
     _handleChange(field, e) {
-        this.setState(field, e.target.value);
+        let nextState = this.state;
+        nextState[field] = e.target.value;
+        this.setState(nextState);
     }
 
     _submitCreateForm() {
-        BeerService.createBeer(this.state);
+        BeerActions.createBeer(this.state);
     }
 
     render() {
