@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EventActions from '../../../actions/EventActions';
+import BeerActions from '../../../actions/BeerActions';
 import EventStore from '../../../stores/EventStore';
 
 import AddBeer from './AddBeer.jsx';
@@ -21,6 +22,9 @@ export default class EventUpdate extends React.Component {
         this._handleDateChange = this._handleDateChange.bind(this);
         this._submitUpdateForm = this._submitUpdateForm.bind(this);
         this._toggleBeerForm = this._toggleBeerForm.bind(this);
+
+        this._updateBeer = this._updateBeer.bind(this);
+        this._deleteBeer = this._deleteBeer.bind(this);
     }
 
     componentDidMount() {
@@ -34,9 +38,19 @@ export default class EventUpdate extends React.Component {
         EventStore.removeChangeListener(this._onEventStoreChange);
     }
 
+    _updateBeer(beer) {
+
+    }
+
+    _deleteBeer(beer) {
+        BeerActions.deleteBeer(beer);
+    }
+
     _onEventStoreChange() {
-        this.setState({ event: EventStore.getById(this.state.id) });
-        this._toggleBeerForm();
+        this.setState({
+            event: EventStore.getById(this.state.id),
+            showBeerForm: false
+        });
     }
 
     _handleNameChange(e) {
@@ -63,6 +77,8 @@ export default class EventUpdate extends React.Component {
         return (
             <div>
                 <h1>Modification de <b>{this.state.event.name}</b></h1>
+
+                <h2>Informations globales</h2>
                 <form>
                     <div className="form-row align-items-center">
                         <div className="col-sm-4">
@@ -78,9 +94,13 @@ export default class EventUpdate extends React.Component {
                         </div>
                     </div>
                 </form>
+
+                <h2>Les bières</h2>
                 <div>
                     {
-                        this.state.event.beers && this.state.event.beers.map(beer => <ShowBeer beer={beer} />)
+                        this.state.event.beers && this.state.event.beers.map(beer => {
+                            return <ShowBeer beer={beer} update={this._updateBeer} delete={this._deleteBeer} />
+                        })
                     }
                     {
                         this.state.showBeerForm

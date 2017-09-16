@@ -65,6 +65,10 @@ class EventStore extends BaseStore {
                 this._data[action.beer.event_id].beers.push(action.beer);
                 this.emitChange();
                 break;
+            case "DELETE_BEER":
+                this._data[action.beer.event_id].beers = this._data[action.beer.event_id].beers.filter(e => e._id != action.beer._id);
+                this.emitChange();
+                break;
         }
     }
 

@@ -25,12 +25,12 @@ export default {
             .catch(err => console.error(err));
     },
 
-    deleteBeer(id) {
-        BeerService.delete(id)
+    deleteBeer(beer) {
+        BeerService.delete(beer._id)
             .then(response => {
                 AppDispatcher.dispatch({
                     type: 'DELETE_BEER',
-                    id
+                    beer
                 });
             })
             .catch(err => console.error(err));
