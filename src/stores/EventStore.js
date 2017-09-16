@@ -69,6 +69,15 @@ class EventStore extends BaseStore {
                 this._data[action.beer.event_id].beers = this._data[action.beer.event_id].beers.filter(e => e._id != action.beer._id);
                 this.emitChange();
                 break;
+            case "UPDATE_BEER":
+                for (let eid in this._data) {
+                    if (action.beer._id === eid) {
+                        this._data[eid] = action.beer;
+                        break;
+                    }
+                }
+                this.emitChange();
+                break;
         }
     }
 

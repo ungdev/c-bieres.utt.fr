@@ -6,6 +6,7 @@ import EventStore from '../../../stores/EventStore';
 
 import AddBeer from './AddBeer.jsx';
 import ShowBeer from './ShowBeer.jsx';
+import UpdateBeer from './UpdateBeer.jsx';
 
 export default class EventUpdate extends React.Component {
 
@@ -15,7 +16,8 @@ export default class EventUpdate extends React.Component {
         this.state = {
             id: props.match.params.id,
             event: {},
-            showBeerForm: false
+            showBeerForm: false,
+            beerToUpdate: null
         };
 
         this._handleNameChange = this._handleNameChange.bind(this);
@@ -25,6 +27,8 @@ export default class EventUpdate extends React.Component {
 
         this._updateBeer = this._updateBeer.bind(this);
         this._deleteBeer = this._deleteBeer.bind(this);
+        this._showUpdateBeerForm = this._showUpdateBeerForm.bind(this);
+        this._closeUpdateBeerForm = this._closeUpdateBeerForm.bind(this);
     }
 
     componentDidMount() {
@@ -38,8 +42,16 @@ export default class EventUpdate extends React.Component {
         EventStore.removeChangeListener(this._onEventStoreChange);
     }
 
-    _updateBeer(beer) {
+    _showUpdateBeerForm(beer) {
+        this.setState({ beerToUpdate: beer._id });
+    }
 
+    _closeUpdateBeerForm(beer) {
+        this.setState({ beerToUpdate: null });
+    }
+
+    _updateBeer(beer) {
+        BeerActions.updateBeer(beer._id, beer);
     }
 
     _deleteBeer(beer) {
@@ -49,7 +61,8 @@ export default class EventUpdate extends React.Component {
     _onEventStoreChange() {
         this.setState({
             event: EventStore.getById(this.state.id),
-            showBeerForm: false
+            showBeerForm: false,
+            beerToUpdate: null
         });
     }
 
@@ -99,7 +112,12 @@ export default class EventUpdate extends React.Component {
                 <div>
                     {
                         this.state.event.beers && this.state.event.beers.map(beer => {
-                            return <ShowBeer beer={beer} update={this._updateBeer} delete={this._deleteBeer} />
+                            if (this.state.beerToUpdate === beer._id) {
+                                return <UpdateBeer key={beer._id} update={this._updateBeer} close={this._closeUpdateBeerForm} beer={beer} />
+                            } else {
+                                return <ShowBeer key={beer._id} beer={beer} update={this._showUpdateBeerForm} delete={this._deleteBeer} />
+                            }
+
                         })
                     }
                     {
