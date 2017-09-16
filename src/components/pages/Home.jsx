@@ -17,13 +17,7 @@ export default class Home extends React.Component {
         super();
 
         this.state = {
-            nextEvent: null,
-            beers: [
-                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
-                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
-                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."},
-                {type: "mystere", name: "inconnue", description: "Pas encore révélée ! Probablement meilleur qu'une Koenigs."}
-            ]
+            nextEvent: null
         };
 
         this.takePart = this.takePart.bind(this);
@@ -108,7 +102,7 @@ export default class Home extends React.Component {
                         <div id="beers" className="content">
                             <h1>Les bières</h1>
                             {
-                                this.state.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
+                                this.state.nextEvent.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
                             }
                         </div>
                     </section>
