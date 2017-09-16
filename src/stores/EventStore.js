@@ -63,6 +63,9 @@ class EventStore extends BaseStore {
                 this._data = this._data.filter(event => event._id !== action.id);
                 this.emitChange();
                 break;
+            case "CREATE_BEER":
+                this.
+                break;
         }
     }
 
