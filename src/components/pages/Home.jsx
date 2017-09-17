@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { monthToString } from '../../helpers/dateHelper';
+
 import { Link } from 'react-router-dom';
 import Beer from '../home/Beer.jsx';
 
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
-import { monthToString } from '../../helpers/dateHelper';
-import AuthService from '../../services/AuthService';
+import AuthActions from '../../actions/AuthActions';
+import AuthStore from '../../stores/AuthStore';
 
 import '../../../assets/js/vendor/covervid.js';
 import '../../../assets/js/main.js';
@@ -37,9 +39,7 @@ export default class Home extends React.Component {
 
            // if there is an authorization_code, send it to get an access token
            if (authorization_code) {
-               AuthService.sendAuthorizationCode(authorization_code[1])
-                    .then(response => console.log(response))
-                    .catch(err => console.log(err));
+               EventActions.register(authorization_code[1]);
            }
        }
 
@@ -59,9 +59,7 @@ export default class Home extends React.Component {
     }
 
     takePart() {
-        AuthService.getRedirectLink()
-            .then(response => window.location.replace(response.data.redirectUri))
-            .catch(err => console.log(err));
+        AuthActions.redirect();
     }
 
     render() {

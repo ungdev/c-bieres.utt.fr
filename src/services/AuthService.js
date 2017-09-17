@@ -2,17 +2,21 @@ import BaseService from './BaseService';
 
 class AuthService extends BaseService {
 
+    constructor() {
+        super('oauth/etuutt');
+    }
+
     getRedirectLink() {
         return this.makeRequest({
             method: "get",
-            url: "http://localhost:3000/api/oauth/etuutt/link"
+            url: this._baseUrl + "/link"
         });
     }
 
     sendAuthorizationCode(authorization_code) {
         return this.makeRequest({
             method: "post",
-            url: "http://localhost:3000/api/oauth/etuutt/callback",
+            url: this._baseUrl + "/callback",
             data: {authorization_code}
         });
     }

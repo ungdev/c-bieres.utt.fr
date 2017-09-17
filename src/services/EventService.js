@@ -18,6 +18,20 @@ class EventService extends BaseService {
         });
     }
 
+    /**
+     * Register the user to the next event
+     *
+     * @param string authorization_code
+     * @return {Promise}
+     */
+    register(authorization_code) {
+        return this.makeRequest({
+            method: 'post',
+            url: this._baseUrl + '/next/register',
+            data: {authorization_code}
+        });
+    }
+
 }
 
 export default new EventService();

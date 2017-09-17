@@ -3,6 +3,22 @@ import EventService from '../services/EventService';
 
 export default {
 
+    /**
+     * Register a user to the next event, by his
+     * authorization_code
+     *
+     - @param string authorization_code
+     */
+    register(authorization_code) {
+        EventService.register(authorization_code)
+             .then(response => {
+                 AppDispatcher.dispatch({
+                     type: 'REGISTERED'
+                 });
+             })
+             .catch(err => console.log(err));
+    },
+
     getEvents() {
         EventService.get()
             .then(response => {
