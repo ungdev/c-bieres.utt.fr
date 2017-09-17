@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EventService from '../services/EventService';
+import registrationHelper from '../helpers/registrationHelper';
 
 export default {
 
@@ -11,25 +12,28 @@ export default {
      */
     register(authorization_code) {
         EventService.register(authorization_code)
-             .then(response => {
-                 AppDispatcher.dispatch({
-                     type: 'NEW_ALERT',
-                     alert: {
-                         type: "success",
-                         message: "Inscription réussie !"
-                     }
-                 });
-             })
-             .catch(err => {
-                 if (err.response.status == 409)
-                     AppDispatcher.dispatch({
-                         type: 'NEW_ALERT',
-                         alert: {
-                             type: "danger",
-                             message: "Tu es déjà inscrit !"
-                         }
-                     });
-             });
+            .then(response => {
+                // save the registration in localStorage
+                registrationHelper.set(response.data.event._id);
+
+                AppDispatcher.dispatch({
+                    type: 'NEW_ALERT',
+                    alert: {
+                        type: "success",
+                        message: "Inscription réussie !"
+                    }
+                });
+            })
+            .catch(err => {
+                if (err.response.status == 409)
+                    AppDispatcher.dispatch({
+                        type: 'NEW_ALERT',
+                        alert: {
+                            type: "danger",
+                            message: "Tu es déjà inscrit !"
+                        }
+                    });
+                });
     },
 
     getEvents() {

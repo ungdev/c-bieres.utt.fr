@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { monthToString } from '../../helpers/dateHelper';
-
 import { Link } from 'react-router-dom';
 import Beer from '../home/Beer.jsx';
 
+import registrationHelper from '../../helpers/registrationHelper';
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
 import AuthActions from '../../actions/AuthActions';
@@ -19,7 +19,8 @@ export default class Home extends React.Component {
         super();
 
         this.state = {
-            nextEvent: null
+            nextEvent: null,
+            registration: registrationHelper.get()
         };
 
         this.takePart = this.takePart.bind(this);
@@ -62,6 +63,10 @@ export default class Home extends React.Component {
         AuthActions.redirect();
     }
 
+    unRegister() {
+
+    }
+
     render() {
 
         let nextEventDate = null;
@@ -84,7 +89,13 @@ export default class Home extends React.Component {
                             ?
                                 <div>
                                     <p>Prochaine dégustation le {nextEventDate}.</p>
-                                    <button onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                                    {
+                                        this.state.registration == this.state.nextEvent._id
+                                        ?
+                                            <button onClick={this.unRegister}>Me désinscrire</button>
+                                        :
+                                            <button onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                                    }
                                 </div>
                             :
                                 <p>
