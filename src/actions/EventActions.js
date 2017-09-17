@@ -13,10 +13,23 @@ export default {
         EventService.register(authorization_code)
              .then(response => {
                  AppDispatcher.dispatch({
-                     type: 'REGISTERED'
+                     type: 'NEW_ALERT',
+                     alert: {
+                         type: "success",
+                         message: "Inscription réussie !"
+                     }
                  });
              })
-             .catch(err => console.log(err));
+             .catch(err => {
+                 if (err.response.status == 409)
+                     AppDispatcher.dispatch({
+                         type: 'NEW_ALERT',
+                         alert: {
+                             type: "danger",
+                             message: "Tu es déjà inscrit !"
+                         }
+                     });
+             });
     },
 
     getEvents() {
