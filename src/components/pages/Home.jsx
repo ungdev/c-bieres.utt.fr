@@ -4,7 +4,8 @@ import { monthToString } from '../../helpers/dateHelper';
 import { Link } from 'react-router-dom';
 import Beer from '../home/Beer.jsx';
 
-import registrationHelper from '../../helpers/registrationHelper';
+import registrationHelper from '../../helpers/localStorage/registrationHelper';
+import redirectHelper from '../../helpers/localStorage/redirectHelper';
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
 import AuthActions from '../../actions/AuthActions';
@@ -40,7 +41,12 @@ export default class Home extends React.Component {
 
            // if there is an authorization_code, send it to get an access token
            if (authorization_code) {
-               EventActions.register(authorization_code[1]);
+               let lastAction = redirectHelper.get();
+               if (lastAction == "register") {
+                   EventActions.register(authorization_code[1]);
+               } else if (lastAction == "unregister") {
+                   EventActions.unregister(authorization_code[1]);
+               }
            }
        }
 
@@ -56,15 +62,18 @@ export default class Home extends React.Component {
     }
 
     _onEventStoreChange() {
-        this.setState({ nextEvent: EventStore.getNext() })
+        this.setState({
+            nextEvent: EventStore.getNext(),
+            registration: registrationHelper.get()
+        })
     }
 
     takePart() {
-        AuthActions.redirect();
+        AuthActions.redirect("register");
     }
 
     unRegister() {
-
+        AuthActions.redirect("unregister");
     }
 
     render() {

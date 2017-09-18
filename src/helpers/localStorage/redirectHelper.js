@@ -1,14 +1,14 @@
-const KEY_NAME = 'registration';
+const KEY_NAME = 'last_action';
 
 export default {
 
     /**
      * Set the registration
      *
-     * @param string id: the event id
+     * @param string action: the last action
      */
-    set(id) {
-        localStorage.setItem(KEY_NAME, id);
+    set(action) {
+        localStorage.setItem(KEY_NAME, action);
     },
 
     /**

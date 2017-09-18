@@ -78,6 +78,12 @@ class EventStore extends BaseStore {
                 }
                 this.emitChange();
                 break;
+            case "REGISTER":
+                this.emitChange();
+                break;
+            case "UNREGISTER":
+                this.emitChange();
+                break;
         }
     }
 

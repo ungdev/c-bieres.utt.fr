@@ -32,6 +32,20 @@ class EventService extends BaseService {
         });
     }
 
+    /**
+     * Unregister the user to the next event
+     *
+     * @param string authorization_code
+     * @return {Promise}
+     */
+    unregister(authorization_code) {
+        return this.makeRequest({
+            method: 'post',
+            url: this._baseUrl + '/next/unregister',
+            data: {authorization_code}
+        });
+    }
+
 }
 
 export default new EventService();
