@@ -6,6 +6,7 @@ import Beer from '../home/Beer.jsx';
 
 import registrationHelper from '../../helpers/localStorage/registrationHelper';
 import redirectHelper from '../../helpers/localStorage/redirectHelper';
+import authHelper from '../../helpers/localStorage/authHelper';
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
 import AuthActions from '../../actions/AuthActions';
@@ -25,6 +26,7 @@ export default class Home extends React.Component {
         };
 
         this.takePart = this.takePart.bind(this);
+        this._loginDashboard = this._loginDashboard.bind(this);
     }
 
     componentDidMount() {
@@ -46,6 +48,14 @@ export default class Home extends React.Component {
                    EventActions.register(authorization_code[1]);
                } else if (lastAction == "unregister") {
                    EventActions.unregister(authorization_code[1]);
+               } else if (lastAction == "login") {
+                   AuthActions.callback(authorization_code[1])
+                   .then(response => {
+                       // save auth token and redirect to dashboard
+                       authHelper.set(response.access_token);
+                       this.props.history.push('/dashboard/event')
+                   })
+                   .catch(err => console.log(err));
                }
            }
        }
@@ -74,6 +84,10 @@ export default class Home extends React.Component {
 
     unRegister() {
         AuthActions.redirect("unregister");
+    }
+
+    _loginDashboard() {
+        AuthActions.redirect("login");
     }
 
     render() {
@@ -132,7 +146,7 @@ export default class Home extends React.Component {
                         <li><a href="https://www.facebook.com/groups/806374509420087/?fref=ts"><i className="fa fa-facebook"></i></a></li>
                     </ul>
                     <span className="dashboard-link">
-                        <Link to={'dashboard/event'}>Admin</Link>
+                        <button type="button" onClick={this._loginDashboard} className="btn btn-link">Admin</button>
                     </span>
                 </footer>
             </div>

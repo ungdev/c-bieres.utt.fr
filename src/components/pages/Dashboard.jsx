@@ -4,10 +4,22 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Event from '../dashboard/event/Event.jsx';
 import EventUpdate from '../dashboard/event/EventUpdate.jsx';
 import Admin from '../dashboard/admin/Admin.jsx';
+import authHelper from '../../helpers/localStorage/authHelper';
 
 import '../../../assets/css/dashboard.css';
 
 export default class Dashboard extends React.Component {
+
+    constructor() {
+        super();
+
+        this._logout = this._logout.bind(this);
+    }
+
+    _logout() {
+        authHelper.clean();
+        this.props.history.push('/');
+    }
 
     render() {
         return (
@@ -17,6 +29,8 @@ export default class Dashboard extends React.Component {
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
+                    <ul className="navbar-nav mr-auto"></ul>
+                    <button onClick={this._logout} className="btn btn-outline-primary" type="button">Logout</button>
                 </nav>
 
                 <div className="container-fluid">

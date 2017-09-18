@@ -13,6 +13,10 @@ export default {
         AuthService.getRedirectLink()
              .then(response => window.location.replace(response.data.redirectUri))
              .catch(err => console.log(err));
+    },
+
+    callback(authorization_code) {
+        return AuthService.sendAuthorizationCode(authorization_code);
     }
 
 }
