@@ -2705,9 +2705,9 @@ html {
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     font-size: 2em; }
-    .footer ul li a:focus, .footer ul li a:hover, .footer .dashboard-link a:focus, .footer .dashboard-link a:hover {
+    .footer ul li a:focus, .footer ul li a:hover, .footer .dashboard-link a:focus, .footer .dashboard-link button:hover {
       color: white; }
-     .footer .dashboard-link a {
+     .footer .dashboard-link button {
          color: rgba(255, 255, 255, 0.4);
          text-decoration: none;
      }
@@ -2743,5 +2743,4 @@ body {
     right: 20px;
     bottom: 10px;
     line-height: 50px;
-    vertical-align: middle;
 }
