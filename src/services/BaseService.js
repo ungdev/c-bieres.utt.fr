@@ -13,7 +13,7 @@ export default class BaseService {
 
     constructor(modelName) {
         this._modelName = modelName;
-        this._baseUrl = "http://localhost:3000/api/" + modelName;
+        this._baseUrl = process.env.SERVER_URI + "api/" + modelName;
     }
 
     /**

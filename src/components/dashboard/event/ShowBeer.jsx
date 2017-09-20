@@ -16,6 +16,7 @@ export default class ShowBeer extends React.Component {
                 <div className="card-body">
                     <h4 className="card-title">{this.state.beer.name}</h4>
                     <p className="card-text">{this.state.beer.type}</p>
+                    <img src={process.env.SERVER_URI + this.state.beer.image} />
                     <p className="card-text">{this.state.beer.description}</p>
                     <div className="btn-group" role="group">
                         <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>

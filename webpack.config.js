@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -20,5 +20,12 @@ module.exports = {
             { test: /\.css$/, loader: "style-loader!css-loader" },
         ]
     },
-    plugins: [HtmlWebpackPluginConfig]
+    plugins: [
+        HtmlWebpackPluginConfig,
+        new webpack.DefinePlugin({
+            "process.env": {
+                SERVER_URI: JSON.stringify(process.env.SERVER_URI || 'http://localhost:3000/')
+            }
+        }),
+    ]
 }
