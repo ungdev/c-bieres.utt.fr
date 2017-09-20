@@ -70,10 +70,12 @@ class EventStore extends BaseStore {
                 this.emitChange();
                 break;
             case "UPDATE_BEER":
-                for (let eid in this._data) {
-                    if (action.beer._id === eid) {
-                        this._data[eid] = action.beer;
-                        break;
+                let event = this._data[action.beer.event_id];
+                // replace the beer in the found event
+                for (let beerIndex in event.beers) {
+                    console.log(event.beers[beerIndex]._id, action.beer._id);
+                    if (event.beers[beerIndex]._id == action.beer._id) {
+                        event.beers[beerIndex] = action.beer;
                     }
                 }
                 this.emitChange();

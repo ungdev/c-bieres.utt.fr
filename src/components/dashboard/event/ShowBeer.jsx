@@ -12,12 +12,14 @@ export default class ShowBeer extends React.Component {
 
     render() {
         return (
-            <div className="card w-100">
-                <div className="card-body">
-                    <h4 className="card-title">{this.state.beer.name}</h4>
-                    <p className="card-text">{this.state.beer.type}</p>
+            <div className="showbeer-container row">
+                <div className="col-3">
                     <img src={process.env.SERVER_URI + this.state.beer.image} />
-                    <p className="card-text">{this.state.beer.description}</p>
+                </div>
+                <div className="col-9">
+                    <h4>{this.state.beer.name}</h4>
+                    <span className="badge badge-primary">{this.state.beer.type}</span>
+                    <p>{this.state.beer.description}</p>
                     <div className="btn-group" role="group">
                         <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>
                         <button type="button" onClick={_ => this.props.delete(this.state.beer)} className="btn btn-danger">Supprimer</button>

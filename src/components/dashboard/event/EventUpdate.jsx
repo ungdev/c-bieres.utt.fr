@@ -51,7 +51,12 @@ export default class EventUpdate extends React.Component {
     }
 
     _updateBeer(beer) {
-        BeerActions.updateBeer(beer._id, beer);
+        // Create a new FormData object and fill it with the beer values
+        var form = new FormData();
+        Object.keys(beer).map(attr => {
+            form.append(attr, beer[attr]);
+        });
+        BeerActions.updateBeer(beer._id, form);
     }
 
     _deleteBeer(beer) {

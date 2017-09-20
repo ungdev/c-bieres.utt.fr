@@ -11,11 +11,18 @@ export default class UpdateBeer extends React.Component {
         }
 
         this._handleChange = this._handleChange.bind(this);
+        this._handleFileUpload = this._handleFileUpload.bind(this);
     }
 
     _handleChange(field, e) {
         let nextState = this.state;
         nextState.beer[field] = e.target.value;
+        this.setState(nextState);
+    }
+
+    _handleFileUpload(e) {
+        let nextState = this.state;
+        nextState.beer.file = e.target.files[0];
         this.setState(nextState);
     }
 
@@ -39,6 +46,10 @@ export default class UpdateBeer extends React.Component {
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
                                 <textarea value={this.state.beer.description} onChange={e => this._handleChange('description', e)} className="form-control" id="description" rows="3"></textarea>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="img">Image</label>
+                                <input type="file" onChange={this._handleFileUpload} className="form-control-file" id="img" />
                             </div>
                             <div className="text-center">
                                 <div className="btn-group" role="group">
