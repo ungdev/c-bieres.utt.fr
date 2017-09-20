@@ -18,7 +18,7 @@ class EventStore extends BaseStore {
     }
 
     _remove(id) {
-        delete this.data[id];
+        delete this._data[id];
     }
 
     getById(id) {
