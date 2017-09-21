@@ -7,7 +7,7 @@ export default class ShowBeer extends React.Component {
 
         this.state = {
             beer: props.beer
-        }
+        };
     }
 
     render() {

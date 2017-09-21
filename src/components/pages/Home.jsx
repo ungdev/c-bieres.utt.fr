@@ -106,7 +106,7 @@ export default class Home extends React.Component {
                         <img src="assets/images/banner.png" alt=""/>
                     </video>
                     <div className="banner-inner">
-                        <h1>Club bières</h1><br />
+                        <h1>Club bières</h1>
                         {
                             nextEventDate
                             ?
@@ -115,9 +115,9 @@ export default class Home extends React.Component {
                                     {
                                         this.state.registration == this.state.nextEvent._id
                                         ?
-                                            <button className="btn btn-danger btn-lg" onClick={this.unRegister}>Me désinscrire</button>
+                                            <button type="button" className="btn btn-danger btn-lg" onClick={this.unRegister}>Me désinscrire</button>
                                         :
-                                            <button className="btn btn-primary btn-lg" onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                                            <button type="button" className="btn btn-primary btn-lg" onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
                                     }
                                 </div>
                             :

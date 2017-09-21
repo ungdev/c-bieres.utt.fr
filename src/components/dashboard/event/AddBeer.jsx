@@ -62,7 +62,7 @@ export default class AddBeer extends React.Component {
                             </div>
                             <div className="text-center">
                                 <div className="btn-group" role="group">
-                                    <button type="submit" onClick={this._submitCreateForm} className="btn btn-primary">Ajouter</button>
+                                    <button type="button" onClick={this._submitCreateForm} className="btn btn-primary">Ajouter</button>
                                     <button type="button" onClick={this.props.close} className="btn btn-danger">Annuler</button>
                                 </div>
                             </div>

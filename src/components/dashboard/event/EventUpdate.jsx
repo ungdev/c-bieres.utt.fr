@@ -108,7 +108,7 @@ export default class EventUpdate extends React.Component {
                             <input type="date" onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
                         </div>
                         <div className="col-sm-4">
-                            <button type="submit" onClick={this._submitUpdateForm} className="btn btn-success btn-lg">Mettre à jour</button>
+                            <button type="button" onClick={this._submitUpdateForm} className="btn btn-success btn-lg">Mettre à jour</button>
                         </div>
                     </div>
                 </form>

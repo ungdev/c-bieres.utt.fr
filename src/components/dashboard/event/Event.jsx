@@ -83,7 +83,7 @@ export default class Event extends React.Component {
                                         <label htmlFor="date">Date</label>
                                         <input type="date" onChange={this._handleDateChange} className="form-control" id="date" />
                                     </div>
-                                    <button type="submit" onClick={this._submitCreateForm} className="btn btn-success btn-lg">Créer</button>
+                                    <button type="button" onClick={this._submitCreateForm} className="btn btn-success btn-lg">Créer</button>
                                 </form>
                             </div>
                         :

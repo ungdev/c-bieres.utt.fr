@@ -53,7 +53,7 @@ export default class UpdateBeer extends React.Component {
                             </div>
                             <div className="text-center">
                                 <div className="btn-group" role="group">
-                                    <button type="submit" onClick={_ => this.props.update(this.state.beer)} className="btn btn-success">Modifier</button>
+                                    <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-success">Modifier</button>
                                     <button type="button" onClick={this.props.close} className="btn btn-danger">Annuler</button>
                                 </div>
                             </div>

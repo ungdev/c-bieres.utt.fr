@@ -54,7 +54,10 @@ export default {
                 });
             })
             .catch(err => {
-                if (err.response.status == 409)
+                if (err.response.status == 409) {
+                    // save the registration in localStorage
+                    registrationHelper.set(err.response.data.event._id);
+
                     AppDispatcher.dispatch({
                         type: 'NEW_ALERT',
                         alert: {
@@ -62,7 +65,12 @@ export default {
                             message: "Tu es déjà inscrit !"
                         }
                     });
-                });
+
+                    AppDispatcher.dispatch({
+                        type: 'REGISTER',
+                    });
+                }
+            });
     },
 
     getEvents() {
