@@ -10,8 +10,8 @@ export default {
      *
      - @param string authorization_code
      */
-    unregister(authorization_code) {
-        EventService.unregister(authorization_code)
+    unregister(data) {
+        EventService.unregister(data)
             .then(response => {
                 // save the registration in localStorage
                 registrationHelper.clean();

@@ -12,6 +12,8 @@ export default class ShowEvent extends React.Component {
             id: props.match.params.id,
             event: null
         };
+
+        this._unregisterDrinker = this._unregisterDrinker.bind(this);
     }
 
     componentDidMount() {
@@ -27,6 +29,10 @@ export default class ShowEvent extends React.Component {
 
     _onEventStoreChange() {
         this.setState({ event: EventStore.getById(this.state.id) });
+    }
+
+    _unregisterDrinker(studentId) {
+        EventActions.unregister({studentId});
     }
 
     render() {
@@ -62,7 +68,7 @@ export default class ShowEvent extends React.Component {
                                                 <td>{drinker.firstName}</td>
                                                 <td>{drinker.lastName}</td>
                                                 <td>
-                                                    <button type="button" className="btn btn-danger">
+                                                    <button onClick={_ => this._unregisterDrinker(drinker.studentId)} type="button" className="btn btn-danger">
                                                         Retirer
                                                     </button>
                                                 </td>

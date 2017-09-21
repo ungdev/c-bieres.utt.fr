@@ -47,7 +47,7 @@ export default class Home extends React.Component {
                if (lastAction == "register") {
                    EventActions.register(authorization_code[1]);
                } else if (lastAction == "unregister") {
-                   EventActions.unregister(authorization_code[1]);
+                   EventActions.unregister({authorization_code: authorization_code[1]});
                } else if (lastAction == "login") {
                    AuthActions.callback(authorization_code[1])
                    .then(response => {
