@@ -8,7 +8,7 @@ import AddBeer from './AddBeer.jsx';
 import ShowBeer from './ShowBeer.jsx';
 import UpdateBeer from './UpdateBeer.jsx';
 
-export default class EventUpdate extends React.Component {
+export default class UpdateEvent extends React.Component {
 
     constructor(props) {
         super(props);

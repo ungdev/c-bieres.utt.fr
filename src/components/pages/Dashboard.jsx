@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Switch, Route, Link } from 'react-router-dom';
 import Event from '../dashboard/event/Event.jsx';
-import EventUpdate from '../dashboard/event/EventUpdate.jsx';
+import UpdateEvent from '../dashboard/event/UpdateEvent.jsx';
+import ShowEvent from '../dashboard/event/ShowEvent.jsx';
 import Admin from '../dashboard/admin/Admin.jsx';
 import authHelper from '../../helpers/localStorage/authHelper';
 
@@ -48,7 +49,8 @@ export default class Dashboard extends React.Component {
 
                         <main className="col-sm-9 ml-sm-auto col-md-10 pt-3 page-content" role="main">
                             <Switch>
-                                <Route path='/dashboard/event/:id/update' component={EventUpdate}/>
+                                <Route path='/dashboard/event/:id/update' component={UpdateEvent}/>
+                                <Route path='/dashboard/event/:id' component={ShowEvent}/>
                                 <Route path='/dashboard/event' component={Event}/>
                                 <Route path='/dashboard/admin' component={Admin}/>
                             </Switch>
