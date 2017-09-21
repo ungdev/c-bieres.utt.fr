@@ -144,10 +144,10 @@ export default class Home extends React.Component {
                     <ul className="footer-social">
                         <li><a href="mailto:club-bieres@utt.fr"><i className="fa fa-envelope"></i></a></li>
                         <li><a href="https://www.facebook.com/groups/806374509420087/?fref=ts"><i className="fa fa-facebook"></i></a></li>
+                        <li className="dashboard-link">
+                            <button type="button" onClick={this._loginDashboard} className="btn btn-link">Admin</button>
+                        </li>
                     </ul>
-                    <span className="dashboard-link">
-                        <button type="button" onClick={this._loginDashboard} className="btn btn-link">Admin</button>
-                    </span>
                 </footer>
             </div>
         );
