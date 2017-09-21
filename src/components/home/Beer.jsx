@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ImageWrapper from './ImageWrapper.jsx';
+
 export default class Beer extends React.Component {
 
     constructor(props) {
@@ -14,13 +16,13 @@ export default class Beer extends React.Component {
     render() {
         return (
             <div className="side-image">
-                {this.state.left &&<div className="images-wrapper"></div>}
+                {this.state.left && <ImageWrapper path={this.state.beer.image} />}
                 <div className="side-image-content">
-                    <h4>{this.state.beer.type}</h4>
+                    <span className="badge badge-primary">{this.state.beer.type}</span>
                     <h1>{this.state.beer.name}</h1>
                     <p>{this.state.beer.description}</p>
                 </div>
-                {!this.state.left &&<div className="images-wrapper"></div>}
+                {!this.state.left && <ImageWrapper path={this.state.beer.image} />}
             </div>
         )
     }
