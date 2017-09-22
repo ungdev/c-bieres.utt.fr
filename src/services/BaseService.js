@@ -37,10 +37,18 @@ export default class BaseService {
      * @returns {Promise}
      */
     get(filters = {}) {
+        let url = this._baseUrl;
+
+        // apply filters
+        const fields = Object.keys(filters);
+        if (fields.length) {
+            // build the query part of the uri using map-reduce
+            url += '?' + fields.map(field => `${field}=${filters[field]}`).reduce((a, b) => a + '&' + b);
+        }
+
         return this.makeRequest({
             method: 'get',
-            url: this._baseUrl,
-            data: {filters}
+            url
         });
     }
 

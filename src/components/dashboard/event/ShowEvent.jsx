@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AddDrinker from './AddDrinker.jsx';
+
 import EventActions from '../../../actions/EventActions';
 import EventStore from '../../../stores/EventStore';
 
@@ -50,6 +52,7 @@ export default class ShowEvent extends React.Component {
                 <div className="alert alert-primary" role="alert">
                     <b>{this.state.event.drinkers.length}</b> participants
                 </div>
+                <AddDrinker />
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>
