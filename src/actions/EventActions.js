@@ -30,6 +30,12 @@ export default {
             .catch(err => console.log(err));
     },
 
+    registerById(id) {
+        EventService.registerById(id)
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
+    },
+
     /**
      * Register a user to the next event, by his
      * authorization_code

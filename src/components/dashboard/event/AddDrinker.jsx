@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DrinkerActions from '../../../actions/DrinkerActions';
+import EventActions from '../../../actions/EventActions';
 import DrinkerStore from '../../../stores/DrinkerStore';
 
 export default class AddDrinker extends React.Component {
@@ -27,6 +28,10 @@ export default class AddDrinker extends React.Component {
 
     _onDrinkerStoreChange() {
         this.setState({ matches: DrinkerStore.drinkers });
+    }
+
+    _addDrinker(id) {
+        EventActions.registerById(id);
     }
 
     _handleSearchChange(e) {
@@ -63,7 +68,12 @@ export default class AddDrinker extends React.Component {
                             </div>
                             <ul className="list-group">
                                 {
-                                    this.state.matches.map(match => <li className="list-group-item">{match.firstName} {match.lastName}</li>)
+                                    this.state.matches.map(match => {
+                                        return  <li className="list-group-item">
+                                                    {match.firstName} {match.lastName}
+                                                    <button type="button" onClick={_ => this._addDrinker(match._id)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                </li>
+                                    })
                                 }
                             </ul>
                         </div>

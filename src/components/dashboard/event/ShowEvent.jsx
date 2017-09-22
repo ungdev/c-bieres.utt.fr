@@ -65,8 +65,8 @@ export default class ShowEvent extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.event.drinkers.map(drinker => {
-                                    return  <tr key={drinker.studentId}>
+                                this.state.event.drinkers.map((drinker, i) => {
+                                    return  <tr key={i}>
                                                 <td>{drinker.studentId}</td>
                                                 <td>{drinker.firstName}</td>
                                                 <td>{drinker.lastName}</td>

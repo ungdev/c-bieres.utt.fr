@@ -65,3 +65,9 @@
     display:block;
     max-width:100%;
 }
+
+.btn-add-drinker {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}

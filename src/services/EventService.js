@@ -32,6 +32,14 @@ class EventService extends BaseService {
         });
     }
 
+    registerById(id) {
+        return this.makeRequest({
+            method: 'post',
+            url: this._baseUrl + '/next/register/id',
+            data: {id}
+        });
+    }
+
     /**
      * Unregister a user to the next event
      *
