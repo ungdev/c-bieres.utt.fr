@@ -20,11 +20,13 @@ export default {
                     type: 'NEW_ALERT',
                     alert: {
                         type: "success",
-                        message: "Vous êtes maintenant desinscrit."
+                        message: "Desinscription réussie."
                     }
                 });
                 AppDispatcher.dispatch({
-                    type: 'UNREGISTER',
+                    type: 'UNREGISTERED',
+                    drinker: response.data.drinker,
+                    event: response.data.event
                 });
             })
             .catch(err => console.log(err));
@@ -32,7 +34,20 @@ export default {
 
     registerById(id) {
         EventService.registerById(id)
-            .then(data => console.log(data))
+            .then(response => {
+                AppDispatcher.dispatch({
+                    type: 'REGISTERED',
+                    drinker: response.data.drinker,
+                    event: response.data.event
+                });
+                AppDispatcher.dispatch({
+                    type: 'NEW_ALERT',
+                    alert: {
+                        type: "success",
+                        message: "Inscription réussie !"
+                    }
+                });
+            })
             .catch(err => console.error(err));
     },
 

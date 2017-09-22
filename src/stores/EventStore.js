@@ -80,10 +80,12 @@ class EventStore extends BaseStore {
                 }
                 this.emitChange();
                 break;
-            case "REGISTER":
+            case "REGISTERED":
+                this._data[action.event._id].drinkers.push(action.drinker);
                 this.emitChange();
                 break;
-            case "UNREGISTER":
+            case "UNREGISTERED":
+                this._data[action.event._id].drinkers = this._data[action.event._id].drinkers.filter(d => d._id != action.drinker._id);
                 this.emitChange();
                 break;
         }
