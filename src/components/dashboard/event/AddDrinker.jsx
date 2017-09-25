@@ -53,7 +53,7 @@ export default class AddDrinker extends React.Component {
             // refresh the matches
             DrinkerActions.getDrinkers({
                 multifield: e.target.value,
-                nextEvent: true 
+                event: this.props.eventId
             });
         } else {
             this.setState({ matches: [] });

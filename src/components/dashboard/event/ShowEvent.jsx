@@ -53,7 +53,7 @@ export default class ShowEvent extends React.Component {
                     <b>{this.state.event.drinkers.length}</b> participants
                 </div>
                 {
-                    (eventDate.getTime() > new Date().getTime()) && <AddDrinker />
+                    (eventDate.getTime() > new Date().getTime()) && <AddDrinker eventId={this.state.id} />
                 }
                 <div className="table-responsive">
                     <table className="table table-striped">
