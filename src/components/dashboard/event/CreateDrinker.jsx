@@ -34,7 +34,7 @@ export default class CreateDrinker extends React.Component {
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-6">
-                            <input type="text" placeholder="Numéro étudiant" onChange={e => this._handleChange(e, 'firstName')} className="form-control" id="studentId" />
+                            <input type="text" placeholder="Numéro étudiant" value={this.state.studentId} onChange={e => this._handleChange(e, 'studentId')} className="form-control" id="studentId" />
                             <small className="form-text text-muted">(optionnel)</small>
                         </div>
                         <div className="form-group col-md-6">
