@@ -36,7 +36,10 @@ export default class Event extends React.Component {
     }
 
     _onEventStoreChange() {
-        this.setState({ events: EventStore.events });
+        this.setState({
+            events: EventStore.events,
+            showCreateForm: false
+        });
     }
 
     _toggleCreateForm() {

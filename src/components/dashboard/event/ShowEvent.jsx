@@ -52,7 +52,9 @@ export default class ShowEvent extends React.Component {
                 <div className="alert alert-primary" role="alert">
                     <b>{this.state.event.drinkers.length}</b> participants
                 </div>
-                <AddDrinker />
+                {
+                    (eventDate.getTime() > new Date().getTime()) && <AddDrinker />
+                }
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>
