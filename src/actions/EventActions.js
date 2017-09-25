@@ -7,9 +7,9 @@ export default {
 
     /**
      * Unregister a user to the next event, by his
-     * authorization_code
+     * authorization_code or id
      *
-     - @param string authorization_code
+     - @param {object}
      */
     unregister(data) {
         EventService.unregister(data)
@@ -28,6 +28,11 @@ export default {
             .catch(err => console.log(err));
     },
 
+    /**
+     * Register a drinker to the next event by his database ID
+     *
+     * @param {string} id
+     */
     registerById(id) {
         EventService.registerById(id)
             .then(response => {
@@ -46,7 +51,7 @@ export default {
      * Register a user to the next event, by his
      * authorization_code
      *
-     - @param string authorization_code
+     - @param {string} authorization_code
      */
     register(authorization_code) {
         EventService.register(authorization_code)
