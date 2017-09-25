@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EventService from '../services/EventService';
 import registrationHelper from '../helpers/localStorage/registrationHelper';
+import alertHelper from '../helpers/alertHelper';
 
 export default {
 
@@ -16,13 +17,8 @@ export default {
                 // save the registration in localStorage
                 registrationHelper.clean();
 
-                AppDispatcher.dispatch({
-                    type: 'NEW_ALERT',
-                    alert: {
-                        type: "success",
-                        message: "Desinscription réussie."
-                    }
-                });
+                alertHelper.success("Desinscription réussie.");
+
                 AppDispatcher.dispatch({
                     type: 'UNREGISTERED',
                     drinker: response.data.drinker,
@@ -40,13 +36,8 @@ export default {
                     drinker: response.data.drinker,
                     event: response.data.event
                 });
-                AppDispatcher.dispatch({
-                    type: 'NEW_ALERT',
-                    alert: {
-                        type: "success",
-                        message: "Inscription réussie !"
-                    }
-                });
+
+                alertHelper.success("Inscription réussie !");
             })
             .catch(err => console.error(err));
     },
@@ -63,15 +54,10 @@ export default {
                 // save the registration in localStorage
                 registrationHelper.set(response.data.event._id);
 
+                alertHelper.success("Inscription réussie.");
+
                 AppDispatcher.dispatch({
-                    type: 'NEW_ALERT',
-                    alert: {
-                        type: "success",
-                        message: "Inscription réussie !"
-                    }
-                });
-                AppDispatcher.dispatch({
-                    type: 'REGISTER',
+                    type: 'REGISTERED',
                 });
             })
             .catch(err => {
@@ -79,13 +65,7 @@ export default {
                     // save the registration in localStorage
                     registrationHelper.set(err.response.data.event._id);
 
-                    AppDispatcher.dispatch({
-                        type: 'NEW_ALERT',
-                        alert: {
-                            type: "danger",
-                            message: "Tu es déjà inscrit !"
-                        }
-                    });
+                    alertHelper.info("Tu es déjà inscrit !");
 
                     AppDispatcher.dispatch({
                         type: 'REGISTER',
