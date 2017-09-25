@@ -1,5 +1,7 @@
 import React from 'react';
 
+import CreateDrinker from './CreateDrinker.jsx';
+
 import DrinkerActions from '../../../actions/DrinkerActions';
 import EventActions from '../../../actions/EventActions';
 import DrinkerStore from '../../../stores/DrinkerStore';
@@ -11,10 +13,13 @@ export default class AddDrinker extends React.Component {
 
         this.state = {
             searchPattern: "",
-            matches: []
+            matches: [],
+            showCreateForm: false
         };
 
         this._handleSearchChange = this._handleSearchChange.bind(this);
+        this._toggleCreateForm = this._toggleCreateForm.bind(this);
+        this._submitCreateForm = this._submitCreateForm.bind(this);
     }
 
     componentDidMount() {
@@ -34,11 +39,21 @@ export default class AddDrinker extends React.Component {
         EventActions.registerById(id);
     }
 
+    _toggleCreateForm() {
+        this.setState({ showCreateForm: !this.state.showCreateForm });
+    }
+
+    _submitCreateForm(data) {
+        DrinkerActions.createDrinker(data);
+    }
+
     _handleSearchChange(e) {
         this.setState({ searchPattern: e.target.value });
         if (e.target.value.length > 2) {
             // refresh the matches
             DrinkerActions.getDrinkers({ multifield: e.target.value });
+        } else {
+            this.setState({ matches: [] });
         }
     }
 
@@ -61,7 +76,7 @@ export default class AddDrinker extends React.Component {
                             <div className="modal-body">
                                 <form>
                                     <div className="form-group">
-                                        <input type="text" value={this.state.searchPattern} onChange={this._handleSearchChange} className="form-control" />
+                                        <input type="text" placeholder="Rechercher" value={this.state.searchPattern} onChange={this._handleSearchChange} className="form-control" />
                                         <small className="form-text text-muted">Par nom, prénom, surnom, .. (3 caractères min)</small>
                                     </div>
                                 </form>
@@ -76,6 +91,17 @@ export default class AddDrinker extends React.Component {
                                     })
                                 }
                             </ul>
+                            <div className="container">
+                                {
+                                    this.state.showCreateForm
+                                    ?
+                                        <CreateDrinker submit={this._submitCreateForm} close={this._toggleCreateForm} />
+                                    :
+                                        <button type="button" onClick={this._toggleCreateForm} className="btn btn-link">
+                                            Pas trouvé ? créer et ajouter à l'évènement
+                                        </button>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

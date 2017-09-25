@@ -71,3 +71,12 @@
     right: 10px;
     bottom: 5px;
 }
+
+.create-drinker-form {
+    background: #FAFAFA;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+}

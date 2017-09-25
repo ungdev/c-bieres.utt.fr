@@ -81,6 +81,7 @@ class EventStore extends BaseStore {
                 this.emitChange();
                 break;
             case "REGISTERED":
+            case "DRINKER_CREATED":
                 this._data[action.event._id].drinkers.push(action.drinker);
                 this.emitChange();
                 break;
