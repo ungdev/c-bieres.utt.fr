@@ -24,8 +24,8 @@ class DrinkerStore extends BaseStore {
      */
     _handleActions(action) {
         switch(action.type) {
-            case "DRINKER_FETCHED":
-                action.drinkers.map(d => this._insert(d));
+            case "DRINKERS_FETCHED":
+                this._data = action.drinkers;
                 this.emitChange();
                 break;
         }

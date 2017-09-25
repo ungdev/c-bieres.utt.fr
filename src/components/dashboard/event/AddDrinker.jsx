@@ -51,7 +51,10 @@ export default class AddDrinker extends React.Component {
         this.setState({ searchPattern: e.target.value });
         if (e.target.value.length > 2) {
             // refresh the matches
-            DrinkerActions.getDrinkers({ multifield: e.target.value });
+            DrinkerActions.getDrinkers({
+                multifield: e.target.value,
+                nextEvent: true 
+            });
         } else {
             this.setState({ matches: [] });
         }

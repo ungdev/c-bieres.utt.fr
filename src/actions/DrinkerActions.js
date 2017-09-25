@@ -8,7 +8,7 @@ export default {
         DrinkerService.get(filters)
             .then(response => {
                 AppDispatcher.dispatch({
-                    type: 'DRINKER_FETCHED',
+                    type: 'DRINKERS_FETCHED',
                     drinkers: response.data
                 });
             })
