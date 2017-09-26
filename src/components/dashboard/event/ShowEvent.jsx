@@ -44,6 +44,9 @@ export default class ShowEvent extends React.Component {
 
         let eventDate = new Date(this.state.event.when);
         let formattedDate = `${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`;
+
+        const isPast = eventDate.getTime() < new Date().getTime();
+
         return (
             <div>
                 <h1>
@@ -53,7 +56,7 @@ export default class ShowEvent extends React.Component {
                     <b>{this.state.event.drinkers.length}</b> participants
                 </div>
                 {
-                    (eventDate.getTime() > new Date().getTime()) && <AddDrinker eventId={this.state.id} />
+                    (!isPast) && <AddDrinker eventId={this.state.id} />
                 }
                 <div className="table-responsive">
                     <table className="table table-striped">
@@ -73,9 +76,12 @@ export default class ShowEvent extends React.Component {
                                                 <td>{drinker.firstName}</td>
                                                 <td>{drinker.lastName}</td>
                                                 <td>
-                                                    <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
-                                                        Retirer
-                                                    </button>
+                                                    {
+                                                        !isPast &&
+                                                        <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
+                                                            Retirer
+                                                        </button>
+                                                    }
                                                 </td>
                                             </tr>
                                 })

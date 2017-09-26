@@ -15,6 +15,7 @@ export default class UpdateEvent extends React.Component {
 
         this.state = {
             id: props.match.params.id,
+            originalDate: null,
             event: {},
             showBeerForm: false,
             beerToUpdate: null
@@ -64,10 +65,12 @@ export default class UpdateEvent extends React.Component {
     }
 
     _onEventStoreChange() {
+        const event = EventStore.getById(this.state.id);
         this.setState({
-            event: EventStore.getById(this.state.id),
+            event,
             showBeerForm: false,
-            beerToUpdate: null
+            beerToUpdate: null,
+            originalDate: event.when
         });
     }
 
@@ -92,7 +95,7 @@ export default class UpdateEvent extends React.Component {
     }
 
     render() {
-        const isPast = new Date(this.state.event.when).getTime() < new Date().getTime();
+        const isPast = new Date(this.state.originalDate).getTime() < new Date().getTime();
 
         return (
             <div>

@@ -41,7 +41,7 @@ export default class Event extends React.Component {
 
     _onEventStoreChange() {
         this.setState({
-            events: EventStore.events,
+            events: EventStore.events.sort((a, b) => a.when < b.when),
             showCreateForm: false,
             eventToDelete: null
         });
