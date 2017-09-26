@@ -111,8 +111,8 @@ export default class Event extends React.Component {
                                                 <td>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</td>
                                                 <td>
                                                     <div className="btn-group" role="group" aria-label="actions">
-                                                        <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}`}>Voir</Link>
-                                                        <Link className="btn btn-success" role="button" to={`/dashboard/event/${event._id}/update`}>Modifier</Link>
+                                                        <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}`}>Participants</Link>
+                                                        <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}/update`}>Informations</Link>
                                                         <button type="button" onClick={_ => this._deleteEvent(event._id)} className="btn btn-danger">
                                                             Supprimer
                                                         </button>

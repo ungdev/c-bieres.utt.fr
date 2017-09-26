@@ -92,6 +92,8 @@ export default class UpdateEvent extends React.Component {
     }
 
     render() {
+        const isPast = new Date(this.state.event.when).getTime() < new Date().getTime();
+
         return (
             <div>
                 <h1>Modification de <b>{this.state.event.name}</b></h1>
@@ -101,14 +103,17 @@ export default class UpdateEvent extends React.Component {
                     <div className="form-row align-items-center">
                         <div className="col-sm-4">
                             <label htmlFor="name">Nom</label>
-                            <input type="text" onChange={this._handleNameChange} value={this.state.event.name} className="form-control" id="name" />
+                            <input type="text" readOnly={isPast} onChange={this._handleNameChange} value={this.state.event.name} className="form-control" id="name" />
                         </div>
                         <div className="col-sm-4">
                             <label htmlFor="date">Date</label>
-                            <input type="date" onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
+                            <input type="date" readOnly={isPast} onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
                         </div>
                         <div className="col-sm-4">
-                            <button type="button" onClick={this._submitUpdateForm} className="btn btn-success btn-lg">Mettre à jour</button>
+                            {
+                                !isPast &&
+                                <button type="button" onClick={this._submitUpdateForm} className="btn btn-success btn-lg">Mettre à jour</button>
+                            }
                         </div>
                     </div>
                 </form>
@@ -120,17 +125,19 @@ export default class UpdateEvent extends React.Component {
                             if (this.state.beerToUpdate === beer._id) {
                                 return <UpdateBeer key={beer._id} update={this._updateBeer} close={this._closeUpdateBeerForm} beer={beer} />
                             } else {
-                                return <ShowBeer key={beer._id} beer={beer} update={this._showUpdateBeerForm} delete={this._deleteBeer} />
+                                return <ShowBeer key={beer._id} showActions={!isPast} beer={beer} update={this._showUpdateBeerForm} delete={this._deleteBeer} />
                             }
 
                         })
                     }
                     {
-                        this.state.showBeerForm
-                        ?
-                            <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
-                        :
-                            <button type="button" onClick={this._toggleBeerForm} className="btn btn-link">Ajouter une bière</button>
+                        !isPast && (
+                            this.state.showBeerForm
+                            ?
+                                <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
+                            :
+                                <button type="button" onClick={this._toggleBeerForm} className="btn btn-link">Ajouter une bière</button>
+                        )
                     }
                 </div>
             </div>

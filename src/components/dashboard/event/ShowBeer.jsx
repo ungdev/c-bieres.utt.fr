@@ -6,7 +6,8 @@ export default class ShowBeer extends React.Component {
         super(props);
 
         this.state = {
-            beer: props.beer
+            beer: props.beer,
+            showActions: props.showActions
         };
     }
 
@@ -20,10 +21,13 @@ export default class ShowBeer extends React.Component {
                     <h4>{this.state.beer.name}</h4>
                     <span className="badge badge-primary">{this.state.beer.type}</span>
                     <p>{this.state.beer.description}</p>
-                    <div className="btn-group" role="group">
-                        <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>
-                        <button type="button" onClick={_ => this.props.delete(this.state.beer)} className="btn btn-danger">Supprimer</button>
-                    </div>
+                    {
+                        this.state.showActions &&
+                        <div className="btn-group" role="group">
+                            <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>
+                            <button type="button" onClick={_ => this.props.delete(this.state.beer)} className="btn btn-danger">Supprimer</button>
+                        </div>
+                    }
                 </div>
             </div>
         );

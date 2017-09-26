@@ -134,7 +134,13 @@ export default class Home extends React.Component {
                         <div id="beers" className="content">
                             <h1>Les bières</h1>
                             {
-                                this.state.nextEvent.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
+                                this.state.nextEvent.beers.length
+                                ?
+                                    this.state.nextEvent.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
+                                :
+                                    <div className="no-beer-message">
+                                        Les bières seront ajoutées prochainement.
+                                    </div>
                             }
                         </div>
                     </section>
