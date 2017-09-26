@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+
+import DeleteEventConfirm from './DeleteEventConfirm.jsx';
 
 import EventActions from '../../../actions/EventActions';
 import EventStore from '../../../stores/EventStore';
@@ -12,6 +13,7 @@ export default class Event extends React.Component {
 
         this.state = {
             showCreateForm: false,
+            eventToDelete: null,
             name: "",
             date: "",
             events: []
@@ -21,6 +23,8 @@ export default class Event extends React.Component {
         this._handleNameChange = this._handleNameChange.bind(this);
         this._handleDateChange = this._handleDateChange.bind(this);
         this._submitCreateForm = this._submitCreateForm.bind(this);
+        this._showConfirmation = this._showConfirmation.bind(this);
+        this._hideConfirmation = this._hideConfirmation.bind(this);
         this._deleteEvent = this._deleteEvent.bind(this);
     }
 
@@ -38,7 +42,8 @@ export default class Event extends React.Component {
     _onEventStoreChange() {
         this.setState({
             events: EventStore.events,
-            showCreateForm: false
+            showCreateForm: false,
+            eventToDelete: null
         });
     }
 
@@ -51,6 +56,14 @@ export default class Event extends React.Component {
             name: this.state.name,
             when: this.state.date
         });
+    }
+
+    _showConfirmation(eventToDelete) {
+        this.setState({ eventToDelete });
+    }
+
+    _hideConfirmation() {
+        this.setState({ eventToDelete: null });
     }
 
     _deleteEvent(id) {
@@ -113,9 +126,12 @@ export default class Event extends React.Component {
                                                     <div className="btn-group" role="group" aria-label="actions">
                                                         <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}`}>Participants</Link>
                                                         <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}/update`}>Informations</Link>
-                                                        <button type="button" onClick={_ => this._deleteEvent(event._id)} className="btn btn-danger">
-                                                            Supprimer
-                                                        </button>
+                                                        {
+                                                            (eventDate.getTime() > new Date().getTime()) &&
+                                                            <button type="button" onClick={_ => this._showConfirmation(event)} className="btn btn-danger">
+                                                                Supprimer
+                                                            </button>
+                                                        }
                                                     </div>
                                                 </td>
                                             </tr>
@@ -123,6 +139,15 @@ export default class Event extends React.Component {
                             }
                         </tbody>
                     </table>
+
+                    {
+                        this.state.eventToDelete &&
+                        <DeleteEventConfirm
+                            event={this.state.eventToDelete}
+                            close={this._hideConfirmation}
+                            delete={this._deleteEvent}
+                            />
+                    }
                 </div>
             </div>
         );
