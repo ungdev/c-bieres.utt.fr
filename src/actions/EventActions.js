@@ -79,8 +79,8 @@ export default {
             });
     },
 
-    getEvents() {
-        EventService.get()
+    getEvents(query) {
+        EventService.get(query)
             .then(response => {
                 AppDispatcher.dispatch({
                     type: 'GET_EVENTS',

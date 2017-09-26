@@ -32,7 +32,7 @@ export default class Event extends React.Component {
         // listen the store change
         EventStore.addChangeListener(this._onEventStoreChange.bind(this));
         // trigger action for the store to load events
-        EventActions.getEvents();
+        EventActions.getEvents({ sort: '-when' });
     }
 
     componentWillUnmount() {
