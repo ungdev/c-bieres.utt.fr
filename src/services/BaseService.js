@@ -1,13 +1,5 @@
 const axios = require('axios');
-
-const GLOBAL_HEADERS = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-};
-
-const REQUEST_TEMPLATE = {
-    headers: GLOBAL_HEADERS
-};
+import authHelper from '../helpers/localStorage/authHelper';
 
 export default class BaseService {
 
@@ -24,7 +16,13 @@ export default class BaseService {
      */
      makeRequest(data) {
          return new Promise((resolve, reject) => {
-             axios(Object.assign(data, REQUEST_TEMPLATE))
+             const headers = {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${authHelper.get()}`
+             };
+
+             axios(Object.assign(data, { headers }))
                 .then(response => resolve(response))
                 .catch(err => reject(err));
             });

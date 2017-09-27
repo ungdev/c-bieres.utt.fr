@@ -1,18 +1,18 @@
-const KEY_NAME = 'access_token';
+const KEY_NAME = 'jwt';
 
 export default {
 
     /**
-     * Set the access token
+     * Set the JWT
      *
-     * @param string id: the event id
+     * @param string jwt
      */
-    set(id) {
-        localStorage.setItem(KEY_NAME, id);
+    set(jwt) {
+        localStorage.setItem(KEY_NAME, jwt);
     },
 
     /**
-     * Get the access token
+     * Get the JWT
      *
      * @return string
      */
@@ -21,7 +21,7 @@ export default {
     },
 
     /**
-     * Remove the access token from localStorage
+     * Remove the JWT from localStorage
      */
      clean() {
          localStorage.removeItem(KEY_NAME);

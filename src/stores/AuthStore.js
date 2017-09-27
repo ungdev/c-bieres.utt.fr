@@ -1,5 +1,7 @@
 import BaseStore from './BaseStore';
 import EventService from '../services/EventService';
+import authHelper from '../helpers/localStorage/authHelper';
+import jwtDecode from 'jwt-decode';
 
 class AuthStore extends BaseStore {
 
@@ -7,6 +9,13 @@ class AuthStore extends BaseStore {
         super();
         this.subscribe(() => this._handleActions.bind(this));
 
+        this.payload = {};
+    }
+
+    _saveJWT(jwt) {
+        authHelper.set(jwt);
+        console.log(jwtDecode(jwt));
+        this.emitChange();
     }
 
     /**
@@ -16,7 +25,9 @@ class AuthStore extends BaseStore {
      */
     _handleActions(action) {
         switch(action.type) {
-
+            case "LOGGED":
+                this._saveJWT(action.jwt);
+                break;
         }
     }
 

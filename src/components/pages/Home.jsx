@@ -6,7 +6,6 @@ import Beer from '../home/Beer.jsx';
 
 import registrationHelper from '../../helpers/localStorage/registrationHelper';
 import redirectHelper from '../../helpers/localStorage/redirectHelper';
-import authHelper from '../../helpers/localStorage/authHelper';
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
 import AuthActions from '../../actions/AuthActions';
@@ -49,33 +48,33 @@ export default class Home extends React.Component {
                } else if (lastAction == "unregister") {
                    EventActions.unregister({authorization_code: authorization_code[1]});
                } else if (lastAction == "login") {
-                   AuthActions.callback(authorization_code[1])
-                   .then(response => {
-                       // save auth token and redirect to dashboard
-                       authHelper.set(response.access_token);
-                       this.props.history.push('/dashboard/event')
-                   })
-                   .catch(err => console.log(err));
+                   AuthActions.callback(authorization_code[1]);
                }
            }
        }
 
-       // listen the store change
+       // listen stores changes
        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+       AuthStore.addChangeListener(this._onAuthStoreChange.bind(this));
        // trigger action for the store to load the event
        EventActions.getNextEvent();
-
     }
 
     componentWillUnmount() {
+        // remove listeners
         EventStore.removeChangeListener(this._onEventStoreChange);
+        AuthStore.removeChangeListener(this._onAuthStoreChange);
+    }
+
+    _onAuthStoreChange() {
+        this.props.history.push('/dashboard/event');
     }
 
     _onEventStoreChange() {
         this.setState({
             nextEvent: EventStore.getNext(),
             registration: registrationHelper.get()
-        })
+        });
     }
 
     takePart() {

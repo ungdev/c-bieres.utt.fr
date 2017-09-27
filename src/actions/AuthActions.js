@@ -16,7 +16,14 @@ export default {
     },
 
     callback(authorization_code) {
-        return AuthService.sendAuthorizationCode(authorization_code);
+        return AuthService.sendAuthorizationCode(authorization_code)
+            .then(response => {
+                AppDispatcher.dispatch({
+                    type: 'LOGGED',
+                    jwt: response.data
+                });
+            })
+            .catch(err => console.log(err));
     }
 
 }
