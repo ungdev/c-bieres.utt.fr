@@ -9,12 +9,20 @@ class AuthStore extends BaseStore {
         super();
         this.subscribe(() => this._handleActions.bind(this));
 
-        this.payload = {};
+        this._payload = {};
+    }
+
+    get payload() {
+        return this._payload;
+    }
+
+    get isAdmin() {
+        return this._payload.isAdmin;
     }
 
     _saveJWT(jwt) {
         authHelper.set(jwt);
-        console.log(jwtDecode(jwt));
+        this._payload = jwtDecode(jwt);
         this.emitChange();
     }
 

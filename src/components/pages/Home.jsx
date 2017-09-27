@@ -67,7 +67,8 @@ export default class Home extends React.Component {
     }
 
     _onAuthStoreChange() {
-        this.props.history.push('/dashboard/event');
+        if (AuthStore.isAdmin)
+            this.props.history.push('/dashboard/event');
     }
 
     _onEventStoreChange() {
