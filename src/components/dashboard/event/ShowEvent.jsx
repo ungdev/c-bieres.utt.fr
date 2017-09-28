@@ -16,11 +16,12 @@ export default class ShowEvent extends React.Component {
         };
 
         this._unregisterDrinker = this._unregisterDrinker.bind(this);
+        this._onEventStoreChange = this._onEventStoreChange.bind(this);
     }
 
     componentDidMount() {
         // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+        EventStore.addChangeListener(this._onEventStoreChange);
         // trigger action for the store to load the event
         EventActions.getEvent(this.state.id);
     }

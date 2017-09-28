@@ -27,7 +27,7 @@ export default class App extends React.Component {
     }
 
     componentWillUnmount() {
-        AlertStore.removeChangeListener(this._onEventStoreChange);
+        AlertStore.removeChangeListener(this._onAlertStoreChange);
     }
 
     _onAlertStoreChange() {

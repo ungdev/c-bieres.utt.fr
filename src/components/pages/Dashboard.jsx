@@ -14,12 +14,20 @@ export default class Dashboard extends React.Component {
     constructor() {
         super();
 
+        this.state = {
+            activeTab: 'event'
+        };
+
         this._logout = this._logout.bind(this);
     }
 
     _logout() {
         authHelper.clean();
         this.props.history.push('/');
+    }
+
+    _handleNavChange(activeTab) {
+        this.setState({ activeTab });
     }
 
     render() {
@@ -31,7 +39,10 @@ export default class Dashboard extends React.Component {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <ul className="navbar-nav mr-auto"></ul>
-                    <button onClick={this._logout} className="btn btn-outline-primary" type="button">Logout</button>
+                    <button onClick={this._logout} className="btn btn-dark" type="button">
+                        <i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;
+                        Logout
+                    </button>
                 </nav>
 
                 <div className="container-fluid">
@@ -39,10 +50,16 @@ export default class Dashboard extends React.Component {
                         <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
                             <ul className="nav nav-pills flex-column">
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to='/dashboard/event'>Évènements</Link>
+                                    <Link className={"nav-link " + (this.state.activeTab === "event" && "active")} onClick={_ => this._handleNavChange('event')} to='/dashboard/event'>
+                                        <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;
+                                        Évènements
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='/dashboard/admin'>Gestion des admins</Link>
+                                    <Link className={"nav-link " + (this.state.activeTab === "admin" && "active")} onClick={_ => this._handleNavChange('admin')} to='/dashboard/admin'>
+                                        <i className="fa fa-lock" aria-hidden="true"></i>&nbsp;
+                                        Gestion des admins
+                                    </Link>
                                 </li>
                             </ul>
                         </nav>

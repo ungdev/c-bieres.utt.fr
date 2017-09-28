@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatchers/AppDispatcher';
 
-const CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'CHANGE';
 
 export default class BaseStore extends EventEmitter {
 
@@ -26,6 +26,7 @@ export default class BaseStore extends EventEmitter {
     }
 
     removeChangeListener(cb) {
+        console.log('removed');
         this.removeListener(CHANGE_EVENT, cb);
     }
 

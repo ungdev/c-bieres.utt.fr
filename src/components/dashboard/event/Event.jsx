@@ -26,11 +26,12 @@ export default class Event extends React.Component {
         this._showConfirmation = this._showConfirmation.bind(this);
         this._hideConfirmation = this._hideConfirmation.bind(this);
         this._deleteEvent = this._deleteEvent.bind(this);
+        this._onEventStoreChange = this._onEventStoreChange.bind(this);
     }
 
     componentDidMount() {
         // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+        EventStore.addChangeListener(this._onEventStoreChange);
         // trigger action for the store to load events
         EventActions.getEvents({ sort: '-when' });
     }

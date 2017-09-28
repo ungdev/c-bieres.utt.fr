@@ -19,7 +19,7 @@ export default class AddAdmin extends React.Component {
     }
 
     componentWillUnmount() {
-        EtuuttStore.removeChangeListener(this._onAdminStoreChange);
+        EtuuttStore.removeChangeListener(this._onEtuuttStoreChange);
     }
 
     _onEtuuttStoreChange() {

@@ -30,11 +30,12 @@ export default class UpdateEvent extends React.Component {
         this._deleteBeer = this._deleteBeer.bind(this);
         this._showUpdateBeerForm = this._showUpdateBeerForm.bind(this);
         this._closeUpdateBeerForm = this._closeUpdateBeerForm.bind(this);
+        this._onEventStoreChange = this._onEventStoreChange.bind(this);
     }
 
     componentDidMount() {
         // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange.bind(this));
+        EventStore.addChangeListener(this._onEventStoreChange);
         // trigger action for the store to load the event
         EventActions.getEvent(this.state.id);
     }

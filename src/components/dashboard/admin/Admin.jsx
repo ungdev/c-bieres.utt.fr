@@ -17,11 +17,12 @@ export default class Admin extends React.Component {
 
         this._deleteAdmin = this._deleteAdmin.bind(this);
         this._toggleAddAdmin = this._toggleAddAdmin.bind(this);
+        this._onAdminStoreChange = this._onAdminStoreChange.bind(this);
     }
 
     componentDidMount() {
         // listen the store change
-        AdminStore.addChangeListener(this._onAdminStoreChange.bind(this));
+        AdminStore.addChangeListener(this._onAdminStoreChange);
         // trigger action for the store to load admins
         AdminActions.getAdmins();
     }

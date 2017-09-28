@@ -20,11 +20,12 @@ export default class AddDrinker extends React.Component {
         this._handleSearchChange = this._handleSearchChange.bind(this);
         this._toggleCreateForm = this._toggleCreateForm.bind(this);
         this._submitCreateForm = this._submitCreateForm.bind(this);
+        this._onDrinkerStoreChange = this._onDrinkerStoreChange.bind(this);
     }
 
     componentDidMount() {
         // listen the store change
-        DrinkerStore.addChangeListener(this._onDrinkerStoreChange.bind(this));
+        DrinkerStore.addChangeListener(this._onDrinkerStoreChange);
     }
 
     componentWillUnmount() {

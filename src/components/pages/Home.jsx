@@ -26,6 +26,8 @@ export default class Home extends React.Component {
 
         this.takePart = this.takePart.bind(this);
         this._loginDashboard = this._loginDashboard.bind(this);
+        this._onEventStoreChange = this._onEventStoreChange.bind(this);
+        this._onAuthStoreChange = this._onAuthStoreChange.bind(this);
     }
 
     componentDidMount() {
@@ -54,8 +56,8 @@ export default class Home extends React.Component {
        }
 
        // listen stores changes
-       EventStore.addChangeListener(this._onEventStoreChange.bind(this));
-       AuthStore.addChangeListener(this._onAuthStoreChange.bind(this));
+       EventStore.addChangeListener(this._onEventStoreChange);
+       AuthStore.addChangeListener(this._onAuthStoreChange);
        // trigger action for the store to load the event
        EventActions.getNextEvent();
     }
