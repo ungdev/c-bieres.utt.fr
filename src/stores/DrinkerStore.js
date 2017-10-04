@@ -6,15 +6,16 @@ class DrinkerStore extends BaseStore {
         super();
         this.subscribe(() => this._handleActions.bind(this));
 
-        this._data = {};
+        this._serverDrinkers = [];
+        this._etuuttDrinkers = [];
     }
 
-    get drinkers() {
-        return Object.values(this._data);
+    get serverDrinkers() {
+        return this._serverDrinkers;
     }
 
-    _insert(e) {
-        this._data[e._id] = e;
+    get etuuttDrinkers() {
+        return this._etuuttDrinkers;
     }
 
     /**
@@ -25,7 +26,8 @@ class DrinkerStore extends BaseStore {
     _handleActions(action) {
         switch(action.type) {
             case "DRINKERS_FETCHED":
-                this._data = action.drinkers;
+                this._etuuttDrinkers = action.etuuttDrinkers;
+                this._serverDrinkers = action.serverDrinkers;
                 this.emitChange();
                 break;
         }

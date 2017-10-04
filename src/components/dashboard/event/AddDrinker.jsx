@@ -13,7 +13,8 @@ export default class AddDrinker extends React.Component {
 
         this.state = {
             searchPattern: "",
-            matches: [],
+            serverMatches: [],
+            etuuttMatches: [],
             showCreateForm: false
         };
 
@@ -33,7 +34,10 @@ export default class AddDrinker extends React.Component {
     }
 
     _onDrinkerStoreChange() {
-        this.setState({ matches: DrinkerStore.drinkers });
+        this.setState({
+            serverMatches: DrinkerStore.serverDrinkers,
+            etuuttMatches: DrinkerStore.etuuttDrinkers,
+        });
     }
 
     _addDrinker(id) {
@@ -57,7 +61,7 @@ export default class AddDrinker extends React.Component {
                 event: this.props.eventId
             });
         } else {
-            this.setState({ matches: [] });
+            this.setState({ serverMatches: [], etuuttMatches: [] });
         }
     }
 
@@ -87,10 +91,20 @@ export default class AddDrinker extends React.Component {
                             </div>
                             <ul className="list-group">
                                 {
-                                    this.state.matches.map(match => {
+                                    this.state.serverMatches.map(match => {
                                         return  <li className="list-group-item">
                                                     {match.firstName} {match.lastName}
                                                     <button type="button" onClick={_ => this._addDrinker(match._id)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                </li>
+                                    })
+                                }
+                            </ul>
+                            <ul className="list-group">
+                                {
+                                    this.state.etuuttMatches.map(match => {
+                                        return  <li className="list-group-item">
+                                                    {match.firstName} {match.lastName}
+                                                    <button type="button" onClick={_ => DrinkerActions.createDrinker(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
                                                 </li>
                                     })
                                 }

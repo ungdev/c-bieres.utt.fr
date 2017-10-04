@@ -1,15 +1,18 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import DrinkerService from '../services/DrinkerService';
+import EtuuttService from '../services/EtuuttService';
 import alertHelper from '../helpers/alertHelper';
 
 export default {
 
     getDrinkers(filters) {
-        DrinkerService.get(filters)
-            .then(response => {
+        Promise.all([DrinkerService.get(filters), EtuuttService.getMatches(filters.multifield)])
+            .then(responses => {
+                console.log(responses);
                 AppDispatcher.dispatch({
                     type: 'DRINKERS_FETCHED',
-                    drinkers: response.data
+                    serverDrinkers: responses[0].data,
+                    etuuttDrinkers: responses[1].data.data
                 });
             })
             .catch(err => console.error(err));
