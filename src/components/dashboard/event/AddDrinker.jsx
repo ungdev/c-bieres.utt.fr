@@ -44,6 +44,11 @@ export default class AddDrinker extends React.Component {
         EventActions.registerById(id);
     }
 
+    _addDrinkerFromEtuutt(match) {
+        match.eventId = this.props.eventId;
+        DrinkerActions.createDrinker(match);
+    }
+
     _toggleCreateForm() {
         this.setState({ showCreateForm: !this.state.showCreateForm });
     }
@@ -114,7 +119,7 @@ export default class AddDrinker extends React.Component {
                                             this.state.etuuttMatches.map((match, i) => {
                                                 return  <li key={i} className="list-group-item">
                                                             {match.firstName} {match.lastName}
-                                                            <button type="button" onClick={_ => DrinkerActions.createDrinker(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                            <button type="button" onClick={_ => this._addDrinkerFromEtuutt(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
                                                         </li>
                                             })
                                         }
