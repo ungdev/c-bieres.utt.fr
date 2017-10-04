@@ -28,7 +28,7 @@ class AuthStore extends BaseStore {
                 action.admins.map(admin => this.addAdmin(admin));
                 this.emitChange();
                 break;
-            case "ADMINS_FETCHED":
+            case "ADMIN_CREATED":
                 this.addAdmin(action.admin);
                 this.emitChange();
                 break;

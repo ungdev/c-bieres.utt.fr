@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EtuuttActions from '../../../actions/EtuuttActions';
+import AdminActions from '../../../actions/AdminActions';
 import EtuuttStore from '../../../stores/EtuuttStore';
 
 export default class AddAdmin extends React.Component {
@@ -11,6 +12,8 @@ export default class AddAdmin extends React.Component {
         this.state = {
             matches: []
         };
+
+        this._handleAddAdmin = this._handleAddAdmin.bind(this);
     }
 
     componentDidMount() {
@@ -23,12 +26,16 @@ export default class AddAdmin extends React.Component {
     }
 
     _onEtuuttStoreChange() {
-        this.setState({ matches: EtuuttStore.matches });
+        this.setState({ matches: EtuuttStore.matches.data });
         console.log(this.state.matches);
     }
 
     _handleChange(e) {
         EtuuttActions.getMatches(e.target.value);
+    }
+
+    _handleAddAdmin(student) {
+        AdminActions.addAdmin(student);
     }
 
     render() {
@@ -54,7 +61,16 @@ export default class AddAdmin extends React.Component {
                                     </div>
                                 </form>
                                 <div>
-
+                                    <ul className="list-group">
+                                        {
+                                            this.state.matches.map(match => {
+                                                return  <li className="list-group-item">
+                                                            {match.firstName} {match.lastName}
+                                                            <button type="button" onClick={_ => this._handleAddAdmin(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                        </li>
+                                            })
+                                        }
+                                    </ul>
                                 </div>
                             </div>
                         </div>
