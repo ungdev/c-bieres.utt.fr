@@ -20,6 +20,10 @@ class AuthStore extends BaseStore {
         return this._payload.isAdmin;
     }
 
+    get accessToken() {
+        return this._payload.accessToken;
+    }
+
     _saveJWT(jwt) {
         authHelper.set(jwt);
         this._payload = jwtDecode(jwt);
