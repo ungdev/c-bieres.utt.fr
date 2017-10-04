@@ -81,7 +81,7 @@ export default class Admin extends React.Component {
                         (this.state.admins.length === 0) &&
                         <Alert
                             type="info"
-                            message={<div>Aucun administrateur. Vous pouvez en ajouter un en cliquant sur <b>ajouter un administrateur</b></div>}
+                            message={<div>Aucun administrateur. Tu peux en ajouter un en cliquant sur <b>ajouter un administrateur</b></div>}
                             />
                     }
                 </div>

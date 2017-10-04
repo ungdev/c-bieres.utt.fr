@@ -6,6 +6,8 @@ import DeleteEventConfirm from './DeleteEventConfirm.jsx';
 import EventActions from '../../../actions/EventActions';
 import EventStore from '../../../stores/EventStore';
 
+import Alert from '../../Alert.jsx';
+
 export default class Event extends React.Component {
 
     constructor() {
@@ -140,6 +142,14 @@ export default class Event extends React.Component {
                             }
                         </tbody>
                     </table>
+
+                    {
+                        (this.state.events.length === 0) &&
+                        <Alert
+                            type="info"
+                            message={<div>Aucun évènement. Tu peux en créer un en cliquant sur <b>créer un évènement</b></div>}
+                            />
+                    }
 
                     {
                         this.state.eventToDelete &&
