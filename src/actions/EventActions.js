@@ -63,6 +63,8 @@ export default {
 
                 AppDispatcher.dispatch({
                     type: 'REGISTERED',
+                    drinker: response.data.drinker,
+                    event: response.data.event
                 });
             })
             .catch(err => {

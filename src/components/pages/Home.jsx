@@ -81,6 +81,7 @@ export default class Home extends React.Component {
             nextEvent: EventStore.getNext(),
             registration: registrationHelper.get()
         });
+        console.log(this.state);
     }
 
     takePart() {
