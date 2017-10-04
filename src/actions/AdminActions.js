@@ -26,7 +26,7 @@ export default {
     },
 
     deleteAdmin(id) {
-        AdminService.delete(beer._id)
+        AdminService.delete(id)
             .then(response => {
                 AppDispatcher.dispatch({
                     type: 'ADMIN_DELETED',

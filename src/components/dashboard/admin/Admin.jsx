@@ -15,7 +15,7 @@ export default class Admin extends React.Component {
             showAddAdmin: false
         };
 
-        this._deleteAdmin = this._deleteAdmin.bind(this);
+        this._handleDeleteAdmin = this._handleDeleteAdmin.bind(this);
         this._toggleAddAdmin = this._toggleAddAdmin.bind(this);
         this._onAdminStoreChange = this._onAdminStoreChange.bind(this);
     }
@@ -35,7 +35,7 @@ export default class Admin extends React.Component {
         this.setState({ admins: AdminStore.admins });
     }
 
-    _deleteAdmin(id) {
+    _handleDeleteAdmin(id) {
         AdminActions.deleteAdmin(id);
     }
 
@@ -65,7 +65,7 @@ export default class Admin extends React.Component {
                                                 <td>{`${admin.firstName} ${admin.lastName}`}</td>
                                                 <td>
                                                     <div className="btn-group" role="group" aria-label="actions">
-                                                        <button type="button" onClick={_ => this._deleteAdmin(admin._id)} className="btn btn-danger">
+                                                        <button type="button" onClick={_ => this._handleDeleteAdmin(admin._id)} className="btn btn-danger">
                                                             Supprimer
                                                         </button>
                                                     </div>
