@@ -8,7 +8,6 @@ export default {
     getDrinkers(filters) {
         Promise.all([DrinkerService.get(filters), EtuuttService.getMatches(filters.multifield)])
             .then(responses => {
-                console.log(responses);
                 AppDispatcher.dispatch({
                     type: 'DRINKERS_FETCHED',
                     serverDrinkers: responses[0].data,

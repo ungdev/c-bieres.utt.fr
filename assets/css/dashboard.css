@@ -80,3 +80,9 @@
     margin-top: 15px;
     padding-top: 15px;
 }
+
+.matches-container {
+    overflow-y: scroll;
+    max-height: 250px;
+    padding-bottom: 20px;
+}

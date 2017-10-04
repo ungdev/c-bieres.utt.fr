@@ -89,26 +89,38 @@ export default class AddDrinker extends React.Component {
                                     </div>
                                 </form>
                             </div>
-                            <ul className="list-group">
-                                {
-                                    this.state.serverMatches.map(match => {
-                                        return  <li className="list-group-item">
-                                                    {match.firstName} {match.lastName}
-                                                    <button type="button" onClick={_ => this._addDrinker(match._id)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
-                                                </li>
-                                    })
-                                }
-                            </ul>
-                            <ul className="list-group">
-                                {
-                                    this.state.etuuttMatches.map(match => {
-                                        return  <li className="list-group-item">
-                                                    {match.firstName} {match.lastName}
-                                                    <button type="button" onClick={_ => DrinkerActions.createDrinker(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
-                                                </li>
-                                    })
-                                }
-                            </ul>
+                            {
+                                (this.state.serverMatches.length > 0) &&
+                                <div className="container">
+                                    <h5>Déjà dans club bières</h5>
+                                    <ul className="list-group matches-container">
+                                        {
+                                            this.state.serverMatches.map((match, i) => {
+                                                return  <li key={i} className="list-group-item">
+                                                            {match.firstName} {match.lastName}
+                                                            <button type="button" onClick={_ => this._addDrinker(match._id)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                        </li>
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                            {
+                                (this.state.etuuttMatches.length > 0) &&
+                                <div className="container">
+                                    <h5>Depuis le site étu</h5>
+                                    <ul className="list-group matches-container">
+                                        {
+                                            this.state.etuuttMatches.map((match, i) => {
+                                                return  <li key={i} className="list-group-item">
+                                                            {match.firstName} {match.lastName}
+                                                            <button type="button" onClick={_ => DrinkerActions.createDrinker(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
+                                                        </li>
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            }
                             <div className="container">
                                 {
                                     this.state.showCreateForm
