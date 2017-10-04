@@ -5,6 +5,8 @@ import AddAdmin from './AddAdmin.jsx';
 import AdminActions from '../../../actions/AdminActions';
 import AdminStore from '../../../stores/AdminStore';
 
+import Alert from '../../Alert.jsx';
+
 export default class Admin extends React.Component {
 
     constructor() {
@@ -77,11 +79,10 @@ export default class Admin extends React.Component {
                     </table>
                     {
                         (this.state.admins.length === 0) &&
-                        <div className="alert-message-container">
-                            <div className="alert alert-info" role="alert">
-                                Aucun administrateur. Vous pouvez en ajouter un en cliquant sur <b>ajouter un administrateur</b>.
-                            </div>
-                        </div>
+                        <Alert
+                            type="info"
+                            message={<div>Aucun administrateur. Vous pouvez en ajouter un en cliquant sur <b>ajouter un administrateur</b></div>}
+                            />
                     }
                 </div>
             </div>

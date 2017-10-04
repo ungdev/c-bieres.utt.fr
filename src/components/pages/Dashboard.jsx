@@ -11,11 +11,11 @@ import '../../../assets/css/dashboard.css';
 
 export default class Dashboard extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            activeTab: 'event'
+            activeTab: this.props.location.pathname.includes('admin') ? 'admin' : 'event'
         };
 
         this._logout = this._logout.bind(this);
