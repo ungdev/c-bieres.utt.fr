@@ -4,7 +4,7 @@ export default {
 
     viewed(id) {
         AppDispatcher.dispatch({
-            type: 'ALERT_VIEWED',
+            type: 'TOAST_VIEWED',
             id
         });
     }

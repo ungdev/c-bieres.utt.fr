@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EventService from '../services/EventService';
 import registrationHelper from '../helpers/localStorage/registrationHelper';
-import alertHelper from '../helpers/alertHelper';
+import toastHelper from '../helpers/toastHelper';
 
 export default {
 
@@ -17,7 +17,7 @@ export default {
                 // save the registration in localStorage
                 registrationHelper.clean();
 
-                alertHelper.success("Desinscription réussie.");
+                toastHelper.success("Desinscription réussie.");
 
                 AppDispatcher.dispatch({
                     type: 'UNREGISTERED',
@@ -42,7 +42,7 @@ export default {
                     event: response.data.event
                 });
 
-                alertHelper.success("Inscription réussie !");
+                toastHelper.success("Inscription réussie !");
             })
             .catch(err => console.error(err));
     },
@@ -59,7 +59,7 @@ export default {
                 // save the registration in localStorage
                 registrationHelper.set(response.data.event._id);
 
-                alertHelper.success("Inscription réussie.");
+                toastHelper.success("Inscription réussie.");
 
                 AppDispatcher.dispatch({
                     type: 'REGISTERED',
@@ -70,7 +70,7 @@ export default {
                     // save the registration in localStorage
                     registrationHelper.set(err.response.data.event._id);
 
-                    alertHelper.info("Tu es déjà inscrit !");
+                    toastHelper.info("Tu es déjà inscrit !");
 
                     AppDispatcher.dispatch({
                         type: 'REGISTER',

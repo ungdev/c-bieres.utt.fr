@@ -36,8 +36,6 @@
   border-radius: 0;
 }
 
-
-
 .page-content {
     margin-top: 56px;
 }
@@ -85,4 +83,10 @@
     overflow-y: scroll;
     max-height: 250px;
     padding-bottom: 20px;
+}
+
+.alert-message-container {
+    text-align: center;
+    padding: 20px 10px;
+    width: 100%;
 }

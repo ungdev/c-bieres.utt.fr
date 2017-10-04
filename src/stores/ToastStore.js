@@ -1,17 +1,17 @@
 import BaseStore from './BaseStore';
 
-class AuthStore extends BaseStore {
+class ToastStore extends BaseStore {
 
     constructor() {
         super();
         this.subscribe(() => this._handleActions.bind(this));
 
         this._nextId = 0;
-        this._alerts = {};
+        this._toasts = {};
     }
 
-    get alerts() {
-        return Object.values(this._alerts);
+    get toasts() {
+        return Object.values(this._toasts);
     }
 
     /**
@@ -21,14 +21,14 @@ class AuthStore extends BaseStore {
      */
     _handleActions(action) {
         switch(action.type) {
-            case "NEW_ALERT":
-                this._alerts[this._nextId] = action.alert;
-                this._alerts[this._nextId].id = this._nextId;
+            case "NEW_TOAST":
+                this._toasts[this._nextId] = action.toast;
+                this._toasts[this._nextId].id = this._nextId;
                 this._nextId++;
                 this.emitChange();
                 break;
-            case "ALERT_VIEWED":
-                delete this._alerts[action.id];
+            case "TOAST_VIEWED":
+                delete this._toasts[action.id];
                 this.emitChange();
                 break;
         }
@@ -36,4 +36,4 @@ class AuthStore extends BaseStore {
 
 }
 
-export default new AuthStore();
+export default new ToastStore();

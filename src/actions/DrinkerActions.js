@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import DrinkerService from '../services/DrinkerService';
 import EtuuttService from '../services/EtuuttService';
-import alertHelper from '../helpers/alertHelper';
+import toastHelper from '../helpers/toastHelper';
 
 export default {
 
@@ -20,7 +20,7 @@ export default {
     createDrinker(data) {
         DrinkerService.create(data)
             .then(response => {
-                alertHelper.success("Participant créé et ajouté à l'évènement");
+                toastHelper.success("Participant créé et ajouté à l'évènement");
 
                 AppDispatcher.dispatch({
                     type: 'DRINKER_CREATED',
@@ -29,7 +29,7 @@ export default {
                 });
             })
             .catch(err => {
-                alertHelper.error("Une erreur est survenue");
+                toastHelper.error("Une erreur est survenue");
                 console.error(err)
             });
     }

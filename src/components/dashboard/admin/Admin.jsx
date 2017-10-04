@@ -75,6 +75,14 @@ export default class Admin extends React.Component {
                             }
                         </tbody>
                     </table>
+                    {
+                        (this.state.admins.length === 0) &&
+                        <div className="alert-message-container">
+                            <div className="alert alert-info" role="alert">
+                                Aucun administrateur. Vous pouvez en ajouter un en cliquant sur <b>ajouter un administrateur</b>.
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         );

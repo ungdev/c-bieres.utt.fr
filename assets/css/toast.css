@@ -1,11 +1,11 @@
-.alerts-container {
+.toasts-container {
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
 }
 
-.alert-container {
+.toast-container {
     position: relative;
     max-width: 500px;
     margin-left: auto;

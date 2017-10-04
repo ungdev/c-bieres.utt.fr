@@ -4,12 +4,12 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import Alert from './Alert.jsx';
+import Toast from './Toast.jsx';
 
-import AlertStore from '../stores/AlertStore';
-import AlertActions from '../actions/AlertActions';
+import ToastStore from '../stores/ToastStore';
+import ToastActions from '../actions/ToastActions';
 
-import '../../assets/css/alert.css';
+import '../../assets/css/toast.css';
 
 export default class App extends React.Component {
 
@@ -17,25 +17,25 @@ export default class App extends React.Component {
         super();
 
         this.state = {
-            alerts: []
+            toasts: []
         };
     }
 
     componentDidMount() {
        // listen the store change
-       AlertStore.addChangeListener(this._onAlertStoreChange.bind(this));
+       ToastStore.addChangeListener(this._onToastStoreChange.bind(this));
     }
 
     componentWillUnmount() {
-        AlertStore.removeChangeListener(this._onAlertStoreChange);
+        ToastStore.removeChangeListener(this._onToastStoreChange);
     }
 
-    _onAlertStoreChange() {
-        this.setState({ alerts: AlertStore.alerts });
+    _onToastStoreChange() {
+        this.setState({ toasts: ToastStore.toasts });
     }
 
-    _onAlertView(id) {
-        AlertActions.viewed(id);
+    _onToastView(id) {
+        ToastActions.viewed(id);
     }
 
     render() {
@@ -45,9 +45,9 @@ export default class App extends React.Component {
                     <Route exact path='/' component={Home}/>
                     <Route path='/dashboard' component={Dashboard}/>
                 </Switch>
-                <div className="alerts-container">
+                <div className="toasts-container">
                     {
-                        this.state.alerts.map(alert => <Alert key={alert.id} alert={alert} close={this._onAlertView} />)
+                        this.state.toasts.map(toast => <Toast key={toast.id} toast={toast} close={this._onToastView} />)
                     }
                 </div>
             </div>
