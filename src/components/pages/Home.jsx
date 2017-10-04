@@ -69,8 +69,11 @@ export default class Home extends React.Component {
     }
 
     _onAuthStoreChange() {
-        if (AuthStore.isAdmin)
+        if (AuthStore.isAdmin) {
+            // use pushState to remove the authorization_code from url
+            window.history.pushState("yolo", "yolo", "/");
             this.props.history.push('/dashboard/event');
+        }
     }
 
     _onEventStoreChange() {

@@ -11,7 +11,9 @@ export default {
     redirect(action) {
         redirectHelper.set(action);
         AuthService.getRedirectLink()
-             .then(response => window.location.replace(response.data.redirectUri))
+             .then(response => {
+                 window.location.replace(response.data.redirectUri);
+             })
              .catch(err => console.log(err));
     },
 
