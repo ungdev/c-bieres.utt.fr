@@ -32,11 +32,11 @@ class EventService extends BaseService {
         });
     }
 
-    registerById(id) {
+    registerById(data) {
         return this.makeRequest({
             method: 'post',
             url: this._baseUrl + '/next/register/id',
-            data: {id}
+            data
         });
     }
 
@@ -50,6 +50,20 @@ class EventService extends BaseService {
         return this.makeRequest({
             method: 'post',
             url: this._baseUrl + '/next/unregister',
+            data
+        });
+    }
+
+    /**
+     * Unregister a user to the next event
+     *
+     * @param {object} data
+     * @return {Promise}
+     */
+    unregisterById(data) {
+        return this.makeRequest({
+            method: 'post',
+            url: this._baseUrl + '/next/unregister/id',
             data
         });
     }

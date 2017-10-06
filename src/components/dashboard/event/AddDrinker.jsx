@@ -41,7 +41,7 @@ export default class AddDrinker extends React.Component {
     }
 
     _addDrinker(id) {
-        EventActions.registerById(id);
+        EventActions.registerById({id, eventId: this.props.eventId});
     }
 
     _addDrinkerFromEtuutt(match) {

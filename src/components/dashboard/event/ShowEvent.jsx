@@ -34,8 +34,8 @@ export default class ShowEvent extends React.Component {
         this.setState({ event: EventStore.getById(this.state.id) });
     }
 
-    _unregisterDrinker(_id) {
-        EventActions.unregister({_id});
+    _unregisterDrinker(id) {
+        EventActions.unregisterById({id, eventId: this.state.id});
     }
 
     render() {

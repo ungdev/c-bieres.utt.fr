@@ -14,7 +14,7 @@ export default {
     unregister(data) {
         EventService.unregister(data)
             .then(response => {
-                // save the registration in localStorage
+                // remove the registration from localStorage
                 registrationHelper.clean();
 
                 toastHelper.success("Desinscription réussie.");
@@ -28,13 +28,27 @@ export default {
             .catch(err => console.log(err));
     },
 
+    unregisterById(data) {
+        EventService.unregisterById(data)
+            .then(response => {
+                toastHelper.success("Desinscription réussie.");
+
+                AppDispatcher.dispatch({
+                    type: 'UNREGISTERED',
+                    drinker: response.data.drinker,
+                    event: response.data.event
+                });
+            })
+            .catch(err => console.log(err));
+    },
+
     /**
-     * Register a drinker to the next event by his database ID
+     * Register a drinker to the an event by his database ID
      *
-     * @param {string} id
+     * @param {object} data
      */
-    registerById(id) {
-        EventService.registerById(id)
+    registerById(data) {
+        EventService.registerById(data)
             .then(response => {
                 AppDispatcher.dispatch({
                     type: 'REGISTERED',
