@@ -14,13 +14,16 @@ export default {
                     etuuttDrinkers: responses[1].data.data
                 });
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Erreur lors de la récupération des données. Essaye de te reconnecter");
+            });
     },
 
     createDrinker(data) {
         DrinkerService.create(data)
             .then(response => {
-                toastHelper.success("Participant créé et ajouté à l'évènement");
+                toastHelper.success("Participant ajouté à l'évènement");
 
                 AppDispatcher.dispatch({
                     type: 'DRINKER_CREATED',
@@ -29,7 +32,7 @@ export default {
                 });
             })
             .catch(err => {
-                toastHelper.error("Une erreur est survenue");
+                toastHelper.error("Une erreur est survenue lors de l'ajout");
                 console.error(err)
             });
     }

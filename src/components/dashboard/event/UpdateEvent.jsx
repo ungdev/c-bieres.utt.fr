@@ -111,7 +111,7 @@ export default class UpdateEvent extends React.Component {
                         </div>
                         <div className="col-sm-4">
                             <label htmlFor="date">Date</label>
-                            <input type="date" readOnly={isPast} onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
+                            <input type="date" min={new Date().toJSON().split('T')[0]} readOnly={isPast} onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
                         </div>
                         <div className="col-sm-4">
                             {

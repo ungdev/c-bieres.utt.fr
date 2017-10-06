@@ -121,8 +121,12 @@ export default {
                     type: 'CREATE_EVENT',
                     event: response.data
                 });
+                toastHelper.success("Évènement créé.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Echec lors de la création de l'évènement");
+            });
     },
 
     updateEvent(id, data) {
@@ -132,8 +136,12 @@ export default {
                     type: 'UPDATE_EVENT',
                     event: response.data
                 });
+                toastHelper.success("Évènement mis à jour.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Echec lors de la mise à jour de l'évènement");
+            });
     },
 
     deleteEvent(id) {
@@ -143,6 +151,8 @@ export default {
                     type: 'DELETE_EVENT',
                     id
                 });
+
+                toastHelper.success("Évènement supprimé.");
             })
             .catch(err => console.error(err));
     }

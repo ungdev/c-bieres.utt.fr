@@ -1,9 +1,23 @@
 import React from 'react';
 
+const TOAST_DURATION = 3000;
+
 export default class Toast extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.interval = null;
+    }
+
+    componentDidMount() {
+        this.interval = setTimeout(_ => {
+            this.props.close(this.props.toast.id);
+        }, TOAST_DURATION, this);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.interval);
     }
 
     render() {

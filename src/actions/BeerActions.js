@@ -10,8 +10,13 @@ export default {
                     type: 'CREATE_BEER',
                     beer: response.data
                 });
+
+                toastHelper.success("Bière créée.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Erreur lors de la création de la bière.");
+            });
     },
 
     updateBeer(id, data) {
@@ -21,8 +26,13 @@ export default {
                     type: 'UPDATE_BEER',
                     beer: response.data
                 });
+
+                toastHelper.success("Bière mise à jour.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Erreur lors de la mise à jour de la bière.");
+            });
     },
 
     deleteBeer(beer) {
@@ -32,6 +42,8 @@ export default {
                     type: 'DELETE_BEER',
                     beer
                 });
+
+                toastHelper.success("Bière supprimée.");
             })
             .catch(err => console.error(err));
     }

@@ -21,8 +21,13 @@ export default {
                     type: 'ADMIN_CREATED',
                     admin: response.data
                 });
+
+                toastHelper.success("Admin ajouté.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                toastHelper.error("Erreur lors de l'ajout de l'Admin.");
+            });
     },
 
     deleteAdmin(id) {
@@ -32,8 +37,12 @@ export default {
                     type: 'ADMIN_DELETED',
                     id
                 });
+
+                toastHelper.success("Admin supprimé.");
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+            });
     }
 
 }
