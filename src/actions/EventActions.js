@@ -89,7 +89,7 @@ export default {
                     toastHelper.info("Tu es déjà inscrit !");
 
                     AppDispatcher.dispatch({
-                        type: 'REGISTER',
+                        type: 'ALREADY_REGISTERED',
                     });
                 }
             });

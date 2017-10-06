@@ -89,6 +89,9 @@ class EventStore extends BaseStore {
                 this._data[action.event._id].drinkers = this._data[action.event._id].drinkers.filter(d => d._id != action.drinker._id);
                 this.emitChange();
                 break;
+            case "ALREADY_REGISTERED":
+                this.emitChange();
+                break;
         }
     }
 
