@@ -12,11 +12,15 @@ export default class ShowEvent extends React.Component {
 
         this.state = {
             id: props.match.params.id,
-            event: null
+            event: null,
+            drinkers: [],
+            filters: {}
         };
 
         this._unregisterDrinker = this._unregisterDrinker.bind(this);
         this._onEventStoreChange = this._onEventStoreChange.bind(this);
+        this._setFilter = this._setFilter.bind(this);
+        this._clearFilters = this._clearFilters.bind(this);
     }
 
     componentDidMount() {
@@ -31,11 +35,32 @@ export default class ShowEvent extends React.Component {
     }
 
     _onEventStoreChange() {
-        this.setState({ event: EventStore.getById(this.state.id) });
+        let event = EventStore.getById(this.state.id);
+        this.setState({ event, drinkers: event.drinkers.slice() });
     }
 
     _unregisterDrinker(id) {
         EventActions.unregisterById({id, eventId: this.state.id});
+    }
+
+    _setFilter(updatedFilter, e) {
+        let nextState = this.state;
+        nextState.filters[updatedFilter] = e.target.value;
+
+        nextState.drinkers = nextState.event.drinkers.slice().filter(drinker => {
+            for (let filter in nextState.filters) {
+                if (nextState.filters[filter] && !drinker[filter].startsWith(nextState.filters[filter])) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        this.setState(nextState);
+    }
+
+    _clearFilters() {
+        this.setState({ filters: {}, drinkers: this.state.event.drinkers });
     }
 
     render() {
@@ -70,8 +95,42 @@ export default class ShowEvent extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>
+                                    <input
+                                        onChange={e => this._setFilter('studentId', e)}
+                                        value={this.state.filters.studentId || ""}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="filtrer num étu"
+                                        />
+                                </td>
+                                <td>
+                                    <input
+                                        onChange={e => this._setFilter('firstName', e)}
+                                        value={this.state.filters.firstName || ""}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="filtrer prénom"
+                                        />
+                                </td>
+                                <td>
+                                    <input
+                                        onChange={e => this._setFilter('lastName', e)}
+                                        value={this.state.filters.lastName || ""}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="filtrer nom"
+                                        />
+                                </td>
+                                <td>
+                                    <button onClick={this._clearFilters} type="button" className="btn btn-primary">
+                                        Clear
+                                    </button>
+                                </td>
+                            </tr>
                             {
-                                this.state.event.drinkers.map((drinker, i) => {
+                                this.state.drinkers.map((drinker, i) => {
                                     return  <tr key={i}>
                                                 <td>{drinker.studentId}</td>
                                                 <td>{drinker.firstName}</td>
