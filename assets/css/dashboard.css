@@ -47,14 +47,15 @@
 }
 
 .showbeer-container {
-    height: 300px;
+    height: 350px;
     border: 1px solid rgba(0,0,0,.125);
     padding: 1.25rem;
     margin: 10px;
 }
 
-.showbeer-container, .showbeer-container > div {
-    position: relative;
+.showbeer-description {
+  overflow-y: scroll;
+  height: 180px;
 }
 
 .showbeer-container img {

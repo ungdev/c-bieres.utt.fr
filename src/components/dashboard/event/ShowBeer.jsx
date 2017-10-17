@@ -20,7 +20,7 @@ export default class ShowBeer extends React.Component {
                 <div className="col-9">
                     <h4>{this.state.beer.name}</h4>
                     <span className="badge badge-primary">{this.state.beer.type}</span>
-                    <p>{this.state.beer.description}</p>
+                    <p className="showbeer-description">{this.state.beer.description}</p>
                     {
                         this.state.showActions &&
                         <div className="btn-group" role="group">
