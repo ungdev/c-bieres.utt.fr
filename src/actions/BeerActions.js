@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import BeerService from '../services/BeerService';
+import toastHelper from '../helpers/toastHelper';
 
 export default {
 
