@@ -61,19 +61,18 @@ class EventStore extends BaseStore {
                 this._remove(action.id);
                 this.emitChange();
                 break;
-            case "CREATE_BEER":
+            case "BEER_CREATED":
                 this._data[action.beer.event_id].beers.push(action.beer);
                 this.emitChange();
                 break;
-            case "DELETE_BEER":
+            case "BEER_DELETED":
                 this._data[action.beer.event_id].beers = this._data[action.beer.event_id].beers.filter(e => e._id != action.beer._id);
                 this.emitChange();
                 break;
-            case "UPDATE_BEER":
+            case "BEER_UPDATED":
                 let event = this._data[action.beer.event_id];
                 // replace the beer in the found event
                 for (let beerIndex in event.beers) {
-                    console.log(event.beers[beerIndex]._id, action.beer._id);
                     if (event.beers[beerIndex]._id == action.beer._id) {
                         event.beers[beerIndex] = action.beer;
                     }

@@ -14,10 +14,7 @@ export default {
                     etuuttDrinkers: responses[1].data.data
                 });
             })
-            .catch(err => {
-                console.error(err);
-                toastHelper.error("Erreur lors de la récupération des données. Essaye de te reconnecter");
-            });
+            .catch(_ => toastHelper.error("Erreur lors de la récupération des données. Essaye de te reconnecter"));
     },
 
     createDrinker(data) {
@@ -33,7 +30,6 @@ export default {
             })
             .catch(err => {
                 toastHelper.error("Une erreur est survenue lors de l'ajout");
-                console.error(err)
             });
     }
 

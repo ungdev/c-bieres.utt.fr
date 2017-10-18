@@ -12,10 +12,7 @@ export default {
                     matches: response.data
                 });
             })
-            .catch(err => {
-                console.error(err);
-                toastHelper.error("Erreur de communication avec EtuUTT. Essaye de te reconnecter.");
-            });
+            .catch(_ => toastHelper.error("Erreur de communication avec EtuUTT. Essaye de te reconnecter."));
     }
 
 }

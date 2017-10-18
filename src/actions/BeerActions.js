@@ -8,39 +8,33 @@ export default {
         BeerService.create(data)
             .then(response => {
                 AppDispatcher.dispatch({
-                    type: 'CREATE_BEER',
+                    type: 'BEER_CREATED',
                     beer: response.data
                 });
 
                 toastHelper.success("Bière créée.");
             })
-            .catch(err => {
-                console.error(err);
-                toastHelper.error("Erreur lors de la création de la bière.");
-            });
+            .catch(_ => toastHelper.error("Erreur lors de la création de la bière."));
     },
 
     updateBeer(id, data) {
         BeerService.update(id, data)
             .then(response => {
                 AppDispatcher.dispatch({
-                    type: 'UPDATE_BEER',
+                    type: 'BEER_UPDATED',
                     beer: response.data
                 });
 
                 toastHelper.success("Bière mise à jour.");
             })
-            .catch(err => {
-                console.error(err);
-                toastHelper.error("Erreur lors de la mise à jour de la bière.");
-            });
+            .catch(_ => toastHelper.error("Erreur lors de la mise à jour de la bière."));
     },
 
     deleteBeer(beer) {
         BeerService.delete(beer._id)
             .then(response => {
                 AppDispatcher.dispatch({
-                    type: 'DELETE_BEER',
+                    type: 'BEER_DELETED',
                     beer
                 });
 

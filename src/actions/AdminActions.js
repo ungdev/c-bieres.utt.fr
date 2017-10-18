@@ -25,10 +25,7 @@ export default {
 
                 toastHelper.success("Admin ajouté.");
             })
-            .catch(err => {
-                console.error(err);
-                toastHelper.error("Erreur lors de l'ajout de l'Admin.");
-            });
+            .catch(_ => toastHelper.error("Erreur lors de l'ajout de l'Admin."));
     },
 
     deleteAdmin(id) {
@@ -41,9 +38,7 @@ export default {
 
                 toastHelper.success("Admin supprimé.");
             })
-            .catch(err => {
-                console.error(err);
-            });
+            .catch(err => console.error(err));
     }
 
 }
