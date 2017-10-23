@@ -73,20 +73,18 @@ body {
     }
 }
 .side-image .images-wrapper {
-    background: url("../images/beer.png");
     background-color: #fff;
     background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
-    border-bottom: 0;
-    display: block;
-    height: 30em;
     padding: 3em;
+    height: 200px;
 }
 @media screen and (min-width: 900px) {
     .side-image .images-wrapper {
         display: table-cell;
         width: 33.33333%;
-        background-position: bottom;
+        background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
         border-right: 0;

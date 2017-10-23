@@ -21,13 +21,15 @@ export default class Home extends React.Component {
 
         this.state = {
             nextEvent: null,
-            registration: registrationHelper.get()
+            registration: registrationHelper.get(),
+            width: window.innerWidth
         };
 
         this.takePart = this.takePart.bind(this);
         this._loginDashboard = this._loginDashboard.bind(this);
         this._onEventStoreChange = this._onEventStoreChange.bind(this);
         this._onAuthStoreChange = this._onAuthStoreChange.bind(this);
+        this._handleWindowSizeChange = this._handleWindowSizeChange.bind(this);
     }
 
     componentDidMount() {
@@ -60,12 +62,20 @@ export default class Home extends React.Component {
        AuthStore.addChangeListener(this._onAuthStoreChange);
        // trigger action for the store to load the event
        EventActions.getNextEvent();
+
+       // window resize listenner
+       window.addEventListener('resize', this.handleWindowSizeChange);
     }
 
     componentWillUnmount() {
         // remove listeners
         EventStore.removeChangeListener(this._onEventStoreChange);
         AuthStore.removeChangeListener(this._onAuthStoreChange);
+        window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    _handleWindowSizeChange() {
+      this.setState({ width: window.innerWidth });
     }
 
     _onAuthStoreChange() {
@@ -96,6 +106,7 @@ export default class Home extends React.Component {
     }
 
     render() {
+        const diplayColumn = this.state.width <= 900;
 
         let nextEventDate = null;
         if (this.state.nextEvent) {
@@ -141,7 +152,7 @@ export default class Home extends React.Component {
                             {
                                 this.state.nextEvent.beers.length
                                 ?
-                                    this.state.nextEvent.beers.map((beer, i) => <Beer key={i} left={i%2 === 0} beer={beer} />)
+                                    this.state.nextEvent.beers.map((beer, i) => <Beer key={i} diplayColumn={diplayColumn} left={i%2 === 0} beer={beer} />)
                                 :
                                     <div className="no-beer-message">
                                         Les bières seront ajoutées prochainement.

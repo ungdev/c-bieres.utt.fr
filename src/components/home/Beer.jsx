@@ -9,20 +9,21 @@ export default class Beer extends React.Component {
 
         this.state = {
             beer: props.beer,
-            left: props.left
+            left: props.left,
+            diplayColumn: props.diplayColumn
         };
     }
 
     render() {
         return (
             <div className="side-image">
-                {this.state.left && <ImageWrapper path={this.state.beer.image} />}
+                {!this.state.diplayColumn && this.state.left && <ImageWrapper path={this.state.beer.image} />}
                 <div className="side-image-content">
                     <span className="badge badge-primary">{this.state.beer.type}</span>
                     <h2>{this.state.beer.name}</h2>
                     <p>{this.state.beer.description}</p>
                 </div>
-                {!this.state.left && <ImageWrapper path={this.state.beer.image} />}
+                {(this.state.diplayColumn || !this.state.left) && <ImageWrapper path={this.state.beer.image} />}
             </div>
         )
     }

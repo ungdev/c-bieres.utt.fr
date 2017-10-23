@@ -11,8 +11,9 @@ export default class ImageWrapper extends React.Component {
     }
 
     render() {
+        const style = {backgroundImage: `url(${this.props.path ? this.state.uri : 'assets/images/beer.png'})`};
         return (
-            <div className="images-wrapper" style={{backgroundImage: `url(${this.state.uri})`}}></div>
+            <div className="images-wrapper" style={style}></div>
         );
     }
 
