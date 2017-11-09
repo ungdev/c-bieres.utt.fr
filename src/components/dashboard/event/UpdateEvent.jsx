@@ -96,7 +96,7 @@ export default class UpdateEvent extends React.Component {
     }
 
     render() {
-        const isPast = new Date(this.state.originalDate).getTime() < new Date().getTime();
+        const isPast = new Date(this.state.originalDate).getTime() < (new Date().getTime() - 24*60*60*1000);
 
         return (
             <div>

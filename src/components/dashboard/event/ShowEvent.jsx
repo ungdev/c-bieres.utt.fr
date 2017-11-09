@@ -71,7 +71,7 @@ export default class ShowEvent extends React.Component {
         let eventDate = new Date(this.state.event.when);
         let formattedDate = `${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`;
 
-        const isPast = eventDate.getTime() < new Date().getTime();
+        const isPast = eventDate.getTime() < (new Date().getTime() - 24*60*60*1000);
 
         return (
             <div>

@@ -26,12 +26,13 @@ class EventStore extends BaseStore {
     }
 
     getNext() {
-        const now_DateTime = new Date().getTime();
+      // next event can be today ! So greater than yesterday
+        const yesterday_DateTime = new Date().getTime() - 24*60*60*1000;
         let next = null;
         for (let event_id in this._data) {
             const event_date = this._data[event_id].when;
             const event_DateTime = new Date(event_date).getTime();
-            if (event_DateTime > now_DateTime && (next === null || event_date - now_DateTime < new Date(next.when).getTime())) {
+            if (event_DateTime > yesterday_DateTime && (next === null || event_date - yesterday_DateTime < new Date(next.when).getTime())) {
                 next = this._data[event_id];
             }
         }

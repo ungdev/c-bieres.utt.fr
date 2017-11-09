@@ -130,7 +130,7 @@ export default class Event extends React.Component {
                                                         <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}`}>Participants</Link>
                                                         <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}/update`}>Informations</Link>
                                                         {
-                                                            (eventDate.getTime() > new Date().getTime()) &&
+                                                            (eventDate.getTime() > new Date().getTime() - 24*60*60*1000) &&
                                                             <button type="button" onClick={_ => this._showConfirmation(event)} className="btn btn-danger">
                                                                 Supprimer
                                                             </button>
