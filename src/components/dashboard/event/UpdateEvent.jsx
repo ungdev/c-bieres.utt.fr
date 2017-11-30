@@ -100,30 +100,64 @@ export default class UpdateEvent extends React.Component {
 
         return (
             <div>
-                <h1>Modification de <b>{this.state.event.name}</b></h1>
+                <div className="jumbotron">
+                    <h1 className="display-3 text-center">{this.state.event.name}</h1>
+                    <hr className="my-4" />
+                    <h2 className="text-center">Informations principales</h2>
+                    <br />
+                    <form>
+                        <div className="container">
+                            <div className="row justify-content-md-center">
+                                <div className="col col-md-8">
+                                    <p className="lead">
+                                        <div className="form-group">
+                                            <label htmlFor="name">Nom</label>
+                                            <input type="text" readOnly={isPast} onChange={this._handleNameChange} value={this.state.event.name} className="form-control" id="name" />
+                                        </div>
+                                    </p>
+                                    <p className="lead">
+                                        <div className="form-group">
+                                            <label htmlFor="date">Date</label>
+                                            <input type="date" min={new Date().toJSON().split('T')[0]} readOnly={isPast} onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
+                                        </div>
+                                    </p>
+                                    <p className="lead">
+                                        {
+                                            !isPast &&
+                                            <button
+                                                type="button"
+                                                onClick={this._submitUpdateForm}
+                                                className="btn btn-success btn-lg btn-block">
+                                                Mettre à jour
+                                            </button>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                <h2>Informations globales</h2>
-                <form>
-                    <div className="form-row align-items-center">
-                        <div className="col-sm-4">
-                            <label htmlFor="name">Nom</label>
-                            <input type="text" readOnly={isPast} onChange={this._handleNameChange} value={this.state.event.name} className="form-control" id="name" />
-                        </div>
-                        <div className="col-sm-4">
-                            <label htmlFor="date">Date</label>
-                            <input type="date" min={new Date().toJSON().split('T')[0]} readOnly={isPast} onChange={this._handleDateChange} value={this.state.event.when && this.state.event.when.split('T')[0]} className="form-control" id="date" />
-                        </div>
-                        <div className="col-sm-4">
-                            {
-                                !isPast &&
-                                <button type="button" onClick={this._submitUpdateForm} className="btn btn-success btn-lg">Mettre à jour</button>
-                            }
-                        </div>
-                    </div>
-                </form>
-
-                <h2>Les bières</h2>
+                <h2 className="text-center">Les bières</h2>
                 <div>
+                    <div className="row justify-content-md-center">
+                        {
+                            !isPast && (
+                                this.state.showBeerForm
+                                ?
+                                    <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
+                                :
+                                    <div className="col col-md-4 add-beer-container">
+                                        <button
+                                            type="button"
+                                            onClick={this._toggleBeerForm}
+                                            className="btn btn-outline-primary btn-block">
+                                            Ajouter une bière
+                                        </button>
+                                    </div>
+                            )
+                        }
+                    </div>
                     {
                         this.state.event.beers && this.state.event.beers.map(beer => {
                             if (this.state.beerToUpdate === beer._id) {
@@ -133,15 +167,6 @@ export default class UpdateEvent extends React.Component {
                             }
 
                         })
-                    }
-                    {
-                        !isPast && (
-                            this.state.showBeerForm
-                            ?
-                                <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
-                            :
-                                <button type="button" onClick={this._toggleBeerForm} className="btn btn-link">Ajouter une bière</button>
-                        )
                     }
                 </div>
             </div>

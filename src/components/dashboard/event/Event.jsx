@@ -84,31 +84,63 @@ export default class Event extends React.Component {
     render() {
         return (
             <div>
-                <h1>Evènements</h1>
-                <div>
-                    <button type="button" onClick={this._toggleCreateForm} className="btn btn-primary btn-lg btn-block">
-                        Créer un évènement
-                    </button>
-                    {
-                        this.state.showCreateForm
-                        ?
-                            <div className="custom-form-container">
-                                <form>
-                                    <div className="form-group">
-                                        <label htmlFor="name">Nom</label>
-                                        <input type="text" onChange={this._handleNameChange} className="form-control" id="name" />
+                <div className="jumbotron">
+                    <h1 className="display-3 text-center">Evènements</h1>
+                    <hr className="my-4" />
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-4">
+                            {
+                                this.state.showCreateForm
+                                ?
+                                    <div>
+                                        <button
+                                            type="button"
+                                            onClick={this._toggleCreateForm}
+                                            className="btn btn-danger btn-lg btn-block">
+                                            Annuler
+                                        </button>
+                                        <form>
+                                            <br />
+                                            <p className="lead">
+                                                <div className="form-group">
+                                                    <label htmlFor="name">Nom</label>
+                                                    <input
+                                                        type="text"
+                                                        onChange={this._handleNameChange}
+                                                        className="form-control"
+                                                        id="name" />
+                                                </div>
+                                            </p>
+                                            <p className="lead">
+                                                <div className="form-group">
+                                                    <label htmlFor="date">Date</label>
+                                                    <input
+                                                        type="date"
+                                                        onChange={this._handleDateChange}
+                                                        className="form-control"
+                                                        id="date" />
+                                                </div>
+                                            </p>
+                                            <button
+                                                type="button"
+                                                onClick={this._submitCreateForm}
+                                                className="btn btn-success btn-lg btn-block">
+                                                Créer
+                                            </button>
+                                        </form>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="date">Date</label>
-                                        <input type="date" onChange={this._handleDateChange} className="form-control" id="date" />
-                                    </div>
-                                    <button type="button" onClick={this._submitCreateForm} className="btn btn-success btn-lg">Créer</button>
-                                </form>
-                            </div>
-                        :
-                            null
-                    }
+                                :
+                                    <button
+                                        type="button"
+                                        onClick={this._toggleCreateForm}
+                                        className="btn btn-primary btn-lg btn-block">
+                                        Créer un évènement
+                                    </button>
+                            }
+                        </div>
+                    </div>
                 </div>
+
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>

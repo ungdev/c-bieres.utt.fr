@@ -48,8 +48,15 @@ export default class Admin extends React.Component {
     render() {
         return (
             <div>
-                <h1>Administrateurs</h1>
-                <AddAdmin />
+                <div className="jumbotron">
+                    <h1 className="display-3 text-center">Administrateurs</h1>
+                    <hr className="my-4" />
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-4">
+                            <AddAdmin />
+                        </div>
+                    </div>
+                </div>
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>

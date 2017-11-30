@@ -27,7 +27,6 @@ export default class AddAdmin extends React.Component {
 
     _onEtuuttStoreChange() {
         this.setState({ matches: EtuuttStore.matches.data });
-        console.log(this.state.matches);
     }
 
     _handleChange(e) {

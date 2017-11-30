@@ -75,15 +75,25 @@ export default class ShowEvent extends React.Component {
 
         return (
             <div>
-                <h1>
-                    Participants à <b>{this.state.event.name}</b> le <b>{formattedDate}</b>
-                </h1>
+                <div className="jumbotron">
+                    <h1 className="display-3 text-center">
+                        Participants
+                    </h1>
+                    <div className="participant-subtitle text-center">
+                        à <b>{this.state.event.name}</b>, le <b>{formattedDate}</b>
+                    </div>
+                    <hr className="my-4" />
+                    <div className="row justify-content-md-center">
+                        <div className="col col-md-4">
+                            {
+                                (!isPast) && <AddDrinker eventId={this.state.id} />
+                            }
+                        </div>
+                    </div>
+                </div>
                 <div className="alert alert-primary" role="alert">
                     <b>{this.state.event.drinkers.length}</b> participants
                 </div>
-                {
-                    (!isPast) && <AddDrinker eventId={this.state.id} />
-                }
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>

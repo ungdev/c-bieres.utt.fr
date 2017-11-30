@@ -34,7 +34,7 @@ export default class Dashboard extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <a className="navbar-brand" href="">Administration</a>
+                    <a className="navbar-brand" href="">HomePage</a>
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

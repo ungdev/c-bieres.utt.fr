@@ -46,16 +46,20 @@
     border: 1px solid #E0E0E0;
 }
 
-.showbeer-container {
-    height: 350px;
-    border: 1px solid rgba(0,0,0,.125);
-    padding: 1.25rem;
-    margin: 10px;
+.showbeer-noimage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    color: #777;
 }
 
 .showbeer-description {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 180px;
+  margin-top: 10px;
 }
 
 .showbeer-container img {
@@ -91,4 +95,12 @@
     text-align: center;
     padding: 20px 10px;
     width: 100%;
+}
+
+.add-beer-container {
+    margin: 20px 0;
+}
+
+.participant-subtitle {
+    font-size: 24px;
 }
