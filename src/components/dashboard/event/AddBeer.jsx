@@ -43,13 +43,17 @@ export default class AddBeer extends React.Component {
                     <div className="card-text">
                         <form>
                             <div className="form-row">
-                                <div className="form-group col-md-6">
+                                <div className="form-group col-md-4">
                                     <label htmlFor="name">Nom</label>
                                     <input type="text" onChange={e => this._handleChange('name', e)} className="form-control" id="name" />
                                 </div>
-                                <div className="form-group col-md-6">
+                                <div className="form-group col-md-4">
                                     <label htmlFor="type">Type</label>
                                     <input type="text" onChange={e => this._handleChange('type', e)} className="form-control" id="type" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="degree">Degrés</label>
+                                    <input type="number" onChange={e => this._handleChange('degree', e)} className="form-control" id="degree" />
                                 </div>
                             </div>
                             <div className="form-group">
