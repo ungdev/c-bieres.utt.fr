@@ -19,7 +19,9 @@ export default class ShowBeer extends React.Component {
                         {
                             (this.state.beer.image && this.state.beer.image != 'null')
                             ?
-                                <img src={process.env.SERVER_URI + this.state.beer.image} />
+                                <img
+                                    className="image-fit-parent"
+                                    src={process.env.SERVER_URI + this.state.beer.image} />
                             :
                                 <div className="showbeer-noimage">
                                     Clique sur "modifier" pour ajouter une image.
