@@ -53,7 +53,7 @@ export default class AddBeer extends React.Component {
                                 </div>
                                 <div className="form-group col-md-4">
                                     <label htmlFor="degree">Degrés</label>
-                                    <input type="number" onChange={e => this._handleChange('degree', e)} className="form-control" id="degree" />
+                                    <input type="number" step="0.01" onChange={e => this._handleChange('degree', e)} className="form-control" id="degree" />
                                 </div>
                             </div>
                             <div className="form-group">
