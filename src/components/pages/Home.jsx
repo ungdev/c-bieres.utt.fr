@@ -3,6 +3,7 @@ import React from 'react';
 import { monthToString } from '../../helpers/dateHelper';
 import { Link } from 'react-router-dom';
 import Beer from '../home/Beer.jsx';
+import ShowOldEvents from '../home/ShowOldEvents.jsx';
 
 import registrationHelper from '../../helpers/localStorage/registrationHelper';
 import redirectHelper from '../../helpers/localStorage/redirectHelper';
@@ -161,6 +162,10 @@ export default class Home extends React.Component {
                         </div>
                     </section>
                 }
+
+                <section>
+                    <ShowOldEvents history={this.props.history} />
+                </section>
 
                 <footer className="footer" role="contentinfo">
                     <ul className="footer-social">

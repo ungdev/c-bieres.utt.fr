@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import OldEvents from './pages/OldEvents.jsx';
 import Toast from './Toast.jsx';
 
 import ToastStore from '../stores/ToastStore';
@@ -44,6 +45,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/olds' component={OldEvents}/>
                 </Switch>
                 <div className="toasts-container">
                     {
