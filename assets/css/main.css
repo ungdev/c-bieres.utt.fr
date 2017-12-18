@@ -175,3 +175,13 @@ body {
 .no-beer-message {
     margin-top: 50px;
 }
+
+
+.show-old-events-container {
+    padding: 100px 0;
+    background-color: #eee;
+}
+
+.old-events-table td {
+    padding: 1.5em 1em !important;
+}

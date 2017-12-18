@@ -12,7 +12,7 @@ export default class OldEvent extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 event {this.state.eventId}
             </div>
         );
