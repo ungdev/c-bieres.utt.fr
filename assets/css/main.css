@@ -182,6 +182,33 @@ body {
     background-color: #eee;
 }
 
+.old-events-table {
+    margin-top: 2em;
+}
+
 .old-events-table td {
     padding: 1.5em 1em !important;
+}
+
+.old-event-jumbotron {
+    margin-bottom: 0 !important;
+}
+
+.old-event-header hr {
+    margin-top: 0 !important;
+}
+
+.old-event-header {
+    background: #e9ecef;
+    padding: 10px 0;
+}
+
+.old-event-header .container {
+    position: relative;
+}
+
+.old-event-header .btn {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
