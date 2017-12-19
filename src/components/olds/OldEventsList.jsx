@@ -30,8 +30,12 @@ export default class OldEventsList extends React.Component {
     }
 
     _onEventStoreChange() {
+        // get only the past events !
+        const now = new Date();
         this.setState({
-            events: EventStore.events.sort((a, b) => a.when < b.when)
+            events: EventStore.events
+                        .filter(e => new Date(e.when) < now)
+                        .sort((a, b) => a.when < b.when)
         });
     }
 
