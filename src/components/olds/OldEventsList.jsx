@@ -22,7 +22,7 @@ export default class OldEventsList extends React.Component {
         // listen the store change
         EventStore.addChangeListener(this._onEventStoreChange);
         // trigger action for the store to load events
-        EventActions.getEvents({ sort: '-when' });
+        EventActions.getEvents({ before: new Date(), sort: '-when' });
     }
 
     componentWillUnmount() {
