@@ -16,14 +16,14 @@ export default class ShowOldEvents extends React.Component {
         return (
             <div className="show-old-events-container">
                 <div className="container text-center">
-                    <p className="lead">
-                        Comment elle s'appelle la petite blonde de la dernière fois déjà ? (la bière hein ...)
-                    </p>
                     <p>
-                        Tu peux trouver les bières que tu as rencontré aux précédents club bières en cliquant sur
+                        <img className="img-fluid" src="assets/images/meme.jpg" />
+                    </p>
+                    <p className="lead old-event-description">
+                        Tu peux trouver les bières que tu as rencontré aux précédents club bières en
                         consultant les anciens évènements.
                     </p>
-                    <button type="button" onClick={this._handleClick} className="btn btn-primary">
+                    <button type="button" onClick={this._handleClick} className="btn btn-lg btn-primary">
                         Voir les anciens évènements
                     </button>
                 </div>

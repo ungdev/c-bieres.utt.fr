@@ -178,7 +178,7 @@ body {
 
 
 .show-old-events-container {
-    padding: 100px 0;
+    padding: 70px 0;
     background-color: #eee;
 }
 
@@ -199,7 +199,8 @@ body {
 }
 
 .old-event-header {
-    background: #e9ecef;
+    background: #333;
+    color: #fff;
     padding: 10px 0;
 }
 
@@ -211,4 +212,13 @@ body {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.old-event-beers {
+    margin-top: 2em;
+}
+
+.old-event-description {
+    margin-top: 40px;
+    margin-bottom: 40px;
 }

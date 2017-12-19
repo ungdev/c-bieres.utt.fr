@@ -47,6 +47,7 @@ export default class OldEvent extends React.Component {
         }
 
         const eventDate = new Date(event.when);
+        const humanDate = `${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`;
 
         return (
             <div>
@@ -54,13 +55,13 @@ export default class OldEvent extends React.Component {
                     <hr className="my-4" />
                     <div className="container">
                         <h2 className="display-4">{event.name}</h2>
-                        <p>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</p>
-                        <button className="btn btn-primary" onClick={this._handleClick}>
+                        <p>Le <b>{humanDate}</b></p>
+                        <button className="btn btn-light" onClick={this._handleClick}>
                             Retour à la liste
                         </button>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container old-event-beers">
                     {
                         event.beers.map((beer, i) => <Beer
                                                         key={i}
