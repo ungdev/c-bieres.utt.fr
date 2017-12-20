@@ -36,8 +36,16 @@ export default class ShowBeer extends React.Component {
                         {
                             this.state.showActions &&
                             <div className="btn-group" role="group">
-                                <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>
-                                <button type="button" onClick={_ => this.props.delete(this.state.beer)} className="btn btn-danger">Supprimer</button>
+                                <button type="button"
+                                        onClick={_ => this.props.update(this.state.beer)}
+                                        className="btn btn-primary">
+                                    Modifier
+                                </button>
+                                <button type="button"
+                                        onClick={_ => this.props.delete(this.state.beer)}
+                                        className="btn btn-danger">
+                                    Supprimer
+                                </button>
                             </div>
                         }
                     </div>

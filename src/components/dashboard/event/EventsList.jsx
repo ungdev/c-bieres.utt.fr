@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import Alert from '../../pieces/Alert';
+import EventsListItem   from './EventsListItem';
+import Alert            from '../../pieces/Alert';
 
 import EventActions from '../../../actions/EventActions';
 
@@ -46,42 +47,13 @@ export default class EventsList extends React.Component {
                     <tbody>
                         {
                             this.props.events.map(event => {
-                                let eventDate = new Date(event.when);
-                                const isNotPast = eventDate.getTime() > new Date().getTime() - 24*60*60*1000;
-                                return  <tr key={event._id}>
-                                            <td>{event.name}</td>
-                                            <td>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</td>
-                                            <td>
-                                                <div className="btn-group" role="group" aria-label="actions">
-                                                    <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}`}>Participants</Link>
-                                                    <Link className="btn btn-primary" role="button" to={`/dashboard/event/${event._id}/update`}>Informations</Link>
-                                                    {
-                                                        isNotPast && (
-                                                            this.state.eventToDelete == event
-                                                            ?
-                                                                <div className="btn-group">
-                                                                    <button type="button"
-                                                                            className="btn btn-success"
-                                                                            onClick={_ => this._deleteEvent(event._id)}>
-                                                                        <i className="fa fa-check"></i>
-                                                                    </button>
-                                                                    <button type="button"
-                                                                            className="btn btn-danger"
-                                                                            onClick={this._hideConfirmation}>
-                                                                        <i className="fa fa-close"></i>
-                                                                    </button>
-                                                                </div>
-                                                            :
-                                                                <button type="button"
-                                                                        onClick={_ => this._showConfirmation(event)}
-                                                                        className="btn btn-danger">
-                                                                    Supprimer
-                                                                </button>
-                                                        )
-                                                    }
-                                                </div>
-                                            </td>
-                                        </tr>
+                                return <EventsListItem
+                                            key={event._id}
+                                            event={event}
+                                            toDelete={this.state.eventToDelete}
+                                            handleDeleteClick={this._showConfirmation}
+                                            handleCancelClick={this._hideConfirmation}
+                                            handleConfirmDeleteClick={this._deleteEvent} />
                             })
                         }
                     </tbody>
