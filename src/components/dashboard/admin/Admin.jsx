@@ -1,11 +1,11 @@
 import React from 'react';
 
-import AddAdmin from './AddAdmin.jsx';
+import AddAdmin from './AddAdmin';
+import Alert    from '../../pieces/Alert';
 
 import AdminActions from '../../../actions/AdminActions';
-import AdminStore from '../../../stores/AdminStore';
 
-import Alert from '../../pieces/Alert.jsx';
+import AdminStore from '../../../stores/AdminStore';
 
 export default class Admin extends React.Component {
 
@@ -18,7 +18,7 @@ export default class Admin extends React.Component {
         };
 
         this._handleDeleteAdmin = this._handleDeleteAdmin.bind(this);
-        this._toggleAddAdmin = this._toggleAddAdmin.bind(this);
+        this._toggleShowAddAdmin = this._toggleShowAddAdmin.bind(this);
         this._onAdminStoreChange = this._onAdminStoreChange.bind(this);
     }
 
@@ -41,7 +41,7 @@ export default class Admin extends React.Component {
         AdminActions.deleteAdmin(id);
     }
 
-    _toggleAddAdmin() {
+    _toggleShowAddAdmin() {
         this.setState({ showAddAdmin: !this.state.showAddAdmin });
     }
 
@@ -53,7 +53,9 @@ export default class Admin extends React.Component {
                     <hr className="my-4" />
                     <div className="row justify-content-md-center">
                         <div className="col col-md-4">
-                            <AddAdmin />
+                            <AddAdmin
+                                showForm={this.state.showAddAdmin}
+                                toggle={this._toggleShowAddAdmin} />
                         </div>
                     </div>
                 </div>
