@@ -7,7 +7,6 @@ export default class MatchesList extends React.Component {
     }
 
     render() {
-
         return (
             <div className="matches-list">
                 <ul className="list-group matches-list">
@@ -17,7 +16,7 @@ export default class MatchesList extends React.Component {
                                         {match.firstName} {match.lastName}
                                         <button type="button"
                                                 onClick={_ => this.props.onSelect(match)}
-                                                className="btn btn-add-drinker btn-success">
+                                                className="btn btn-success">
                                             Ajouter
                                         </button>
                                     </li>

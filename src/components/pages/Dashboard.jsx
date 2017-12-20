@@ -66,7 +66,7 @@ export default class Dashboard extends React.Component {
                             </ul>
                         </nav>
 
-                        <main className="col-sm-9 ml-sm-auto col-md-10 pt-3 page-content" role="main">
+                        <main className="col-sm-9 ml-sm-auto col-md-10 pt-3 dashboard-main" role="main">
                             <Switch>
                                 <Route path='/dashboard/event/:id/update' component={UpdateEvent}/>
                                 <Route path='/dashboard/event/:id' component={ShowEvent}/>

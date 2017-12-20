@@ -1,6 +1,8 @@
+@import "./_colors.scss";
+
 .show-old-events-container {
     padding: 70px 0;
-    background-color: #eee;
+    background-color: $light-grey;
 }
 
 .old-events-table {
@@ -20,8 +22,8 @@
 }
 
 .old-event-header {
-    background: #333;
-    color: #fff;
+    background: $dark;
+    color: $white;
     padding: 10px 0;
 }
 

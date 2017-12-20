@@ -1,17 +1,5 @@
-.page-content {
+.dashboard-main {
     margin-top: 56px;
-}
-
-.custom-form-container {
-    padding: 10px;
-    background: #FAFAFA;
-    border: 1px solid #E0E0E0;
-}
-
-.btn-add-drinker {
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
 }
 
 .create-drinker-form {
@@ -21,12 +9,6 @@
     margin-bottom: 15px;
     margin-top: 15px;
     padding-top: 15px;
-}
-
-.matches-container {
-    overflow-y: scroll;
-    max-height: 250px;
-    padding-bottom: 20px;
 }
 
 .alert-message-container {
@@ -39,11 +21,15 @@
     margin: 20px 0;
 }
 
-.participant-subtitle {
-    font-size: 24px;
-}
+/* Matches */
 
 .matches-list {
     height: 148px;
     overflow-y: auto;
+}
+
+.matches-list .btn {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
 }

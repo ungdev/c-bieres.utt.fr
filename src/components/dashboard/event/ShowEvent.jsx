@@ -80,7 +80,7 @@ export default class ShowEvent extends React.Component {
                     <h1 className="display-3 text-center">
                         Participants
                     </h1>
-                    <div className="participant-subtitle text-center">
+                    <div className="text-center">
                         à <b>{this.state.event.name}</b>, le <b>{formattedDate}</b>
                     </div>
                     <hr className="my-4" />

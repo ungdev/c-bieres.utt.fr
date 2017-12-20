@@ -1,6 +1,8 @@
+@import "./_colors.scss";
+
 .footer {
     position: relative;
-    background: #333;
+    background: $dark;
     padding: 1em;
     width: 100%;
     display: inline-block;
@@ -14,7 +16,7 @@
     margin-right: 0.5em;
 }
 .footer ul li a {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba($white, 0.4);
     text-decoration: none;
     font-size: 2em;
 }
@@ -22,10 +24,10 @@
 .footer ul li a:hover,
 .footer .dashboard-link a:focus,
 .footer .dashboard-link button:hover {
-    color: #fff;
+    color: $white;
 }
 .footer .dashboard-link button {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba($white, 0.4);
     text-decoration: none;
 }
 .footer li.dashboard-link {
