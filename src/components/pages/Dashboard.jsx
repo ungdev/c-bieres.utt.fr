@@ -9,7 +9,7 @@ import Admin        from '../dashboard/admin/Admin';
 
 import authHelper   from '../../helpers/localStorage/authHelper';
 
-import '../../styles/dashboard.css';
+import '../../styles/css/dashboard.css';
 
 export default class Dashboard extends React.Component {
 

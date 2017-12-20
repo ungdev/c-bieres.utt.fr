@@ -15,7 +15,7 @@ import AuthActions          from '../../actions/AuthActions';
 import EventStore           from '../../stores/EventStore';
 import AuthStore            from '../../stores/AuthStore';
 
-import '../../scripts/vendor/covervid.js';
+import '../../scripts/covervid.js';
 import '../../scripts/main.js';
 
 export default class Home extends React.Component {
