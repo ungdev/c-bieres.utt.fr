@@ -1,0 +1,35 @@
+.footer {
+    position: relative;
+    background: #333;
+    padding: 1em;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+.footer ul li {
+    list-style: none;
+    padding-right: 1em;
+    display: inline;
+    text-align: left;
+    margin-right: 0.5em;
+}
+.footer ul li a {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-size: 2em;
+}
+.footer ul li a:focus,
+.footer ul li a:hover,
+.footer .dashboard-link a:focus,
+.footer .dashboard-link button:hover {
+    color: #fff;
+}
+.footer .dashboard-link button {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+}
+.footer li.dashboard-link {
+    position: absolute;
+    right: 20px;
+    padding-top: 12px;
+}

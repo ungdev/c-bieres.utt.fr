@@ -1,0 +1,49 @@
+.page-content {
+    margin-top: 56px;
+}
+
+.custom-form-container {
+    padding: 10px;
+    background: #FAFAFA;
+    border: 1px solid #E0E0E0;
+}
+
+.btn-add-drinker {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.create-drinker-form {
+    background: #FAFAFA;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.matches-container {
+    overflow-y: scroll;
+    max-height: 250px;
+    padding-bottom: 20px;
+}
+
+.alert-message-container {
+    text-align: center;
+    padding: 20px 10px;
+    width: 100%;
+}
+
+.add-beer-container {
+    margin: 20px 0;
+}
+
+.participant-subtitle {
+    font-size: 24px;
+}
+
+.add-admin-list-container {
+    height: 148px;
+    overflow-y: auto;
+}
