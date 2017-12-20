@@ -1,8 +1,9 @@
 import React from 'react';
 
-import EtuuttActions from '../../../actions/EtuuttActions';
-import AdminActions from '../../../actions/AdminActions';
-import EtuuttStore from '../../../stores/EtuuttStore';
+import EtuuttActions    from '../../../actions/EtuuttActions';
+import AdminActions     from '../../../actions/AdminActions';
+
+import EtuuttStore      from '../../../stores/EtuuttStore';
 
 export default class AddAdmin extends React.Component {
 

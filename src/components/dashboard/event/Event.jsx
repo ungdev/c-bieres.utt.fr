@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
-import DeleteEventConfirm from './DeleteEventConfirm.jsx';
+import DeleteEventConfirm   from './DeleteEventConfirm';
+import Alert                from '../../pieces/Alert';
 
 import EventActions from '../../../actions/EventActions';
-import EventStore from '../../../stores/EventStore';
 
-import Alert from '../../Alert.jsx';
+import EventStore   from '../../../stores/EventStore';
+
 
 export default class Event extends React.Component {
 

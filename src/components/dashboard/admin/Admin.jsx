@@ -5,7 +5,7 @@ import AddAdmin from './AddAdmin.jsx';
 import AdminActions from '../../../actions/AdminActions';
 import AdminStore from '../../../stores/AdminStore';
 
-import Alert from '../../Alert.jsx';
+import Alert from '../../pieces/Alert.jsx';
 
 export default class Admin extends React.Component {
 

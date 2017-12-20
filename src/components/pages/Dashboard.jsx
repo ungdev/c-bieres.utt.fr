@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Switch, Route, Link } from 'react-router-dom';
-import Event from '../dashboard/event/Event.jsx';
-import UpdateEvent from '../dashboard/event/UpdateEvent.jsx';
-import ShowEvent from '../dashboard/event/ShowEvent.jsx';
-import Admin from '../dashboard/admin/Admin.jsx';
-import authHelper from '../../helpers/localStorage/authHelper';
+
+import Event        from '../dashboard/event/Event';
+import UpdateEvent  from '../dashboard/event/UpdateEvent';
+import ShowEvent    from '../dashboard/event/ShowEvent';
+import Admin        from '../dashboard/admin/Admin';
+
+import authHelper   from '../../helpers/localStorage/authHelper';
 
 import '../../styles/dashboard.css';
 

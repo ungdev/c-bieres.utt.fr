@@ -1,8 +1,9 @@
 import React from 'react';
 
-import OldEventsListItem from './OldEventsListItem.jsx';
+import OldEventsListItem from './OldEventsListItem';
 
 import EventActions from '../../actions/EventActions';
+
 import EventStore from '../../stores/EventStore';
 
 export default class OldEventsList extends React.Component {

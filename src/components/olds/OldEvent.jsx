@@ -1,9 +1,10 @@
 import React from 'react';
 
-import EventActions from '../../actions/EventActions';
-import EventStore from '../../stores/EventStore';
+import Beer from '../home/Beer';
 
-import Beer from '../home/Beer.jsx';
+import EventActions from '../../actions/EventActions';
+
+import EventStore from '../../stores/EventStore';
 
 export default class OldEvent extends React.Component {
 

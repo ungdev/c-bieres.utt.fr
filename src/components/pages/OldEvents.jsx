@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
-import OldEventsList from '../olds/OldEventsList.jsx';
-import OldEvent from '../olds/OldEvent.jsx';
+import OldEventsList    from '../olds/OldEventsList';
+import OldEvent         from '../olds/OldEvent';
 
 export default class OldEvents extends React.Component {
 

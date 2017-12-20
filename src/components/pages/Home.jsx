@@ -1,16 +1,19 @@
 import React from 'react';
 
-import { monthToString } from '../../helpers/dateHelper';
 import { Link } from 'react-router-dom';
-import Beer from '../home/Beer.jsx';
-import ShowOldEvents from '../home/ShowOldEvents.jsx';
 
-import registrationHelper from '../../helpers/localStorage/registrationHelper';
-import redirectHelper from '../../helpers/localStorage/redirectHelper';
-import EventActions from '../../actions/EventActions';
-import EventStore from '../../stores/EventStore';
-import AuthActions from '../../actions/AuthActions';
-import AuthStore from '../../stores/AuthStore';
+import Beer             from '../home/Beer';
+import ShowOldEvents    from '../home/ShowOldEvents';
+
+import { monthToString }    from '../../helpers/dateHelper';
+import registrationHelper   from '../../helpers/localStorage/registrationHelper';
+import redirectHelper       from '../../helpers/localStorage/redirectHelper';
+
+import EventActions         from '../../actions/EventActions';
+import AuthActions          from '../../actions/AuthActions';
+
+import EventStore           from '../../stores/EventStore';
+import AuthStore            from '../../stores/AuthStore';
 
 import '../../scripts/vendor/covervid.js';
 import '../../scripts/main.js';

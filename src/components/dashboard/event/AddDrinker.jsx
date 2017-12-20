@@ -1,10 +1,11 @@
 import React from 'react';
 
-import CreateDrinker from './CreateDrinker.jsx';
+import CreateDrinker    from './CreateDrinker';
 
-import DrinkerActions from '../../../actions/DrinkerActions';
-import EventActions from '../../../actions/EventActions';
-import DrinkerStore from '../../../stores/DrinkerStore';
+import DrinkerActions   from '../../../actions/DrinkerActions';
+import EventActions     from '../../../actions/EventActions';
+
+import DrinkerStore     from '../../../stores/DrinkerStore';
 
 export default class AddDrinker extends React.Component {
 

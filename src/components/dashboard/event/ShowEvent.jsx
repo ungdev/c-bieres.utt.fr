@@ -1,9 +1,10 @@
 import React from 'react';
 
-import AddDrinker from './AddDrinker.jsx';
+import AddDrinker from './AddDrinker';
 
 import EventActions from '../../../actions/EventActions';
-import EventStore from '../../../stores/EventStore';
+
+import EventStore   from '../../../stores/EventStore';
 
 export default class ShowEvent extends React.Component {
 

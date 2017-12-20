@@ -1,13 +1,12 @@
 import React from 'react';
-
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './pages/Home.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import OldEvents from './pages/OldEvents.jsx';
-import Toast from './Toast.jsx';
+import Home         from './pages/Home';
+import Dashboard    from './pages/Dashboard';
+import OldEvents    from './pages/OldEvents';
+import Toast        from './pieces/Toast';
 
-import ToastStore from '../stores/ToastStore';
+import ToastStore   from '../stores/ToastStore';
 import ToastActions from '../actions/ToastActions';
 
 import '../styles/toast.css';
