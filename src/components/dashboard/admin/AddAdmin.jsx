@@ -1,5 +1,7 @@
 import React from 'react';
 
+import MatchesList      from '../../pieces/MatchesList';
+
 import EtuuttActions    from '../../../actions/EtuuttActions';
 import AdminActions     from '../../../actions/AdminActions';
 
@@ -68,22 +70,10 @@ export default class AddAdmin extends React.Component {
                             className="form-control"
                             id="pattern" />
                     </div>
-                    <div className="add-admin-list-container">
-                        <ul className="list-group">
-                            {
-                                this.state.matches.map(match => {
-                                    return  <li className="list-group-item">
-                                                {match.firstName} {match.lastName}
-                                                <button type="button"
-                                                        onClick={_ => this._handleAddAdmin(match)}
-                                                        className="btn btn-add-drinker btn-success">
-                                                    Ajouter
-                                                </button>
-                                            </li>
-                                })
-                            }
-                        </ul>
-                    </div>
+
+                    <MatchesList
+                        matches={this.state.matches}
+                        onSelect={this._handleAddAdmin} />
                 </form>
             </div>
         );

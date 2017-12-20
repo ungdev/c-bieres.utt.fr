@@ -2,13 +2,13 @@
 
 @import "./_colors.scss";
 
-@import "./banner.scss";
 @import "./sidebar.scss";
 @import "./dashboard.scss";
 @import "./toast.scss";
 @import "./beer.scss";
 @import "./footer.scss";
 @import "./old-events.scss";
+@import "./banner.scss";
 
 *, *::after, *::before {
     box-sizing: inherit;
