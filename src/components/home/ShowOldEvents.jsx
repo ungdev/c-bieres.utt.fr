@@ -17,7 +17,7 @@ export default class ShowOldEvents extends React.Component {
             <div className="show-old-events-container">
                 <div className="container text-center">
                     <p>
-                        <img className="img-fluid" src="assets/images/meme.jpg" />
+                        <img className="img-fluid" src="images/meme.jpg" />
                     </p>
                     <p className="lead old-event-description">
                         Tu peux trouver les bières que tu as rencontré aux précédents club bières en

@@ -1,3 +1,7 @@
+import $ from 'jquery';
+
+var jQuery = $;
+
 var coverVid = function (elem, width, height) {
 
 	// call sizeVideo on load

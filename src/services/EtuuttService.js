@@ -1,7 +1,7 @@
-const axios = require('axios');
-
 import authHelper from '../helpers/localStorage/authHelper';
 import AuthStore from '../stores/AuthStore';
+
+const axios = require('axios');
 
 class EtuuttService  {
 

@@ -16,14 +16,16 @@ function createNewToast(type, message) {
     });
 }
 
-exports.success = function(message) {
+const success = function(message) {
     createNewToast("success", message);
 }
 
-exports.info = function(message) {
+const info = function(message) {
     createNewToast("info", message);
 }
 
-exports.error = function(message = "") {
+const error = function(message = "") {
     createNewToast("danger", message);
 }
+
+export {success, info, error}

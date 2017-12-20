@@ -10,7 +10,9 @@ import Toast from './Toast.jsx';
 import ToastStore from '../stores/ToastStore';
 import ToastActions from '../actions/ToastActions';
 
-import '../../assets/css/toast.css';
+import '../styles/toast.css';
+import '../styles/main.css';
+import '../styles/font-awesome.min.css';
 
 export default class App extends React.Component {
 

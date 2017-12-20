@@ -12,8 +12,8 @@ import EventStore from '../../stores/EventStore';
 import AuthActions from '../../actions/AuthActions';
 import AuthStore from '../../stores/AuthStore';
 
-import '../../../assets/js/vendor/covervid.js';
-import '../../../assets/js/main.js';
+import '../../scripts/vendor/covervid.js';
+import '../../scripts/main.js';
 
 export default class Home extends React.Component {
 
@@ -119,8 +119,8 @@ export default class Home extends React.Component {
             <div>
                 <section className="banner">
                     <video className="banner-video" autoPlay>
-                        <source src="assets/videos/banner.mp4" type="video/mp4"/>
-                        <img src="assets/images/banner.png" alt=""/>
+                        <source src="videos/banner.mp4" type="video/mp4"/>
+                        <img src="images/banner.png" alt=""/>
                     </video>
                     <div className="banner-inner">
                         <h1>Club bières</h1>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import $ from 'jquery';
+
 export default class DeleteEventConfirm extends React.Component {
 
     constructor(props) {

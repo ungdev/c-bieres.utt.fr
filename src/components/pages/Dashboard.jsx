@@ -7,7 +7,7 @@ import ShowEvent from '../dashboard/event/ShowEvent.jsx';
 import Admin from '../dashboard/admin/Admin.jsx';
 import authHelper from '../../helpers/localStorage/authHelper';
 
-import '../../../assets/css/dashboard.css';
+import '../../styles/dashboard.css';
 
 export default class Dashboard extends React.Component {
 

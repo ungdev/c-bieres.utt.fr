@@ -1,11 +1,12 @@
-const axios = require('axios');
 import authHelper from '../helpers/localStorage/authHelper';
+
+const axios = require('axios');
 
 export default class BaseService {
 
     constructor(modelName) {
         this._modelName = modelName;
-        this._baseUrl = process.env.SERVER_URI + "api/" + modelName;
+        this._baseUrl = process.env.REACT_APP_SERVER_URI + "api/" + modelName;
     }
 
     /**
