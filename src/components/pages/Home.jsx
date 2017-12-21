@@ -121,23 +121,33 @@ export default class Home extends React.Component {
         return (
             <div>
                 <section className="banner">
-                    <video className="banner-video" autoPlay>
+                    <video className="banner__video" autoPlay>
                         <source src="videos/banner.mp4" type="video/mp4"/>
                         <img src="images/banner.png" alt=""/>
                     </video>
-                    <div className="banner-inner">
-                        <h1>Club bières</h1>
+                    <div className="banner__inner">
+                        <h1 className="banner__inner__title">Club bières</h1>
                         {
                             nextEventDate
                             ?
                                 <div>
-                                    <p>Prochaine dégustation le {nextEventDate}.</p>
+                                    <p className="banner__inner__text">
+                                        Prochaine dégustation le {nextEventDate}.
+                                    </p>
                                     {
                                         this.state.registration == this.state.nextEvent._id
                                         ?
-                                            <button type="button" className="btn btn-danger btn-lg" onClick={this.unRegister}>Me désinscrire</button>
+                                            <button type="button"
+                                                    className="btn btn-danger btn-lg banner__inner__button"
+                                                    onClick={this.unRegister}>
+                                                Me désinscrire
+                                            </button>
                                         :
-                                            <button type="button" className="btn btn-primary btn-lg" onClick={this.takePart}>J'en suis <i className="fa fa-beer"></i></button>
+                                            <button type="button"
+                                                    className="btn btn-primary btn-lg banner__inner__button"
+                                                    onClick={this.takePart}>
+                                                J'en suis <i className="fa fa-beer"></i>
+                                            </button>
                                     }
                                 </div>
                             :
@@ -150,32 +160,45 @@ export default class Home extends React.Component {
 
                 {
                     nextEventDate &&
-                    <section>
-                        <div id="beers" className="content">
-                            <h1>Les bières</h1>
-                            {
-                                this.state.nextEvent.beers.length
-                                ?
-                                    this.state.nextEvent.beers.map((beer, i) => <Beer key={i} diplayColumn={diplayColumn} left={i%2 === 0} beer={beer} />)
-                                :
-                                    <div className="no-beer-message">
-                                        Les bières seront ajoutées prochainement.
-                                    </div>
-                            }
-                        </div>
-                    </section>
+                    <div className="beers">
+                        <h1 className="beers__title">Les bières</h1>
+                        {
+                            this.state.nextEvent.beers.length
+                            ?
+                                this.state.nextEvent.beers.map((beer, i) => <Beer key={i}
+                                                                                  diplayColumn={diplayColumn}
+                                                                                  left={i%2 === 0}
+                                                                                  beer={beer} />)
+                            :
+                                <div className="beers__message">
+                                    Les bières seront ajoutées prochainement.
+                                </div>
+                        }
+                    </div>
                 }
 
-                <section>
-                    <ShowOldEvents history={this.props.history} />
-                </section>
+                <ShowOldEvents history={this.props.history} />
 
-                <footer className="footer" role="contentinfo">
-                    <ul className="footer-social">
-                        <li><a href="mailto:club-bieres@utt.fr"><i className="fa fa-envelope"></i></a></li>
-                        <li><a href="https://www.facebook.com/groups/806374509420087/?fref=ts"><i className="fa fa-facebook"></i></a></li>
-                        <li className="dashboard-link">
-                            <button type="button" onClick={this._loginDashboard} className="btn btn-link">Admin</button>
+                <footer className="footer">
+                    <ul>
+                        <li className="footer__list__item">
+                            <a  className="footer__list__item__link"
+                                href="mailto:club-bieres@utt.fr">
+                                <i className="fa fa-envelope"></i>
+                            </a>
+                        </li>
+                        <li className="footer__list__item">
+                            <a  className="footer__list__item__link"
+                                href="https://www.facebook.com/groups/806374509420087/?fref=ts">
+                                <i className="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li className="footer__list__item footer__list__item--right">
+                            <button type="button"
+                                    onClick={this._loginDashboard}
+                                    className="btn btn-link footer__list__item--right__button">
+                                Admin
+                            </button>
                         </li>
                     </ul>
                 </footer>

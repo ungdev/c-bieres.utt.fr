@@ -1,11 +1,11 @@
-.toasts-container {
+.toasts {
   position: fixed;
   bottom: 0;
   width: 100%;
   text-align: center;
   z-index: 10000; }
 
-.toast-container {
+.toast {
   position: relative;
   max-width: 500px;
   margin-left: auto;

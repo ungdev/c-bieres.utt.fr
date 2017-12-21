@@ -22,7 +22,7 @@ export default class Toast extends React.Component {
 
     render() {
         return (
-            <div className={`toast-container alert alert-${this.props.toast.type} alert-dismissible fade show`} role="alert">
+            <div className={`toast alert alert-${this.props.toast.type} alert-dismissible fade show`} role="alert">
                 <button onClick={_ => this.props.close(this.props.toast.id)} type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

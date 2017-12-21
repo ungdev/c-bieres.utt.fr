@@ -20,7 +20,7 @@ export default class OldEvents extends React.Component {
     render() {
         return (
             <div>
-                <div className="jumbotron jumbotron-fluid old-event-jumbotron">
+                <div className="jumbotron jumbotron-fluid old-events__jumbotron">
                     <div className="container">
                         <h1 className="display-3">Anciens évènements</h1>
                         <p className="lead">

@@ -1,47 +1,42 @@
 @import "./_colors.scss";
 
-.show-old-events-container {
+.show-old-events {
     padding: 70px 0;
     background-color: $light-grey;
 }
-
-.old-events-table {
-    margin-top: 2em;
+.show-old-events__text {
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
-.old-events-table td {
+
+.old-events__jumbotron {
+    margin-bottom: 0 !important;
+}
+.old-events__table {
+    margin-top: 2em;
+}
+.old-events__table__col {
     padding: 1.5em 1em !important;
 }
 
-.old-event-jumbotron {
-    margin-bottom: 0 !important;
-}
 
-.old-event-header hr {
-    margin-top: 0 !important;
-}
-
-.old-event-header {
+.old-event__header {
     background: $dark;
     color: $white;
     padding: 10px 0;
 }
-
-.old-event-header .container {
+.old-event__header__seperator {
+    margin-top: 0 !important;
+}
+.old-event__header__inner {
     position: relative;
 }
-
-.old-event-header .btn {
+.old-event__header__inner__button--right {
     position: absolute;
     right: 0;
     top: 0;
 }
-
-.old-event-beers {
+.old-event__beers {
     margin-top: 2em;
-}
-
-.old-event-description {
-    margin-top: 40px;
-    margin-bottom: 40px;
 }

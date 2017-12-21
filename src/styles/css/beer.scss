@@ -51,31 +51,33 @@
   color: $dark;
   line-height: 1.5; }
 
-.content {
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5em 0;
-  text-align: center;
-}
-.content::after {
-  clear: both;
-  content: "";
-  display: table;
-}
-.content > h1 {
-  color: $black;
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 3em;
-  margin: 0 0 0;
-  padding: 20px 30px;
-  text-transform: uppercase;
-  border-top: 1px solid $black;
-  border-bottom: 1px solid $black;
-  display: inline-block;
+.beers {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5em 0;
+    text-align: center;
 }
 
-.no-beer-message {
+.beers::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.beers__title {
+    color: $black;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 3em;
+    margin: 0 0 0;
+    padding: 20px 30px;
+    text-transform: uppercase;
+    border-top: 1px solid $black;
+    border-bottom: 1px solid $black;
+    display: inline-block;
+}
+
+.beers__message {
   margin-top: 50px;
 }
 

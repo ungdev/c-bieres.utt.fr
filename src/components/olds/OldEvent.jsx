@@ -52,17 +52,18 @@ export default class OldEvent extends React.Component {
 
         return (
             <div>
-                <div className="old-event-header">
-                    <hr className="my-4" />
-                    <div className="container">
+                <div className="old-event__header">
+                    <hr className="my-4 old-event__header__seperator" />
+                    <div className="container old-event__header__inner">
                         <h2 className="display-4">{event.name}</h2>
                         <p>Le <b>{humanDate}</b></p>
-                        <button className="btn btn-light" onClick={this._handleClick}>
+                        <button className="btn btn-light old-event__header__inner__button--right"
+                                onClick={this._handleClick}>
                             Retour à la liste
                         </button>
                     </div>
                 </div>
-                <div className="container old-event-beers">
+                <div className="container old-event__beers">
                     {
                         event.beers.map((beer, i) => <Beer
                                                         key={i}

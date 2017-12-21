@@ -47,7 +47,7 @@ export default class App extends React.Component {
                     <Route path='/dashboard' component={Dashboard}/>
                     <Route path='/olds' component={OldEvents}/>
                 </Switch>
-                <div className="toasts-container">
+                <div className="toasts">
                     {
                         this.state.toasts.map(toast => <Toast key={toast.id} toast={toast} close={this._onToastView} />)
                     }

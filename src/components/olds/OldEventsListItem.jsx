@@ -19,11 +19,13 @@ export default class OldEventsListItem extends React.Component {
                 <th scope="row">
                     {event.name}
                 </th>
-                <td>
+                <td className="old-events__table__col">
                     {`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}
                 </td>
-                <td>
-                    <button type="button" className="btn btn-link" onClick={_ => this.props.handleClick(event._id)}>
+                <td className="old-events__table__col">
+                    <button type="button"
+                            className="btn btn-link"
+                            onClick={_ => this.props.handleClick(event._id)}>
                         Voir
                     </button>
                 </td>

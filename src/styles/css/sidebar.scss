@@ -6,30 +6,16 @@
   bottom: 0;
   left: 0;
   z-index: 1000;
-  padding: 20px;
+  padding: 20px 0;
   overflow-x: hidden;
   overflow-y: auto;
   border-right: 1px solid $light-grey;
 }
 
-/* Sidebar navigation */
-.sidebar {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.sidebar .nav {
-  margin-bottom: 20px;
-}
-
-.sidebar .nav-item {
+.sidebar__tab {
   width: 100%;
 }
 
-.sidebar .nav-item + .nav-item {
-  margin-left: 0;
-}
-
-.sidebar .nav-link {
-  border-radius: 0;
+.sidebar__tab__link {
+    border-radius: 0 !important;
 }

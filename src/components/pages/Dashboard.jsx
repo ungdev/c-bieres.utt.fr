@@ -6,6 +6,8 @@ import Event        from '../dashboard/event/Event';
 import UpdateEvent  from '../dashboard/event/UpdateEvent';
 import ShowEvent    from '../dashboard/event/ShowEvent';
 import Admin        from '../dashboard/admin/Admin';
+import Sidebar      from '../dashboard/Sidebar';
+import SidebarItem  from '../dashboard/SidebarItem';
 
 import authHelper   from '../../helpers/localStorage/authHelper';
 
@@ -16,10 +18,6 @@ export default class Dashboard extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            activeTab: this.props.location.pathname.includes('admin') ? 'admin' : 'event'
-        };
-
         this._logout = this._logout.bind(this);
     }
 
@@ -28,16 +26,15 @@ export default class Dashboard extends React.Component {
         this.props.history.push('/');
     }
 
-    _handleNavChange(activeTab) {
-        this.setState({ activeTab });
-    }
-
     render() {
         return (
             <div>
                 <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                     <a className="navbar-brand" href="">HomePage</a>
-                    <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler d-lg-none"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarsExampleDefault">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <ul className="navbar-nav mr-auto"></ul>
@@ -49,22 +46,8 @@ export default class Dashboard extends React.Component {
 
                 <div className="container-fluid">
                     <div className="row">
-                        <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                            <ul className="nav nav-pills flex-column">
-                                <li className="nav-item">
-                                    <Link className={"nav-link " + (this.state.activeTab === "event" && "active")} onClick={_ => this._handleNavChange('event')} to='/dashboard/event'>
-                                        <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;
-                                        Évènements
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className={"nav-link " + (this.state.activeTab === "admin" && "active")} onClick={_ => this._handleNavChange('admin')} to='/dashboard/admin'>
-                                        <i className="fa fa-lock" aria-hidden="true"></i>&nbsp;
-                                        Gestion des admins
-                                    </Link>
-                                </li>
-                            </ul>
-                        </nav>
+
+                        <Sidebar location={this.props.location} />
 
                         <main className="col-sm-9 ml-sm-auto col-md-10 pt-3 dashboard-main" role="main">
                             <Switch>
