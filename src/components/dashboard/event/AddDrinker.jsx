@@ -25,6 +25,8 @@ export default class AddDrinker extends React.Component {
         this._submitCreateForm = this._submitCreateForm.bind(this);
         this._onDrinkerStoreChange = this._onDrinkerStoreChange.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
+        this._addDrinkerFromEtuutt = this._addDrinkerFromEtuutt.bind(this);
+        this._addDrinker = this._addDrinker.bind(this);
     }
 
     componentDidMount() {
