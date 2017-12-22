@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ImageWrapper from './ImageWrapper.jsx';
+import ImageWrapper from './ImageWrapper';
 
 export default class Beer extends React.Component {
 

@@ -1,7 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EventService from '../services/EventService';
 import registrationHelper from '../helpers/localStorage/registrationHelper';
-import toastHelper from '../helpers/toastHelper';
+import * as toastHelper from '../helpers/toastHelper';
 
 export default {
 

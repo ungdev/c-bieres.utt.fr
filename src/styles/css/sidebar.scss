@@ -1,0 +1,21 @@
+@import "./_colors.scss";
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid $light-grey;
+}
+
+.sidebar__tab {
+  width: 100%;
+}
+
+.sidebar__tab__link {
+    border-radius: 0 !important;
+}

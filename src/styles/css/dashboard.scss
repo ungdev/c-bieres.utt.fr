@@ -1,0 +1,35 @@
+.dashboard-main {
+    margin-top: 56px;
+}
+
+.create-drinker-form {
+    background: #FAFAFA;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.alert-message-container {
+    text-align: center;
+    padding: 20px 10px;
+    width: 100%;
+}
+
+.add-beer-container {
+    margin: 20px 0;
+}
+
+/* Matches */
+
+.matches-list {
+    height: 148px;
+    overflow-y: auto;
+}
+
+.matches-list .btn {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}

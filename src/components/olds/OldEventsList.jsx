@@ -1,8 +1,9 @@
 import React from 'react';
 
-import OldEventsListItem from './OldEventsListItem.jsx';
+import OldEventsListItem from './OldEventsListItem';
 
 import EventActions from '../../actions/EventActions';
+
 import EventStore from '../../stores/EventStore';
 
 export default class OldEventsList extends React.Component {
@@ -46,7 +47,7 @@ export default class OldEventsList extends React.Component {
     render() {
         return (
             <div className="container">
-                <table className="table table-hover table-striped old-events-table">
+                <table className="table table-hover table-striped old-events__table">
                     <tbody>
                         {this.state.events.map(event => <OldEventsListItem
                                                             key={event._id}

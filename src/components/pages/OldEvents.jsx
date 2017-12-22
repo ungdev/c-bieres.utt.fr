@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
-import OldEventsList from '../olds/OldEventsList.jsx';
-import OldEvent from '../olds/OldEvent.jsx';
+import OldEventsList    from '../olds/OldEventsList';
+import OldEvent         from '../olds/OldEvent';
 
 export default class OldEvents extends React.Component {
 
@@ -20,7 +20,7 @@ export default class OldEvents extends React.Component {
     render() {
         return (
             <div>
-                <div className="jumbotron jumbotron-fluid old-event-jumbotron">
+                <div className="jumbotron jumbotron-fluid old-events__jumbotron">
                     <div className="container">
                         <h1 className="display-3">Anciens évènements</h1>
                         <p className="lead">

@@ -1,12 +1,13 @@
 import React from 'react';
 
-import EventActions from '../../../actions/EventActions';
-import BeerActions from '../../../actions/BeerActions';
-import EventStore from '../../../stores/EventStore';
+import AddBeer      from './AddBeer';
+import ShowBeer     from './ShowBeer';
+import UpdateBeer   from './UpdateBeer';
 
-import AddBeer from './AddBeer.jsx';
-import ShowBeer from './ShowBeer.jsx';
-import UpdateBeer from './UpdateBeer.jsx';
+import EventActions from '../../../actions/EventActions';
+import BeerActions  from '../../../actions/BeerActions';
+
+import EventStore   from '../../../stores/EventStore';
 
 export default class UpdateEvent extends React.Component {
 

@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EtuuttService from '../services/EtuuttService';
-import toastHelper from '../helpers/toastHelper';
+import * as toastHelper from '../helpers/toastHelper';
 
 export default {
 

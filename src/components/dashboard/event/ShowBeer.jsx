@@ -20,8 +20,8 @@ export default class ShowBeer extends React.Component {
                             (this.state.beer.image && this.state.beer.image != 'null')
                             ?
                                 <img
-                                    className="image-fit-parent"
-                                    src={process.env.SERVER_URI + this.state.beer.image} />
+                                    className="img-fluid"
+                                    src={process.env.REACT_APP_SERVER_URI + this.state.beer.image} />
                             :
                                 <div className="showbeer-noimage">
                                     Clique sur "modifier" pour ajouter une image.
@@ -36,8 +36,16 @@ export default class ShowBeer extends React.Component {
                         {
                             this.state.showActions &&
                             <div className="btn-group" role="group">
-                                <button type="button" onClick={_ => this.props.update(this.state.beer)} className="btn btn-primary">Modifier</button>
-                                <button type="button" onClick={_ => this.props.delete(this.state.beer)} className="btn btn-danger">Supprimer</button>
+                                <button type="button"
+                                        onClick={_ => this.props.update(this.state.beer)}
+                                        className="btn btn-primary">
+                                    Modifier
+                                </button>
+                                <button type="button"
+                                        onClick={_ => this.props.delete(this.state.beer)}
+                                        className="btn btn-danger">
+                                    Supprimer
+                                </button>
                             </div>
                         }
                     </div>

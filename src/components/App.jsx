@@ -1,16 +1,16 @@
 import React from 'react';
-
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './pages/Home.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import OldEvents from './pages/OldEvents.jsx';
-import Toast from './Toast.jsx';
+import Home         from './pages/Home';
+import Dashboard    from './pages/Dashboard';
+import OldEvents    from './pages/OldEvents';
+import Toast        from './pieces/Toast';
 
-import ToastStore from '../stores/ToastStore';
+import ToastStore   from '../stores/ToastStore';
 import ToastActions from '../actions/ToastActions';
 
-import '../../assets/css/toast.css';
+import '../styles/css/font-awesome.min.css';
+import '../styles/css/index.css';
 
 export default class App extends React.Component {
 
@@ -47,7 +47,7 @@ export default class App extends React.Component {
                     <Route path='/dashboard' component={Dashboard}/>
                     <Route path='/olds' component={OldEvents}/>
                 </Switch>
-                <div className="toasts-container">
+                <div className="toasts">
                     {
                         this.state.toasts.map(toast => <Toast key={toast.id} toast={toast} close={this._onToastView} />)
                     }

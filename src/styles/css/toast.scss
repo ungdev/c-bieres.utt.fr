@@ -1,4 +1,4 @@
-.toasts-container {
+.toasts {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -6,7 +6,7 @@
     z-index: 10000;
 }
 
-.toast-container {
+.toast {
     position: relative;
     max-width: 500px;
     margin-left: auto;

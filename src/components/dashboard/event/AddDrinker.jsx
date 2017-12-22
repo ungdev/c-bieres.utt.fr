@@ -1,10 +1,12 @@
 import React from 'react';
 
-import CreateDrinker from './CreateDrinker.jsx';
+import CreateDrinker    from './CreateDrinker';
+import MatchesList      from '../../pieces/MatchesList';
 
-import DrinkerActions from '../../../actions/DrinkerActions';
-import EventActions from '../../../actions/EventActions';
-import DrinkerStore from '../../../stores/DrinkerStore';
+import DrinkerActions   from '../../../actions/DrinkerActions';
+import EventActions     from '../../../actions/EventActions';
+
+import DrinkerStore     from '../../../stores/DrinkerStore';
 
 export default class AddDrinker extends React.Component {
 
@@ -15,13 +17,16 @@ export default class AddDrinker extends React.Component {
             searchPattern: "",
             serverMatches: [],
             etuuttMatches: [],
-            showCreateForm: false
+            showForm: false
         };
 
         this._handleSearchChange = this._handleSearchChange.bind(this);
         this._toggleCreateForm = this._toggleCreateForm.bind(this);
         this._submitCreateForm = this._submitCreateForm.bind(this);
         this._onDrinkerStoreChange = this._onDrinkerStoreChange.bind(this);
+        this._toggleForm = this._toggleForm.bind(this);
+        this._addDrinkerFromEtuutt = this._addDrinkerFromEtuutt.bind(this);
+        this._addDrinker = this._addDrinker.bind(this);
     }
 
     componentDidMount() {
@@ -40,8 +45,12 @@ export default class AddDrinker extends React.Component {
         });
     }
 
-    _addDrinker(id) {
-        EventActions.registerById({id, eventId: this.props.eventId});
+    _toggleForm() {
+        this.setState({ showForm: !this.state.showForm })
+    }
+
+    _addDrinker(drinker) {
+        EventActions.registerById({id: drinker._id, eventId: this.props.eventId});
     }
 
     _addDrinkerFromEtuutt(match) {
@@ -71,74 +80,66 @@ export default class AddDrinker extends React.Component {
     }
 
     render() {
+
+        if (!this.state.showForm) {
+            return (
+                <div>
+                    <button className="btn btn-primary btn-lg btn-block"
+                            onClick={this._toggleForm}>
+                        Ajouter un participant
+                    </button>
+                </div>
+            )
+        }
+
         return (
             <div>
-                <button className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addDrinker">
-                    Ajouter un participant
+                <button className="btn btn-danger btn-lg btn-block"
+                        onClick={this._toggleForm}>
+                    Annuler
                 </button>
-
-                <div className="modal fade" tabIndex="-1" role="dialog" id="addDrinker">
-                    <div className="modal-dialog modal-lg">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Ajout d'un participant</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <form>
-                                    <div className="form-group">
-                                        <input type="text" placeholder="Rechercher" value={this.state.searchPattern} onChange={this._handleSearchChange} className="form-control" />
-                                        <small className="form-text text-muted">Par nom, prénom, surnom, .. (3 caractères min)</small>
-                                    </div>
-                                </form>
-                            </div>
-                            {
-                                (this.state.serverMatches.length > 0) &&
-                                <div className="container">
-                                    <h5>Déjà dans club bières</h5>
-                                    <ul className="list-group matches-container">
-                                        {
-                                            this.state.serverMatches.map((match, i) => {
-                                                return  <li key={i} className="list-group-item">
-                                                            {match.firstName} {match.lastName}
-                                                            <button type="button" onClick={_ => this._addDrinker(match._id)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
-                                                        </li>
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            }
-                            {
-                                (this.state.etuuttMatches.length > 0) &&
-                                <div className="container">
-                                    <h5>Depuis le site étu</h5>
-                                    <ul className="list-group matches-container">
-                                        {
-                                            this.state.etuuttMatches.map((match, i) => {
-                                                return  <li key={i} className="list-group-item">
-                                                            {match.firstName} {match.lastName}
-                                                            <button type="button" onClick={_ => this._addDrinkerFromEtuutt(match)} className="btn btn-add-drinker btn-secondary">Ajouter</button>
-                                                        </li>
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            }
-                            <div className="container">
-                                {
-                                    this.state.showCreateForm
-                                    ?
-                                        <CreateDrinker submit={this._submitCreateForm} close={this._toggleCreateForm} />
-                                    :
-                                        <button type="button" onClick={this._toggleCreateForm} className="btn btn-link">
-                                            Pas trouvé ? créer et ajouter à l'évènement
-                                        </button>
-                                }
-                            </div>
-                        </div>
+                <form>
+                    <br />
+                    <div className="form-group">
+                        <input  type="text"
+                                placeholder="Rechercher"
+                                value={this.state.searchPattern}
+                                onChange={this._handleSearchChange}
+                                className="form-control" />
+                        <small className="form-text text-muted">
+                            Par nom, prénom, surnom, .. (3 caractères min)
+                        </small>
                     </div>
+                </form>
+                {
+                    (this.state.serverMatches.length > 0) &&
+                    <div className="container">
+                        <h5>Déjà dans club bières</h5>
+                        <MatchesList matches={this.state.serverMatches}
+                                     onSelect={this._addDrinker} />
+                    </div>
+                }
+                {
+                    (this.state.etuuttMatches.length > 0) &&
+                    <div className="container">
+                        <h5>Depuis le site étu</h5>
+                        <MatchesList matches={this.state.etuuttMatches}
+                                     onSelect={this._addDrinkerFromEtuutt} />
+                    </div>
+                }
+                <div className="container">
+                    {
+                        this.state.showCreateForm
+                        ?
+                            <CreateDrinker submit={this._submitCreateForm}
+                                            close={this._toggleCreateForm} />
+                        :
+                            <button type="button"
+                                    onClick={this._toggleCreateForm}
+                                    className="btn btn-link">
+                                Pas trouvé ? créer et ajouter à l'évènement
+                            </button>
+                    }
                 </div>
             </div>
         );
