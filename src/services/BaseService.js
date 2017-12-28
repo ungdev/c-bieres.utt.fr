@@ -6,7 +6,7 @@ export default class BaseService {
 
     constructor(modelName) {
         this._modelName = modelName;
-        this._baseUrl = process.env.REACT_APP_SERVER_URI + "api/" + modelName;
+        this._baseUrl = (process.env.REACT_APP_SERVER_URI || process.env.SERVER_URI) + "api/" + modelName;
     }
 
     /**
