@@ -3,6 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Beer             from '../home/Beer';
+import BeerList         from '../home/BeerList'
+import Banner           from '../home/Banner'
+import Footer           from '../home/Footer'
 import ShowOldEvents    from '../home/ShowOldEvents';
 
 import { monthToString }    from '../../helpers/dateHelper';
@@ -29,11 +32,10 @@ export default class Home extends React.Component {
             width: window.innerWidth
         };
 
-        this.takePart = this.takePart.bind(this);
-        this._loginDashboard = this._loginDashboard.bind(this);
         this._onEventStoreChange = this._onEventStoreChange.bind(this);
         this._onAuthStoreChange = this._onAuthStoreChange.bind(this);
         this._handleWindowSizeChange = this._handleWindowSizeChange.bind(this);
+        this.handleBannerClick = this.handleBannerClick.bind(this);
     }
 
     componentDidMount() {
@@ -97,16 +99,12 @@ export default class Home extends React.Component {
         });
     }
 
-    takePart() {
-        AuthActions.redirect("register");
+    handleBannerClick() {
+      AuthActions.redirect(this.state.registration ? "unregister" : "register")
     }
 
-    unRegister() {
-        AuthActions.redirect("unregister");
-    }
-
-    _loginDashboard() {
-        AuthActions.redirect("login");
+    handleAdminClick() {
+      AuthActions.redirect("login");
     }
 
     render() {
@@ -120,88 +118,17 @@ export default class Home extends React.Component {
 
         return (
             <div>
-                <section className="banner">
-                    <video className="banner__video" autoPlay>
-                        <source src="videos/banner.mp4" type="video/mp4"/>
-                        <img src="images/banner.png" alt=""/>
-                    </video>
-                    <div className="banner__inner">
-                        <h1 className="banner__inner__title">Club bières</h1>
-                        {
-                            nextEventDate
-                            ?
-                                <div>
-                                    <p className="banner__inner__text">
-                                        Prochaine dégustation le {nextEventDate}.
-                                    </p>
-                                    {
-                                        this.state.registration == this.state.nextEvent._id
-                                        ?
-                                            <button type="button"
-                                                    className="btn btn-danger btn-lg banner__inner__button"
-                                                    onClick={this.unRegister}>
-                                                Me désinscrire
-                                            </button>
-                                        :
-                                            <button type="button"
-                                                    className="btn btn-primary btn-lg banner__inner__button"
-                                                    onClick={this.takePart}>
-                                                J'en suis <i className="fa fa-beer"></i>
-                                            </button>
-                                    }
-                                </div>
-                            :
-                                <p>
-                                    Aucun évènement prévu pour le moment.
-                                </p>
-                        }
-                    </div>
-                </section>
-
-                {
-                    nextEventDate &&
-                    <div className="beers">
-                        <h1 className="beers__title">Les bières</h1>
-                        {
-                            this.state.nextEvent.beers.length
-                            ?
-                                this.state.nextEvent.beers.map((beer, i) => <Beer key={i}
-                                                                                  diplayColumn={diplayColumn}
-                                                                                  left={i%2 === 0}
-                                                                                  beer={beer} />)
-                            :
-                                <div className="beers__message">
-                                    Les bières seront ajoutées prochainement.
-                                </div>
-                        }
-                    </div>
-                }
-
-                <ShowOldEvents history={this.props.history} />
-
-                <footer className="footer">
-                    <ul>
-                        <li className="footer__list__item">
-                            <a  className="footer__list__item__link"
-                                href="mailto:club-bieres@utt.fr">
-                                <i className="fa fa-envelope"></i>
-                            </a>
-                        </li>
-                        <li className="footer__list__item">
-                            <a  className="footer__list__item__link"
-                                href="https://www.facebook.com/groups/806374509420087/?fref=ts">
-                                <i className="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li className="footer__list__item footer__list__item--right">
-                            <button type="button"
-                                    onClick={this._loginDashboard}
-                                    className="btn btn-link footer__list__item--right__button">
-                                Admin
-                            </button>
-                        </li>
-                    </ul>
-                </footer>
+              <Banner
+                event={this.state.nextEvent}
+                date={nextEventDate}
+                registration={this.state.registration}
+                onClick={this.handleBannerClick} />
+              {
+                nextEventDate &&
+                <BeerList beers={this.state.nextEvent.beers} diplayColumn={diplayColumn} />
+              }
+              <ShowOldEvents history={this.props.history} />
+              <Footer onAdminClick={this.handleAdminClick} />
             </div>
         );
     }
