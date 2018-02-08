@@ -52,7 +52,8 @@ export default class OldEventsList extends React.Component {
                         {this.state.events.map(event => <OldEventsListItem
                                                             key={event._id}
                                                             event={event}
-                                                            handleClick={this._showOldEvent} />)}
+                                                            eventDate={new Date(event.when)}
+                                                            onClick={this._showOldEvent} />)}
                     </tbody>
                 </table>
             </div>

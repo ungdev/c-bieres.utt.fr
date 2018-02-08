@@ -1,26 +1,24 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom';
 
-export default class SidebarItem extends React.Component {
+const SidebarItem = ({ isActive, value, text, onClick }) => (
+  <li className="sidebar__tab">
+    <Link className={"nav-link sidebar__tab__link " + (isActive && "active")}
+        onClick={_ => onClick(value)}
+        to={`/dashboard/${value}`}>
+      <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;
+      {text}
+    </Link>
+  </li>
+)
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const isActive = this.props.activeTab === this.props.value;
-
-        return (
-            <li className="sidebar__tab">
-                <Link className={"nav-link sidebar__tab__link " + (isActive && "active")}
-                        onClick={_ => this.props.onSelect(this.props.value)}
-                        to={`/dashboard/${this.props.value}`}>
-                    <i className="fa fa-calendar" aria-hidden="true"></i>&nbsp;
-                    {this.props.text}
-                </Link>
-            </li>
-        );
-    }
-
+SidebarItem.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
+
+export default SidebarItem

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CreateDrinker    from './CreateDrinker';
-import MatchesList      from '../../pieces/MatchesList';
+import SelectList       from '../../pieces/SelectList';
 
 import DrinkerActions   from '../../../actions/DrinkerActions';
 import EventActions     from '../../../actions/EventActions';
@@ -115,16 +115,14 @@ export default class AddDrinker extends React.Component {
                     (this.state.serverMatches.length > 0) &&
                     <div className="container">
                         <h5>Déjà dans club bières</h5>
-                        <MatchesList matches={this.state.serverMatches}
-                                     onSelect={this._addDrinker} />
+                        <SelectList items={this.state.serverMatches} onClick={this._addDrinker} />
                     </div>
                 }
                 {
                     (this.state.etuuttMatches.length > 0) &&
                     <div className="container">
                         <h5>Depuis le site étu</h5>
-                        <MatchesList matches={this.state.etuuttMatches}
-                                     onSelect={this._addDrinkerFromEtuutt} />
+                        <SelectList items={this.state.etuuttMatches} onClick={this._addDrinkerFromEtuutt} />
                     </div>
                 }
                 <div className="container">

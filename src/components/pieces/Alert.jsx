@@ -1,19 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
-export default class Alert extends React.Component {
+const Alert = ({ type, message }) => (
+  <div className="alert-message-container">
+    <div className={`alert alert-${type}`} role="alert">
+      {message}
+    </div>
+  </div>
+)
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="alert-message-container">
-                <div className={`alert alert-${this.props.type}`} role="alert">
-                    {this.props.message}
-                </div>
-            </div>
-        );
-    }
-
+Alert.propTypes = {
+  type: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 }
+
+export default Alert

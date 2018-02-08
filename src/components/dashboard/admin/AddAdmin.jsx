@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MatchesList      from '../../pieces/MatchesList';
+import SelectList      from '../../pieces/SelectList';
 
 import EtuuttActions    from '../../../actions/EtuuttActions';
 import AdminActions     from '../../../actions/AdminActions';
@@ -71,9 +71,7 @@ export default class AddAdmin extends React.Component {
                             id="pattern" />
                     </div>
 
-                    <MatchesList
-                        matches={this.state.matches}
-                        onSelect={this._handleAddAdmin} />
+                    <SelectList items={this.state.matches} onClick={this._handleAddAdmin} />
                 </form>
             </div>
         );
