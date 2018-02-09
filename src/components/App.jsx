@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home         from './pages/Home';
-import Dashboard    from './pages/Dashboard';
-import OldEvents    from './pages/OldEvents';
+import Home         from '../containers/Home';
+import Dashboard    from '../containers/Dashboard';
+import OldEvents    from '../containers/OldEvents';
 import Toast        from './pieces/Toast';
 
 import ToastStore   from '../stores/ToastStore';

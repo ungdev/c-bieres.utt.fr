@@ -1,20 +1,15 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class ImageWrapper extends React.Component {
+const ImageWrapper = ({ path }) => (
+  <div className="images-wrapper" style={{
+      backgroundImage: `url(${path ? (process.env.SERVER_URI+path) : 'images/beer.png'})`
+    }}>
+  </div>
+)
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            uri: process.env.SERVER_URI + props.path
-        }
-    }
-
-    render() {
-        const style = {backgroundImage: `url(${this.props.path ? this.state.uri : 'images/beer.png'})`};
-        return (
-            <div className="images-wrapper" style={style}></div>
-        );
-    }
-
+ImageWrapper.propTypes = {
+  path: PropTypes.string,
 }
+
+export default ImageWrapper

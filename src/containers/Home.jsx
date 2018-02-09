@@ -1,38 +1,68 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom';
 
-import Beer             from '../home/Beer';
-import BeerList         from '../home/BeerList'
-import Banner           from '../home/Banner'
-import Footer           from '../home/Footer'
-import ShowOldEvents    from '../home/ShowOldEvents';
+import Beer             from '../components/home/Beer';
+import BeerList         from '../components/home/BeerList'
+import Banner           from '../components/home/Banner'
+import Footer           from '../components/home/Footer'
+import ShowOldEvents    from '../components/home/ShowOldEvents';
 
-import { monthToString }    from '../../helpers/dateHelper';
-import registrationHelper   from '../../helpers/localStorage/registrationHelper';
-import redirectHelper       from '../../helpers/localStorage/redirectHelper';
+import { monthToString }    from '../helpers/dateHelper';
+import registrationHelper   from '../helpers/localStorage/registrationHelper';
+import redirectHelper       from '../helpers/localStorage/redirectHelper';
 
-import EventActions         from '../../actions/EventActions';
-import AuthActions          from '../../actions/AuthActions';
+import EventActions         from '../actions/EventActions';
+import AuthActions          from '../actions/AuthActions';
 
-import EventStore           from '../../stores/EventStore';
-import AuthStore            from '../../stores/AuthStore';
+import EventStore           from '../stores/EventStore';
+import AuthStore            from '../stores/AuthStore';
 
-import '../../scripts/covervid.js';
-import '../../scripts/main.js';
+import EventService from '../services/EventService'
+import { fetchNextEventSuccess } from '../actions'
 
-export default class Home extends React.Component {
+import '../scripts/covervid.js';
+import '../scripts/main.js';
+
+const filterNextEvent = (events) => {
+  // next event can be today ! So greater than yesterday
+  let next = null;
+  for (let event of events.all) {
+    if (events.next === event._id) {
+      next = event
+    }
+  }
+  return next;
+}
+
+const mapStateToProps = state => {
+  return {
+    nextEvent: filterNextEvent(state.events)
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    loadNextEvent: () => {
+      EventService.getNext()
+        .then(res => dispatch(fetchNextEventSuccess(res.data)))
+        .catch(e => console.log(e))
+    }
+  }
+}
+
+class Home extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            nextEvent: null,
             registration: registrationHelper.get(),
             width: window.innerWidth
         };
 
-        this._onEventStoreChange = this._onEventStoreChange.bind(this);
+        this.handleOldEventsClick = this.handleOldEventsClick.bind(this);
         this._onAuthStoreChange = this._onAuthStoreChange.bind(this);
         this._handleWindowSizeChange = this._handleWindowSizeChange.bind(this);
         this.handleBannerClick = this.handleBannerClick.bind(this);
@@ -64,10 +94,9 @@ export default class Home extends React.Component {
        }
 
        // listen stores changes
-       EventStore.addChangeListener(this._onEventStoreChange);
        AuthStore.addChangeListener(this._onAuthStoreChange);
        // trigger action for the store to load the event
-       EventActions.getNextEvent();
+       this.props.loadNextEvent()
 
        // window resize listenner
        window.addEventListener('resize', this.handleWindowSizeChange);
@@ -75,7 +104,6 @@ export default class Home extends React.Component {
 
     componentWillUnmount() {
         // remove listeners
-        EventStore.removeChangeListener(this._onEventStoreChange);
         AuthStore.removeChangeListener(this._onAuthStoreChange);
         window.removeEventListener('resize', this.handleWindowSizeChange);
     }
@@ -92,13 +120,6 @@ export default class Home extends React.Component {
         }
     }
 
-    _onEventStoreChange() {
-        this.setState({
-            nextEvent: EventStore.getNext(),
-            registration: registrationHelper.get()
-        });
-    }
-
     handleBannerClick() {
       AuthActions.redirect(this.state.registration ? "unregister" : "register")
     }
@@ -107,30 +128,36 @@ export default class Home extends React.Component {
       AuthActions.redirect("login");
     }
 
+    handleOldEventsClick() {
+      this.props.history.push("/olds");
+    }
+
     render() {
         const diplayColumn = this.state.width <= 900;
 
         let nextEventDate = null;
-        if (this.state.nextEvent) {
-            let when = new Date(this.state.nextEvent.when);
+        if (this.props.nextEvent) {
+            let when = new Date(this.props.nextEvent.when);
             nextEventDate = `${when.getDate()} ${monthToString(when.getMonth())}`;
         }
 
         return (
             <div>
               <Banner
-                event={this.state.nextEvent}
+                event={this.props.nextEvent}
                 date={nextEventDate}
                 registration={this.state.registration}
                 onClick={this.handleBannerClick} />
               {
                 nextEventDate &&
-                <BeerList beers={this.state.nextEvent.beers} diplayColumn={diplayColumn} />
+                <BeerList beers={this.props.nextEvent.beers} diplayColumn={diplayColumn} />
               }
-              <ShowOldEvents history={this.props.history} />
+              <ShowOldEvents onClick={this.handleOldEventsClick} />
               <Footer onAdminClick={this.handleAdminClick} />
             </div>
         );
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -43,9 +43,9 @@ const Banner = ({ event, date, registration, onClick }) => (
 Banner.propTypes = {
   event: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
   date: PropTypes.string,
-  registration: PropTypes.string.isRequired,
+  registration: PropTypes.string,
   onClick: PropTypes.func.isRequired
 }
 

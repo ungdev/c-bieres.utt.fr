@@ -2,16 +2,16 @@ import React from 'react';
 
 import { Switch, Route, Link } from 'react-router-dom';
 
-import Event        from '../dashboard/event/Event';
-import UpdateEvent  from '../dashboard/event/UpdateEvent';
-import ShowEvent    from '../dashboard/event/ShowEvent';
-import Admin        from '../dashboard/admin/Admin';
-import Sidebar      from '../dashboard/Sidebar';
-import SidebarItem  from '../dashboard/SidebarItem';
+import Event        from '../components/dashboard/event/Event';
+import UpdateEvent  from '../components/dashboard/event/UpdateEvent';
+import ShowEvent    from '../components/dashboard/event/ShowEvent';
+import Admin        from '../components/dashboard/admin/Admin';
+import Sidebar      from '../components/dashboard/Sidebar';
+import SidebarItem  from '../components/dashboard/SidebarItem';
 
-import authHelper   from '../../helpers/localStorage/authHelper';
+import authHelper   from '../helpers/localStorage/authHelper';
 
-import '../../styles/css/dashboard.css';
+import '../styles/css/dashboard.css';
 
 export default class Dashboard extends React.Component {
 
