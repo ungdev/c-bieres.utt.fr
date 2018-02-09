@@ -20,35 +20,20 @@ import EventStore           from '../stores/EventStore';
 import AuthStore            from '../stores/AuthStore';
 
 import EventService from '../services/EventService'
-import { fetchNextEventSuccess } from '../actions'
+import { fetchNextEvent } from '../actions'
 
 import '../scripts/covervid.js';
 import '../scripts/main.js';
 
-const filterNextEvent = (events) => {
-  // next event can be today ! So greater than yesterday
-  let next = null;
-  for (let event of events.all) {
-    if (events.next === event._id) {
-      next = event
-    }
-  }
-  return next;
-}
-
 const mapStateToProps = state => {
   return {
-    nextEvent: filterNextEvent(state.events)
+    nextEvent: state.events.items.filter(event => state.events.next === event._id)[0]
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    loadNextEvent: () => {
-      EventService.getNext()
-        .then(res => dispatch(fetchNextEventSuccess(res.data)))
-        .catch(e => console.log(e))
-    }
+    fetchNextEvent: () => dispatch(fetchNextEvent())
   }
 }
 
@@ -96,7 +81,7 @@ class Home extends React.Component {
        // listen stores changes
        AuthStore.addChangeListener(this._onAuthStoreChange);
        // trigger action for the store to load the event
-       this.props.loadNextEvent()
+       this.props.fetchNextEvent()
 
        // window resize listenner
        window.addEventListener('resize', this.handleWindowSizeChange);

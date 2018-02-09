@@ -1,18 +1,31 @@
 const initialState = {
-  all: [],
-  next: null
+  items: [],
+  next: null,
+  isLoading: false,
+  hasFailed: false
 }
 
 const events = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_NEXT_EVENT_SUCCESS':
-      console.log('STATE', state.all)
       return Object.assign({}, state, {
-        next: action.payload._id,
+        isLoading: false,
+        hasFailed: false,
+        next: action.event._id,
         // push only if not already in
-        all: state.all.filter(event => event._id === action.payload._id).length
-              ? state.all
-              : [...state.all, action.payload]
+        items: state.items.filter(event => event._id === action.event._id).length
+              ? state.items
+              : [...state.items, action.event]
+      })
+    case 'NEXT_EVENT_HAS_FAILED':
+      return Object.assign({}, state, {
+        isLoading: false,
+        hasFailed: true
+      })
+    case 'NEXT_EVENT_IS_LOADING':
+      return Object.assign({}, state, {
+        isLoading: true,
+        hasFailed: false
       })
     default:
       return state
