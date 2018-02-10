@@ -3,8 +3,6 @@ import React from 'react';
 import SelectList      from '../../pieces/SelectList';
 
 import EtuuttActions    from '../../../actions/EtuuttActions';
-import AdminActions     from '../../../actions/AdminActions';
-
 import EtuuttStore      from '../../../stores/EtuuttStore';
 
 export default class AddAdmin extends React.Component {
@@ -37,7 +35,7 @@ export default class AddAdmin extends React.Component {
     }
 
     _handleAddAdmin(student) {
-        AdminActions.addAdmin(student);
+        this.props.onSubmit(student);
     }
 
     render() {

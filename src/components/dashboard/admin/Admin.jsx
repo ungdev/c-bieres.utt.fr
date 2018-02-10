@@ -1,44 +1,48 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import AddAdmin from './AddAdmin';
 import Alert    from '../../pieces/Alert';
 
-import AdminActions from '../../../actions/AdminActions';
+import { fetchAdmins, deleteAdmin, addAdmin } from '../../../actions'
 
-import AdminStore from '../../../stores/AdminStore';
+const mapStateToProps = state => {
+  return {
+    admins: state.admins.items,
+    beingDeleted: state.admins.adminBeingDeleted,
+    deleteHasFailed: state.admins.deleteHasFailed,
+    areLoading: state.admins.adminsAreLoading,
+    fetchAdminsError: state.admins.fetchAdminsError
+  }
+}
 
-export default class Admin extends React.Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAdmins: () => dispatch(fetchAdmins()),
+    deleteAdmin: (id) => dispatch(deleteAdmin(id)),
+    addAdmin: (student) => dispatch(addAdmin(student)),
+  }
+}
+
+class Admin extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            admins: [],
             showAddAdmin: false
         };
 
-        this._handleDeleteAdmin = this._handleDeleteAdmin.bind(this);
+        this.onDeleteClick = this.onDeleteClick.bind(this);
         this._toggleShowAddAdmin = this._toggleShowAddAdmin.bind(this);
-        this._onAdminStoreChange = this._onAdminStoreChange.bind(this);
     }
 
     componentDidMount() {
-        // listen the store change
-        AdminStore.addChangeListener(this._onAdminStoreChange);
-        // trigger action for the store to load admins
-        AdminActions.getAdmins();
+      this.props.fetchAdmins()
     }
 
-    componentWillUnmount() {
-        AdminStore.removeChangeListener(this._onAdminStoreChange);
-    }
-
-    _onAdminStoreChange() {
-        this.setState({ admins: AdminStore.admins });
-    }
-
-    _handleDeleteAdmin(id) {
-        AdminActions.deleteAdmin(id);
+    onDeleteClick(id) {
+      this.props.deleteAdmin(id);
     }
 
     _toggleShowAddAdmin() {
@@ -55,7 +59,8 @@ export default class Admin extends React.Component {
                         <div className="col col-md-4">
                             <AddAdmin
                                 showForm={this.state.showAddAdmin}
-                                toggle={this._toggleShowAddAdmin} />
+                                toggle={this._toggleShowAddAdmin}
+                                onSubmit={this.props.addAdmin} />
                         </div>
                     </div>
                 </div>
@@ -70,13 +75,13 @@ export default class Admin extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.admins.map(admin => {
+                                this.props.admins.map(admin => {
                                     return  <tr key={admin._id}>
                                                 <td>{admin.studentId}</td>
                                                 <td>{`${admin.firstName} ${admin.lastName}`}</td>
                                                 <td>
                                                     <div className="btn-group" role="group" aria-label="actions">
-                                                        <button type="button" onClick={_ => this._handleDeleteAdmin(admin._id)} className="btn btn-danger">
+                                                        <button type="button" onClick={_ => this.onDeleteClick(admin._id)} className="btn btn-danger">
                                                             Supprimer
                                                         </button>
                                                     </div>
@@ -87,7 +92,7 @@ export default class Admin extends React.Component {
                         </tbody>
                     </table>
                     {
-                        (this.state.admins.length === 0) &&
+                        (this.props.admins.length === 0) &&
                         <Alert
                             type="info"
                             message={<div>Aucun administrateur. Tu peux en ajouter un en cliquant sur <b>ajouter un administrateur</b></div>}
@@ -99,3 +104,5 @@ export default class Admin extends React.Component {
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin)
