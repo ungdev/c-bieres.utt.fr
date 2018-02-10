@@ -26,7 +26,7 @@ Beer.propTypes = {
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
-  diplayColumn: PropTypes.bool.isRequired,
+  diplayColumn: PropTypes.bool,
   left: PropTypes.bool.isRequired,
 }
 

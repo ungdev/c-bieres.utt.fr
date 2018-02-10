@@ -1,63 +1,56 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import OldEventsListItem from './OldEventsListItem';
+import OldEventsListItem from './OldEventsListItem'
+import { fetchEvents } from '../../actions'
 
-import EventActions from '../../actions/EventActions';
-
-import EventStore from '../../stores/EventStore';
-
-export default class OldEventsList extends React.Component {
-
-    constructor() {
-        super();
-
-        this.state = {
-            events: []
-        }
-
-        this._onEventStoreChange = this._onEventStoreChange.bind(this);
-        this._showOldEvent = this._showOldEvent.bind(this);
-    }
-
-    componentDidMount() {
-        // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange);
-        // trigger action for the store to load events
-        EventActions.getEvents({ before: new Date(), sort: '-when' });
-    }
-
-    componentWillUnmount() {
-        EventStore.removeChangeListener(this._onEventStoreChange);
-    }
-
-    _onEventStoreChange() {
-        // get only the past events !
-        const now = new Date();
-        this.setState({
-            events: EventStore.events
-                        .filter(e => new Date(e.when) < now)
-                        .sort((a, b) => a.when < b.when)
-        });
-    }
-
-    _showOldEvent(id) {
-        this.props.history.push(`/olds/${id}`);
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <table className="table table-hover table-striped old-events__table">
-                    <tbody>
-                        {this.state.events.map(event => <OldEventsListItem
-                                                            key={event._id}
-                                                            event={event}
-                                                            eventDate={new Date(event.when)}
-                                                            onClick={this._showOldEvent} />)}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
-
+const mapStateToProps = state => {
+  return {
+    // only past events, sorted by date
+    events: state.events.items
+      .filter(event => new Date(event.when) < new Date())
+      .sort((a, b) => new Date(b.when) - new Date(a.when)),
+    areLoading: state.events.itemsAreLoading,
+    haveFailed: state.events.itemsHaveFailed,
+  }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchEvents: () => dispatch(fetchEvents())
+  }
+}
+
+class OldEventsList extends React.Component {
+
+  constructor() {
+    super();
+    this._showOldEvent = this._showOldEvent.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchEvents()
+  }
+
+  _showOldEvent(id) {
+    this.props.history.push(`/olds/${id}`);
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <table className="table table-hover table-striped old-events__table">
+          <tbody>
+            {this.props.events.map((event, i) => <OldEventsListItem
+                                                key={i}
+                                                event={event}
+                                                eventDate={new Date(event.when)}
+                                                onClick={this._showOldEvent} />)}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OldEventsList)

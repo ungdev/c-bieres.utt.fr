@@ -19,7 +19,6 @@ import AuthActions          from '../actions/AuthActions';
 import EventStore           from '../stores/EventStore';
 import AuthStore            from '../stores/AuthStore';
 
-import EventService from '../services/EventService'
 import { fetchNextEvent } from '../actions'
 
 import '../scripts/covervid.js';

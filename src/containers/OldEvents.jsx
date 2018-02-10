@@ -7,8 +7,8 @@ import OldEvent         from '../components/olds/OldEvent';
 
 export default class OldEvents extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this._handleClick = this._handleClick.bind(this);
     }
