@@ -1,8 +1,22 @@
-import React from "react";
+import React from 'react'
+import { connect } from 'react-redux'
 
-import EventActions from '../../../actions/EventActions';
+import { createEvent } from '../../../actions'
 
-export default class CreateEvent extends React.Component {
+const mapStateToProps = state => {
+  return {
+    beingCreated: state.events.itemBeingCreated,
+    hasFailed: state.events.createHasFailed,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createEvent: (data) => dispatch(createEvent(data))
+  }
+}
+
+class CreateEvent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,10 +31,10 @@ export default class CreateEvent extends React.Component {
     }
 
     _submit() {
-        EventActions.createEvent({
+        this.props.createEvent({
             name: this.state.name,
             when: this.state.when
-        });
+        })
     }
 
     _handleChange(e) {
@@ -79,3 +93,5 @@ export default class CreateEvent extends React.Component {
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent)

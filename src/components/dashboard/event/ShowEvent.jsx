@@ -1,43 +1,43 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import AddDrinker from './AddDrinker';
 
 import EventActions from '../../../actions/EventActions';
 
-import EventStore   from '../../../stores/EventStore';
+import { fetchEvents } from '../../../actions'
 
-export default class ShowEvent extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    event: state.events.items.filter(item => item._id == ownProps.match.params.id)[0],
+    areLoading: state.events.itemsAreLoading,
+    haveFailed: state.events.itemsHaveFailed,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchEvents: () => dispatch(fetchEvents()),
+  }
+}
+
+class ShowEvent extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            id: props.match.params.id,
             event: null,
             drinkers: [],
             filters: {}
         };
 
         this._unregisterDrinker = this._unregisterDrinker.bind(this);
-        this._onEventStoreChange = this._onEventStoreChange.bind(this);
         this._setFilter = this._setFilter.bind(this);
         this._clearFilters = this._clearFilters.bind(this);
     }
 
     componentDidMount() {
-        // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange);
-        // trigger action for the store to load the event
-        EventActions.getEvent(this.state.id);
-    }
-
-    componentWillUnmount() {
-        EventStore.removeChangeListener(this._onEventStoreChange);
-    }
-
-    _onEventStoreChange() {
-        let event = EventStore.getById(this.state.id);
-        this.setState({ event, drinkers: event.drinkers.slice() });
+        this.props.fetchEvents()
     }
 
     _unregisterDrinker(id) {
@@ -61,19 +61,18 @@ export default class ShowEvent extends React.Component {
     }
 
     _clearFilters() {
-        this.setState({ filters: {}, drinkers: this.state.event.drinkers });
+        this.setState({ filters: {}, drinkers: this.props.event.drinkers });
     }
 
     render() {
-        if (!this.state.event) {
+        if (!this.props.event) {
             return (<div></div>);
         }
 
-        let eventDate = new Date(this.state.event.when);
+        let eventDate = new Date(this.props.event.when);
         let formattedDate = `${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`;
 
         const isPast = eventDate.getTime() < (new Date().getTime() - 24*60*60*1000);
-
         return (
             <div>
                 <div className="jumbotron">
@@ -81,19 +80,19 @@ export default class ShowEvent extends React.Component {
                         Participants
                     </h1>
                     <div className="text-center">
-                        à <b>{this.state.event.name}</b>, le <b>{formattedDate}</b>
+                        à <b>{this.props.event.name}</b>, le <b>{formattedDate}</b>
                     </div>
                     <hr className="my-4" />
                     <div className="row justify-content-md-center">
                         <div className="col col-md-4">
                             {
-                                (!isPast) && <AddDrinker eventId={this.state.id} />
+                                (!isPast) && <AddDrinker eventId={this.props.event.id} />
                             }
                         </div>
                     </div>
                 </div>
                 <div className="alert alert-primary" role="alert">
-                    <b>{this.state.event.drinkers.length}</b> participants
+                    <b>{this.props.event.drinkers.length}</b> participants
                 </div>
                 <div className="table-responsive">
                     <table className="table table-striped">
@@ -147,12 +146,12 @@ export default class ShowEvent extends React.Component {
                                                 <td>{drinker.firstName}</td>
                                                 <td>{drinker.lastName}</td>
                                                 <td>
-                                                    {
-                                                        !isPast &&
-                                                        <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
-                                                            Retirer
-                                                        </button>
-                                                    }
+                                                  {
+                                                    !isPast &&
+                                                    <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
+                                                        Retirer
+                                                    </button>
+                                                  }
                                                 </td>
                                             </tr>
                                 })
@@ -165,3 +164,5 @@ export default class ShowEvent extends React.Component {
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowEvent)

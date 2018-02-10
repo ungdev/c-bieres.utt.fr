@@ -1,18 +1,52 @@
 const initialState = {
   items: [],
+  next: null,
   itemsAreLoading: false,
   itemsHaveFailed: false,
-
-  next: null,
   nextIsLoading: false,
   nextHasFailed: false,
-
+  itemBeingCreated: false,
+  createHasFailed: false,
   itemBeingDeleted: null,
-  deleteHasFailed: null
+  deleteHasFailed: null,
+  itemBeingUpdated: null,
+  updateHasFailed: null,
 }
 
 const events = (state = initialState, action) => {
   switch (action.type) {
+    case 'UPDATE_EVENT_SUCCESS':
+      return Object.assign({}, state, {
+        itemBeingUpdated: false,
+        updateHasFailed: false,
+        items: state.items.map(item => item._id == action.event._id ? action.event : item)
+      })
+    case 'UPDATE_EVENT_ERROR':
+      return Object.assign({}, state, {
+        itemBeingUpdated: null,
+        updateHasFailed: action.id
+      })
+    case 'EVENT_BEING_UPDATED':
+      return Object.assign({}, state, {
+        itemBeingUpdated: action.id,
+        updateHasFailed: null
+      })
+    case 'CREATE_EVENT_SUCCESS':
+      return Object.assign({}, state, {
+        itemBeingCreated: false,
+        createHasFailed: false,
+        items: [...state.items, action.event]
+      })
+    case 'CREATE_EVENT_ERROR':
+      return Object.assign({}, state, {
+        itemBeingCreated: false,
+        createHasFailed: true
+      })
+    case 'EVENT_BEING_CREATED':
+      return Object.assign({}, state, {
+        itemBeingCreated: true,
+        createHasFailed: false
+      })
     case 'DELETE_EVENT_SUCCESS':
       return Object.assign({}, state, {
         itemBeingDeleted: null,

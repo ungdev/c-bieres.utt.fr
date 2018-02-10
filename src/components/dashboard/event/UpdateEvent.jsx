@@ -1,23 +1,36 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import AddBeer      from './AddBeer';
 import ShowBeer     from './ShowBeer';
 import UpdateBeer   from './UpdateBeer';
 
-import EventActions from '../../../actions/EventActions';
 import BeerActions  from '../../../actions/BeerActions';
 
-import EventStore   from '../../../stores/EventStore';
+import { updateEvent } from '../../../actions'
 
-export default class UpdateEvent extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    event: state.events.items.filter(item => item._id == ownProps.match.params.id)[0],
+    beingUpdated: state.events.itemBeingUpdated,
+    hasFailed: state.events.updateHasFailed,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateEvent: (event) => dispatch(updateEvent(event))
+  }
+}
+
+class UpdateEvent extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            id: props.match.params.id,
             originalDate: null,
-            event: {},
+            event: this.props.event,
             showBeerForm: false,
             beerToUpdate: null
         };
@@ -31,18 +44,6 @@ export default class UpdateEvent extends React.Component {
         this._deleteBeer = this._deleteBeer.bind(this);
         this._showUpdateBeerForm = this._showUpdateBeerForm.bind(this);
         this._closeUpdateBeerForm = this._closeUpdateBeerForm.bind(this);
-        this._onEventStoreChange = this._onEventStoreChange.bind(this);
-    }
-
-    componentDidMount() {
-        // listen the store change
-        EventStore.addChangeListener(this._onEventStoreChange);
-        // trigger action for the store to load the event
-        EventActions.getEvent(this.state.id);
-    }
-
-    componentWillUnmount() {
-        EventStore.removeChangeListener(this._onEventStoreChange);
     }
 
     _showUpdateBeerForm(beer) {
@@ -66,16 +67,6 @@ export default class UpdateEvent extends React.Component {
         BeerActions.deleteBeer(beer);
     }
 
-    _onEventStoreChange() {
-        const event = EventStore.getById(this.state.id);
-        this.setState({
-            event,
-            showBeerForm: false,
-            beerToUpdate: null,
-            originalDate: event.when
-        });
-    }
-
     _handleNameChange(e) {
         let event = this.state.event;
         event.name = e.target.value;
@@ -93,11 +84,11 @@ export default class UpdateEvent extends React.Component {
     }
 
     _submitUpdateForm() {
-        EventActions.updateEvent(this.state.id, this.state.event);
+        this.props.updateEvent(this.state.event);
     }
 
     render() {
-        const isPast = new Date(this.state.originalDate).getTime() < (new Date().getTime() - 24*60*60*1000);
+        const isPast = new Date(this.props.event.when).getTime() < (new Date().getTime() - 24*60*60*1000);
 
         return (
             <div>
@@ -175,3 +166,5 @@ export default class UpdateEvent extends React.Component {
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateEvent)

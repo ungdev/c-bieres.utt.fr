@@ -16,7 +16,6 @@ import redirectHelper       from '../helpers/localStorage/redirectHelper';
 import EventActions         from '../actions/EventActions';
 import AuthActions          from '../actions/AuthActions';
 
-import EventStore           from '../stores/EventStore';
 import AuthStore            from '../stores/AuthStore';
 
 import { fetchNextEvent } from '../actions'

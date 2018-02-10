@@ -53,6 +53,62 @@ export const deleteEventSuccess = (id) => {
   }
 }
 
+export const eventBeingCreated = () => {
+  return {
+    type: 'EVENTS_BEING_CREATED'
+  }
+}
+export const createEventError = () => {
+  return {
+    type: 'CREATE_EVENT_ERROR'
+  }
+}
+export const createEventSuccess = (event) => {
+  return {
+    type: 'CREATE_EVENT_SUCCESS',
+    event
+  }
+}
+
+export const eventBeingUpdated = (id) => {
+  return {
+    type: 'EVENTS_BEING_UPDATED',
+    id
+  }
+}
+export const updateEventError = (id) => {
+  return {
+    type: 'UPDATE_EVENT_ERROR',
+    id
+  }
+}
+export const updateEventSuccess = (event) => {
+  return {
+    type: 'UPDATE_EVENT_SUCCESS',
+    event
+  }
+}
+
+export const updateEvent = (event) => {
+  return dispatch => {
+    dispatch(eventBeingUpdated())
+    return EventService.update(event._id, event)
+      .then(response => response.data)
+      .then(event => dispatch(updateEventSuccess(event)))
+      .catch(() => dispatch(updateEventError()))
+  }
+}
+
+export const createEvent = (data) => {
+  return dispatch => {
+    dispatch(eventBeingCreated())
+    return EventService.create(data)
+      .then(response => response.data)
+      .then(event => dispatch(createEventSuccess(event)))
+      .catch(() => dispatch(createEventError()))
+  }
+}
+
 export const deleteEvent = (id) => {
   return dispatch => {
     dispatch(eventBeingDeleted(id))

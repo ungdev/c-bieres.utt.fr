@@ -7,7 +7,7 @@ import Alert                from '../../pieces/Alert';
 
 import { fetchEvents, deleteEvent } from '../../../actions'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     // only past events, sorted by date
     events: state.events.items
@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchEvents: () => dispatch(fetchEvents()),
     deleteEvent: (id) => dispatch(deleteEvent(id))
