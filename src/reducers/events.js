@@ -5,11 +5,30 @@ const initialState = {
 
   next: null,
   nextIsLoading: false,
-  nextHasFailed: false
+  nextHasFailed: false,
+
+  itemBeingDeleted: null,
+  deleteHasFailed: null
 }
 
 const events = (state = initialState, action) => {
   switch (action.type) {
+    case 'DELETE_EVENT_SUCCESS':
+      return Object.assign({}, state, {
+        itemBeingDeleted: null,
+        deleteHasFailed: null,
+        items: state.items.filter(item => item._id !== action.id)
+      })
+    case 'DELETE_EVENT_ERROR':
+      return Object.assign({}, state, {
+        itemBeingDeleted: null,
+        deleteHasFailed: action.id
+      })
+    case 'EVENT_BEING_DELETED':
+      return Object.assign({}, state, {
+        itemBeingDeleted: action.id,
+        deleteHasFailed: null
+      })
     case 'FETCH_EVENTS_SUCCESS':
       return Object.assign({}, state, {
         itemsAreLoading: false,

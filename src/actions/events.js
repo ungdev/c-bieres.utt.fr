@@ -5,13 +5,11 @@ export const eventsAreLoading = () => {
     type: 'EVENTS_ARE_LOADING'
   }
 }
-
 export const fetchEventsError = () => {
   return {
     type: 'FETCH_EVENTS_ERROR'
   }
 }
-
 export const fetchEventsSuccess = (events) => {
   return {
     type: 'FETCH_EVENTS_SUCCESS',
@@ -24,17 +22,43 @@ export const nextEventIsLoading = () => {
     type: 'NEXT_EVENT_IS_LOADING'
   }
 }
-
 export const fetchNextEventError = () => {
   return {
     type: 'FETCH_NEXT_EVENT_ERROR'
   }
 }
-
 export const fetchNextEventSuccess = (event) => {
   return {
     type: 'FETCH_NEXT_EVENT_SUCCESS',
     event
+  }
+}
+
+export const eventBeingDeleted = (id) => {
+  return {
+    type: 'EVENT_BEING_DELETED',
+    id
+  }
+}
+export const deleteEventError = (id) => {
+  return {
+    type: 'DELETE_EVENT_ERROR',
+    id
+  }
+}
+export const deleteEventSuccess = (id) => {
+  return {
+    type: 'DELETE_EVENT_SUCCESS',
+    id
+  }
+}
+
+export const deleteEvent = (id) => {
+  return dispatch => {
+    dispatch(eventBeingDeleted(id))
+    return EventService.delete(id)
+      .then(_ => dispatch(deleteEventSuccess(id)))
+      .catch(_ => dispatch(deleteEventError(id)))
   }
 }
 

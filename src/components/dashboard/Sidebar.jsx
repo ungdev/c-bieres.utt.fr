@@ -34,7 +34,7 @@ export default class Sidebar extends React.Component {
                                         value={itemKey}
                                         text={this.state.items[itemKey]}
                                         activeTab={this.state.activeTab}
-                                        isActice={this.state.activeTab === itemKey}
+                                        isActive={this.state.activeTab === itemKey}
                                         onClick={this._handleNavChange} />
                         })
                     }
