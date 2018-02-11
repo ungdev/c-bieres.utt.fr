@@ -5,7 +5,7 @@ import CreateEvent          from './CreateEvent';
 import EventsList           from './EventsList';
 import Alert                from '../../pieces/Alert';
 
-import { fetchEvents, deleteEvent } from '../../../actions'
+import { fetchEvents } from '../../../actions'
 
 const mapStateToProps = state => {
   return {
@@ -19,8 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchEvents: () => dispatch(fetchEvents()),
-    deleteEvent: (id) => dispatch(deleteEvent(id))
+    fetchEvents: () => dispatch(fetchEvents())
   }
 }
 
@@ -58,8 +57,7 @@ class Event extends React.Component {
             </div>
           </div>
         </div>
-
-        <EventsList events={this.props.events} onDeleteClick={this.props.deleteEvent} />
+        <EventsList events={this.props.events} />
       </div>
     )
   }
