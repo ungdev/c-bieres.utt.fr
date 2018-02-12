@@ -1,7 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import EventService from '../services/EventService';
 import registrationHelper from '../helpers/localStorage/registrationHelper';
-import * as toastHelper from '../helpers/toastHelper';
 
 export default {
 
@@ -17,8 +16,6 @@ export default {
                 // remove the registration from localStorage
                 registrationHelper.clean();
 
-                toastHelper.success("Desinscription réussie.");
-
                 AppDispatcher.dispatch({
                     type: 'UNREGISTERED',
                     drinker: response.data.drinker,
@@ -31,7 +28,6 @@ export default {
     unregisterById(data) {
         EventService.unregisterById(data)
             .then(response => {
-                toastHelper.success("Desinscription réussie.");
 
                 AppDispatcher.dispatch({
                     type: 'UNREGISTERED',
@@ -56,7 +52,6 @@ export default {
                     event: response.data.event
                 });
 
-                toastHelper.success("Inscription réussie !");
             })
             .catch(err => console.error(err));
     },
@@ -73,8 +68,6 @@ export default {
                 // save the registration in localStorage
                 registrationHelper.set(response.data.event._id);
 
-                toastHelper.success("Inscription réussie.");
-
                 AppDispatcher.dispatch({
                     type: 'REGISTERED',
                     drinker: response.data.drinker,
@@ -85,8 +78,6 @@ export default {
                 if (err.response.status == 409) {
                     // save the registration in localStorage
                     registrationHelper.set(err.response.data.event._id);
-
-                    toastHelper.info("Tu es déjà inscrit !");
 
                     AppDispatcher.dispatch({
                         type: 'ALREADY_REGISTERED',
@@ -135,11 +126,9 @@ export default {
                     type: 'CREATE_EVENT',
                     event: response.data
                 });
-                toastHelper.success("Évènement créé.");
             })
             .catch(err => {
                 console.error(err);
-                toastHelper.error("Echec lors de la création de l'évènement");
             });
     },
 
@@ -150,11 +139,9 @@ export default {
                     type: 'UPDATE_EVENT',
                     event: response.data
                 });
-                toastHelper.success("Évènement mis à jour.");
             })
             .catch(err => {
                 console.error(err);
-                toastHelper.error("Echec lors de la mise à jour de l'évènement");
             });
     },
 
@@ -166,7 +153,6 @@ export default {
                     id
                 });
 
-                toastHelper.success("Évènement supprimé.");
             })
             .catch(err => console.error(err));
     }
