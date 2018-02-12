@@ -1,48 +1,49 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import CreateDrinker    from './CreateDrinker';
 import SelectList       from '../../pieces/SelectList';
 
-import DrinkerActions   from '../../../actions/DrinkerActions';
 import EventActions     from '../../../actions/EventActions';
 
-import DrinkerStore     from '../../../stores/DrinkerStore';
+import { fetchDrinkers, createDrinker } from '../../../actions'
 
-export default class AddDrinker extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    etuuttDrinkers: state.drinkers.items.fromEtuutt,
+    serverDrinkers: state.drinkers.items.fromServer,
+    etuuttAreLoading: state.drinkers.etuuttItemsAreLoading,
+    serverAreLoading: state.drinkers.serverItemsAreLoading,
+    etuuttFetchHasFailed: state.drinkers.etuuttItemsHaveFailed,
+    serverFetchHasFailed: state.drinkers.serverItemsHaveFailed,
+    beingCreated: state.drinkers.itemBeingCreated,
+    createHasFailed: state.drinkers.createHasFailed
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchDrinkers: (fiters) => dispatch(fetchDrinkers(fiters)),
+    createDrinker: (data) => dispatch(createDrinker(data)),
+  }
+}
+
+class AddDrinker extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             searchPattern: "",
-            serverMatches: [],
-            etuuttMatches: [],
             showForm: false
         };
 
         this._handleSearchChange = this._handleSearchChange.bind(this);
         this._toggleCreateForm = this._toggleCreateForm.bind(this);
         this._submitCreateForm = this._submitCreateForm.bind(this);
-        this._onDrinkerStoreChange = this._onDrinkerStoreChange.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
         this._addDrinkerFromEtuutt = this._addDrinkerFromEtuutt.bind(this);
         this._addDrinker = this._addDrinker.bind(this);
-    }
-
-    componentDidMount() {
-        // listen the store change
-        DrinkerStore.addChangeListener(this._onDrinkerStoreChange);
-    }
-
-    componentWillUnmount() {
-        DrinkerStore.removeChangeListener(this._onDrinkerStoreChange);
-    }
-
-    _onDrinkerStoreChange() {
-        this.setState({
-            serverMatches: DrinkerStore.serverDrinkers,
-            etuuttMatches: DrinkerStore.etuuttDrinkers,
-        });
     }
 
     _toggleForm() {
@@ -55,7 +56,7 @@ export default class AddDrinker extends React.Component {
 
     _addDrinkerFromEtuutt(match) {
         match.eventId = this.props.eventId;
-        DrinkerActions.createDrinker(match);
+        this.props.createDrinker(match)
     }
 
     _toggleCreateForm() {
@@ -63,20 +64,18 @@ export default class AddDrinker extends React.Component {
     }
 
     _submitCreateForm(data) {
-        DrinkerActions.createDrinker(data);
+        this.props.createDrinker(data)
     }
 
     _handleSearchChange(e) {
-        this.setState({ searchPattern: e.target.value });
-        if (e.target.value.length > 2) {
-            // refresh the matches
-            DrinkerActions.getDrinkers({
-                multifield: e.target.value,
-                event: this.props.eventId
-            });
-        } else {
-            this.setState({ serverMatches: [], etuuttMatches: [] });
-        }
+      this.setState({ searchPattern: e.target.value });
+      if (e.target.value.length > 2) {
+        // refresh the matches
+        this.props.fetchDrinkers({
+          multifield: e.target.value,
+          event: this.props.eventId
+        });
+      }
     }
 
     render() {
@@ -112,17 +111,17 @@ export default class AddDrinker extends React.Component {
                     </div>
                 </form>
                 {
-                    (this.state.serverMatches.length > 0) &&
+                    (this.props.serverDrinkers.length > 0) &&
                     <div className="container">
                         <h5>Déjà dans club bières</h5>
-                        <SelectList items={this.state.serverMatches} onClick={this._addDrinker} />
+                        <SelectList items={this.props.serverDrinkers} onClick={this._addDrinker} />
                     </div>
                 }
                 {
-                    (this.state.etuuttMatches.length > 0) &&
+                    (this.props.etuuttDrinkers.length > 0) &&
                     <div className="container">
                         <h5>Depuis le site étu</h5>
-                        <SelectList items={this.state.etuuttMatches} onClick={this._addDrinkerFromEtuutt} />
+                        <SelectList items={this.props.etuuttDrinkers} onClick={this._addDrinkerFromEtuutt} />
                     </div>
                 }
                 <div className="container">
@@ -143,3 +142,5 @@ export default class AddDrinker extends React.Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddDrinker)

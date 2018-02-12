@@ -37,7 +37,7 @@ class ShowEvent extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchEvents()
+      this.props.fetchEvents()
     }
 
     _unregisterDrinker(id) {
@@ -47,16 +47,6 @@ class ShowEvent extends React.Component {
     _setFilter(updatedFilter, e) {
         let nextState = this.state;
         nextState.filters[updatedFilter] = e.target.value;
-
-        nextState.drinkers = nextState.event.drinkers.slice().filter(drinker => {
-            for (let filter in nextState.filters) {
-                if (nextState.filters[filter] && !drinker[filter].startsWith(nextState.filters[filter])) {
-                    return false;
-                }
-            }
-            return true;
-        });
-
         this.setState(nextState);
     }
 
@@ -86,7 +76,7 @@ class ShowEvent extends React.Component {
                     <div className="row justify-content-md-center">
                         <div className="col col-md-4">
                             {
-                                (!isPast) && <AddDrinker eventId={this.props.event.id} />
+                                (!isPast) && <AddDrinker eventId={this.props.event._id} />
                             }
                         </div>
                     </div>
@@ -140,20 +130,29 @@ class ShowEvent extends React.Component {
                                 </td>
                             </tr>
                             {
-                                this.state.drinkers.map((drinker, i) => {
-                                    return  <tr key={i}>
-                                                <td>{drinker.studentId}</td>
-                                                <td>{drinker.firstName}</td>
-                                                <td>{drinker.lastName}</td>
-                                                <td>
-                                                  {
-                                                    !isPast &&
-                                                    <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
-                                                        Retirer
-                                                    </button>
-                                                  }
-                                                </td>
-                                            </tr>
+                              this.props.event.drinkers
+                                .filter(drinker => {
+                                    for (let filter of this.state.filters) {
+                                        if (this.state.filters[filter] && !drinker[filter].startsWith(this.state.filters[filter])) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                })
+                                .map((drinker, i) => {
+                                  return  <tr key={i}>
+                                              <td>{drinker.studentId}</td>
+                                              <td>{drinker.firstName}</td>
+                                              <td>{drinker.lastName}</td>
+                                              <td>
+                                                {
+                                                  !isPast &&
+                                                  <button onClick={_ => this._unregisterDrinker(drinker._id)} type="button" className="btn btn-danger">
+                                                      Retirer
+                                                  </button>
+                                                }
+                                              </td>
+                                          </tr>
                                 })
                             }
                         </tbody>
