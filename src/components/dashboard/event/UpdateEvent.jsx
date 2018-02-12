@@ -5,9 +5,7 @@ import AddBeer      from './AddBeer';
 import ShowBeer     from './ShowBeer';
 import UpdateBeer   from './UpdateBeer';
 
-import BeerActions  from '../../../actions/BeerActions';
-
-import { updateEvent, deleteEvent } from '../../../actions'
+import { updateEvent, deleteEvent, deleteBeer, createBeer, updateBeer } from '../../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -19,10 +17,13 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     updateEvent: (event) => dispatch(updateEvent(event)),
-    deleteEvent: (id) => dispatch(deleteEvent(id))
+    deleteEvent: () => dispatch(deleteEvent(ownProps.match.params.id)),
+    deleteBeer: (beerId) => dispatch(deleteBeer(beerId, ownProps.match.params.id)),
+    createBeer: (beer) => dispatch(createBeer(beer)),
+    updateBeer: (beer) => dispatch(updateBeer(beer))
   }
 }
 
@@ -41,8 +42,6 @@ class UpdateEvent extends React.Component {
         this._handleDateChange = this._handleDateChange.bind(this);
         this._toggleBeerForm = this._toggleBeerForm.bind(this);
 
-        this._updateBeer = this._updateBeer.bind(this);
-        this._deleteBeer = this._deleteBeer.bind(this);
         this._showUpdateBeerForm = this._showUpdateBeerForm.bind(this);
         this._closeUpdateBeerForm = this._closeUpdateBeerForm.bind(this);
     }
@@ -53,19 +52,6 @@ class UpdateEvent extends React.Component {
 
     _closeUpdateBeerForm(beer) {
         this.setState({ beerToUpdate: null });
-    }
-
-    _updateBeer(beer) {
-        // Create a new FormData object and fill it with the beer values
-        var form = new FormData();
-        Object.keys(beer).map(attr => {
-            form.append(attr, beer[attr]);
-        });
-        BeerActions.updateBeer(beer._id, form);
-    }
-
-    _deleteBeer(beer) {
-        BeerActions.deleteBeer(beer);
     }
 
     _handleNameChange(e) {
@@ -114,18 +100,18 @@ class UpdateEvent extends React.Component {
                     {
                       !isPast &&
                       <div>
-                      <button
-                        type="button"
-                        onClick={_ => this.props.updateEvent(this.state.event)}
-                        className="btn btn-success btn-lg btn-block">
-                        Mettre à jour
-                      </button>
-                      <button
-                        type="button"
-                        onClick={_ => this.props.deleteEvent(this.props.event._id)}
-                        className="btn btn-danger btn-lg btn-block">
-                        Supprimer
-                      </button>
+                        <button
+                          type="button"
+                          onClick={_ => this.props.updateEvent(this.state.event)}
+                          className="btn btn-success btn-lg btn-block">
+                          Mettre à jour
+                        </button>
+                        <button
+                          type="button"
+                          onClick={this.props.deleteEvent}
+                          className="btn btn-danger btn-lg btn-block">
+                          Supprimer
+                        </button>
                       </div>
                     }
                   </p>
@@ -142,7 +128,7 @@ class UpdateEvent extends React.Component {
               !isPast && (
                 this.state.showBeerForm
                 ?
-                  <AddBeer eventId={this.state.id} close={this._toggleBeerForm} />
+                  <AddBeer createBeer={this.props.createBeer} eventId={this.props.event._id} close={this._toggleBeerForm} />
                 :
                   <div className="col col-md-4 add-beer-container">
                     <button
@@ -156,11 +142,11 @@ class UpdateEvent extends React.Component {
             }
           </div>
           {
-              this.state.event.beers && this.state.event.beers.map(beer => {
+              this.state.event.beers.map((beer, i) => {
                   if (this.state.beerToUpdate === beer._id) {
-                      return <UpdateBeer key={beer._id} update={this._updateBeer} close={this._closeUpdateBeerForm} beer={beer} />
+                      return <UpdateBeer key={i} update={this.props.updateBeer} close={this._closeUpdateBeerForm} beer={beer} />
                   } else {
-                      return <ShowBeer key={beer._id} showActions={!isPast} beer={beer} update={this._showUpdateBeerForm} delete={this._deleteBeer} />
+                      return <ShowBeer key={i} showActions={!isPast} beer={beer} update={this._showUpdateBeerForm} delete={this.props.deleteBeer} />
                   }
 
               })

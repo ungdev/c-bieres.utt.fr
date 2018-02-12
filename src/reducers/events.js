@@ -99,6 +99,35 @@ const events = (state = initialState, action) => {
         nextIsLoading: true,
         nextHasFailed: false
       })
+    // beers event
+    case 'DELETE_BEER_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.eventId)
+            event.beers = event.beers.filter(beer => beer._id != action.beerId)
+          return event
+        })
+      })
+    case 'CREATE_BEER_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.beer.event_id)
+            event.beers = [...event.beers, action.beer]
+          return event
+        })
+      })
+    case 'UPDATE_BEER_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.beer.event_id)
+            event.beers = event.beers.map(beer => {
+              if (beer._id == action.beer._id)
+                return action.beer
+              return beer
+            })
+          return event
+        })
+      })
     default:
       return state
   }

@@ -55,7 +55,7 @@ export const deleteEventSuccess = (id) => {
 
 export const eventBeingCreated = () => {
   return {
-    type: 'EVENTS_BEING_CREATED'
+    type: 'EVENT_BEING_CREATED'
   }
 }
 export const createEventError = () => {
@@ -72,7 +72,7 @@ export const createEventSuccess = (event) => {
 
 export const eventBeingUpdated = (id) => {
   return {
-    type: 'EVENTS_BEING_UPDATED',
+    type: 'EVENT_BEING_UPDATED',
     id
   }
 }

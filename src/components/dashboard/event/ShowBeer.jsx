@@ -42,7 +42,7 @@ export default class ShowBeer extends React.Component {
                                     Modifier
                                 </button>
                                 <button type="button"
-                                        onClick={_ => this.props.delete(this.state.beer)}
+                                        onClick={_ => this.props.delete(this.state.beer._id)}
                                         className="btn btn-danger">
                                     Supprimer
                                 </button>

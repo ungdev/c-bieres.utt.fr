@@ -1,15 +1,9 @@
 import React from 'react';
 
-import BeerActions from '../../../actions/BeerActions';
-
 export default class AddBeer extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            event_id: this.props.eventId
-        };
 
         this._submitCreateForm = this._submitCreateForm.bind(this);
         this._handleChange = this._handleChange.bind(this);
@@ -32,7 +26,7 @@ export default class AddBeer extends React.Component {
         Object.keys(this.state).map(attr => {
             form.append(attr, this.state[attr]);
         });
-        BeerActions.createBeer(form);
+        this.props.createBeer(form)
     }
 
     render() {
