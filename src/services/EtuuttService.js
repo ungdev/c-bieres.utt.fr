@@ -1,7 +1,6 @@
-import authHelper from '../helpers/localStorage/authHelper';
-import AuthStore from '../stores/AuthStore';
+import authHelper from '../helpers/localStorage/authHelper'
 
-const axios = require('axios');
+const axios = require('axios')
 
 class EtuuttService  {
 
@@ -21,17 +20,17 @@ class EtuuttService  {
                  'Accept': 'application/json',
                  'Content-Type': 'application/json',
                  'Access-Control-Allow-Origin': '*',
-                 'Authorization': `bearer ${AuthStore.accessToken}`
+                 'Authorization': `bearer ${authHelper.getAccessToken()}`
              },
              method: 'get',
              url: `${this._apiUrl}users?multifield=${pattern}`
-         };
+         }
 
          return new Promise((resolve, reject) => {
              axios(request)
                 .then(response => resolve(response))
-                .catch(err => reject(err));
-            });
+                .catch(err => reject(err))
+            })
     }
 
 }

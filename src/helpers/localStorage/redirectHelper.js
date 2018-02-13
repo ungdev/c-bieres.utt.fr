@@ -8,7 +8,7 @@ export default {
      * @param string action: the last action
      */
     set(action) {
-        localStorage.setItem(KEY_NAME, action);
+      localStorage.setItem(KEY_NAME, action);
     },
 
     /**

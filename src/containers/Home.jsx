@@ -14,31 +14,31 @@ import registrationHelper   from '../helpers/localStorage/registrationHelper';
 import redirectHelper       from '../helpers/localStorage/redirectHelper';
 
 import EventActions         from '../actions/EventActions';
-import AuthActions          from '../actions/AuthActions';
 
-import AuthStore            from '../stores/AuthStore';
-
-import { fetchNextEvent } from '../actions'
+import { fetchNextEvent, fetchRedirectLink, sendAuthorizationCode } from '../actions'
 
 import '../scripts/covervid.js';
 import '../scripts/main.js';
 
 const mapStateToProps = state => {
   return {
-    nextEvent: state.events.items.filter(event => state.events.next === event._id)[0]
+    nextEvent: state.events.items.filter(event => state.events.next === event._id)[0],
+    isAdmin: state.auth.payload.isAdmin
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchNextEvent: () => dispatch(fetchNextEvent())
+    fetchNextEvent: () => dispatch(fetchNextEvent()),
+    fetchRedirectLink: (action) => dispatch(fetchRedirectLink(action)),
+    sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code))
   }
 }
 
 class Home extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             registration: registrationHelper.get(),
@@ -46,9 +46,9 @@ class Home extends React.Component {
         };
 
         this.handleOldEventsClick = this.handleOldEventsClick.bind(this);
-        this._onAuthStoreChange = this._onAuthStoreChange.bind(this);
         this._handleWindowSizeChange = this._handleWindowSizeChange.bind(this);
         this.handleBannerClick = this.handleBannerClick.bind(this);
+        this.handleAdminClick = this.handleAdminClick.bind(this);
     }
 
     componentDidMount() {
@@ -56,38 +56,34 @@ class Home extends React.Component {
        const fullUrl = window.location.href;
        const searchPart = fullUrl.split('?')[1];
 
-       if (searchPart) {
-           const parameters = searchPart.split('&');
+      if (searchPart) {
+        const parameters = searchPart.split('&');
 
-           const authorization_code = parameters
-               .map(p => p.split('='))
-               .find(p => p[0] === "authorization_code");
+        const authorization_code = parameters
+          .map(p => p.split('='))
+          .find(p => p[0] === "authorization_code");
 
-           // if there is an authorization_code, send it to get an access token
-           if (authorization_code) {
-               let lastAction = redirectHelper.get();
-               if (lastAction == "register") {
-                   EventActions.register(authorization_code[1]);
-               } else if (lastAction == "unregister") {
-                   EventActions.unregister({authorization_code: authorization_code[1]});
-               } else if (lastAction == "login") {
-                   AuthActions.callback(authorization_code[1]);
-               }
-           }
-       }
+        // if there is an authorization_code, send it to get an access token
+        if (authorization_code) {
+          let lastAction = redirectHelper.get();
+          if (lastAction == "register") {
+            EventActions.register(authorization_code[1]);
+          } else if (lastAction == "unregister") {
+            EventActions.unregister({authorization_code: authorization_code[1]});
+          } else if (lastAction == "login") {
+            this.props.sendAuthorizationCode(authorization_code[1]);
+          }
+        }
+      }
 
-       // listen stores changes
-       AuthStore.addChangeListener(this._onAuthStoreChange);
        // trigger action for the store to load the event
        this.props.fetchNextEvent()
-
        // window resize listenner
        window.addEventListener('resize', this.handleWindowSizeChange);
     }
 
     componentWillUnmount() {
         // remove listeners
-        AuthStore.removeChangeListener(this._onAuthStoreChange);
         window.removeEventListener('resize', this.handleWindowSizeChange);
     }
 
@@ -95,20 +91,18 @@ class Home extends React.Component {
       this.setState({ width: window.innerWidth });
     }
 
-    _onAuthStoreChange() {
-        if (AuthStore.isAdmin) {
-            // use pushState to remove the authorization_code from url
-            window.history.pushState("yolo", "yolo", "/");
-            this.props.history.push('/dashboard/event');
-        }
-    }
-
     handleBannerClick() {
-      AuthActions.redirect(this.state.registration ? "unregister" : "register")
+      this.props.fetchRedirectLink(this.state.registration ? "unregister" : "register")
     }
 
     handleAdminClick() {
-      AuthActions.redirect("login");
+      if (this.props.isAdmin) {
+        // use pushState to remove the authorization_code from url
+        window.history.pushState("yolo", "yolo", "/");
+        this.props.history.push('/dashboard/event');
+      } else {
+        this.props.fetchRedirectLink("login");
+      }
     }
 
     handleOldEventsClick() {
