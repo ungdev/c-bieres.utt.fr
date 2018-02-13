@@ -1,15 +1,34 @@
 const initialState = {
   items: [],
+  matches: [],
   itemsAreLoading: false,
   itemsHaveFailed: false,
   itemBeingAdded: false,
   addHasFailed: false,
   itemBeingDeleted: null,
   deleteHasFailed: null,
+  matchesAreLoading: null,
+  matchesHaveFailed: null
 }
 
 const admins = (state = initialState, action) => {
   switch (action.type) {
+    case 'MATCHES_ARE_LOADING':
+      return Object.assign({}, state, {
+        matchesAreLoading: action.pattern,
+        matchesHaveFailed: null
+      })
+    case 'FETCH_MATCHES_ERROR':
+      return Object.assign({}, state, {
+        matchesAreLoading: null,
+        matchesHaveFailed: action.pattern
+      })
+    case 'FETCH_MATCHES_SUCCESS':
+      return Object.assign({}, state, {
+        matchesAreLoading: null,
+        matchesHaveFailed: null,
+        matches: action.matches
+      })
     case 'FETCH_ADMINS_SUCCESS':
       return Object.assign({}, state, {
         itemsAreLoading: false,

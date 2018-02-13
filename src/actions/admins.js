@@ -1,4 +1,5 @@
 import AdminService from '../services/AdminService'
+import EtuuttService from '../services/EtuuttService'
 
 export const adminsAreLoading = () => {
   return {
@@ -52,6 +53,35 @@ export const addAdminSuccess = (admin) => {
   return {
     type: 'ADD_ADMIN_SUCCESS',
     admin
+  }
+}
+
+export const matchesAreLoading = (pattern) => {
+  return {
+    type: 'MATCHES_ARE_LOADING',
+    pattern
+  }
+}
+export const fetchMatchesError = (pattern) => {
+  return {
+    type: 'FETCH_MATCHES_ERROR',
+    pattern
+  }
+}
+export const fetchMatchesSuccess = (matches) => {
+  return {
+    type: 'FETCH_MATCHES_SUCCESS',
+    matches
+  }
+}
+
+export const fetchMatches = (pattern) => {
+  return dispatch => {
+    dispatch(matchesAreLoading(pattern))
+    return EtuuttService.getMatches(pattern)
+        .then(response => response.data.data)
+        .then(matches => dispatch(fetchMatchesSuccess(matches)))
+        .catch(() => dispatch(fetchMatchesError(pattern)));
   }
 }
 

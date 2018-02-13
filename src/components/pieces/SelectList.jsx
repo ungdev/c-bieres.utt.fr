@@ -15,5 +15,4 @@ SelectList.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-
 export default SelectList

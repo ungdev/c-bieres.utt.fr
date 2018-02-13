@@ -1,37 +1,33 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
 import SelectList      from '../../pieces/SelectList';
 
-import EtuuttActions    from '../../../actions/EtuuttActions';
-import EtuuttStore      from '../../../stores/EtuuttStore';
+import { fetchMatches } from '../../../actions'
 
-export default class AddAdmin extends React.Component {
+const mapStateToProps = state => {
+  return {
+    matches: state.admins.matches
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchMatches: (pattern) => dispatch(fetchMatches(pattern))
+  }
+}
+
+class AddAdmin extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            matches: []
-        };
-
         this._handleAddAdmin = this._handleAddAdmin.bind(this);
-    }
-
-    componentDidMount() {
-        // listen the store change
-        EtuuttStore.addChangeListener(this._onEtuuttStoreChange.bind(this));
-    }
-
-    componentWillUnmount() {
-        EtuuttStore.removeChangeListener(this._onEtuuttStoreChange);
-    }
-
-    _onEtuuttStoreChange() {
-        this.setState({ matches: EtuuttStore.matches.data });
+        this._handleChange = this._handleChange.bind(this);
     }
 
     _handleChange(e) {
-        EtuuttActions.getMatches(e.target.value);
+        this.props.fetchMatches(e.target.value);
     }
 
     _handleAddAdmin(student) {
@@ -69,10 +65,12 @@ export default class AddAdmin extends React.Component {
                             id="pattern" />
                     </div>
 
-                    <SelectList items={this.state.matches} onClick={this._handleAddAdmin} />
+                    <SelectList items={this.props.matches} onClick={this._handleAddAdmin} />
                 </form>
             </div>
         );
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddAdmin)
