@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 
 import AddDrinker from './AddDrinker';
 
-import EventActions from '../../../actions/EventActions';
-
-import { fetchEvents } from '../../../actions'
+import { fetchEvents, unregisterById } from '../../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -41,7 +39,7 @@ class ShowEvent extends React.Component {
     }
 
     _unregisterDrinker(id) {
-        EventActions.unregisterById({id, eventId: this.state.id});
+        this.props.unregisterById({id, eventId: this.state.id});
     }
 
     _setFilter(updatedFilter, e) {
@@ -132,7 +130,7 @@ class ShowEvent extends React.Component {
                             {
                               this.props.event.drinkers
                                 .filter(drinker => {
-                                    for (let filter of this.state.filters) {
+                                    for (let filter in this.state.filters) {
                                         if (this.state.filters[filter] && !drinker[filter].startsWith(this.state.filters[filter])) {
                                             return false;
                                         }

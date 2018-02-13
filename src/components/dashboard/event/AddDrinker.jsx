@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 import CreateDrinker    from './CreateDrinker';
 import SelectList       from '../../pieces/SelectList';
 
-import EventActions     from '../../../actions/EventActions';
-
-import { fetchDrinkers, createDrinker } from '../../../actions'
+import { fetchDrinkers, createDrinker, registerById } from '../../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -25,6 +23,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchDrinkers: (fiters) => dispatch(fetchDrinkers(fiters)),
     createDrinker: (data) => dispatch(createDrinker(data)),
+    registerById: (drinkerId, eventId) => dispatch(registerById(drinkerId, eventId))
   }
 }
 
@@ -51,7 +50,7 @@ class AddDrinker extends React.Component {
     }
 
     _addDrinker(drinker) {
-        EventActions.registerById({id: drinker._id, eventId: this.props.eventId});
+        this.props.registerById({id: drinker._id, eventId: this.props.eventId});
     }
 
     _addDrinkerFromEtuutt(match) {

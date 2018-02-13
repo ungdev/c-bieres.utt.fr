@@ -13,9 +13,7 @@ import { monthToString }    from '../helpers/dateHelper';
 import registrationHelper   from '../helpers/localStorage/registrationHelper';
 import redirectHelper       from '../helpers/localStorage/redirectHelper';
 
-import EventActions         from '../actions/EventActions';
-
-import { fetchNextEvent, fetchRedirectLink, sendAuthorizationCode } from '../actions'
+import { fetchNextEvent, fetchRedirectLink, sendAuthorizationCode, register, unregister } from '../actions'
 
 import '../scripts/covervid.js';
 import '../scripts/main.js';
@@ -31,7 +29,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchNextEvent: () => dispatch(fetchNextEvent()),
     fetchRedirectLink: (action) => dispatch(fetchRedirectLink(action)),
-    sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code))
+    sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code)),
+    register: (code) => dispatch(register(code)),
+    unregister: (code) => dispatch(unregister(code)),
   }
 }
 
@@ -67,9 +67,9 @@ class Home extends React.Component {
         if (authorization_code) {
           let lastAction = redirectHelper.get();
           if (lastAction == "register") {
-            EventActions.register(authorization_code[1]);
+            this.props.register(authorization_code[1]);
           } else if (lastAction == "unregister") {
-            EventActions.unregister({authorization_code: authorization_code[1]});
+            this.props.unregister({authorization_code: authorization_code[1]});
           } else if (lastAction == "login") {
             this.props.sendAuthorizationCode(authorization_code[1]);
           }
