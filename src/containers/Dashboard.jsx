@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import { Switch, Route, Link } from 'react-router-dom';
 
@@ -13,7 +15,13 @@ import authHelper   from '../helpers/localStorage/authHelper';
 
 import '../styles/css/dashboard.css';
 
-export default class Dashboard extends React.Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    goHome: () => dispatch(push('/'))
+  }
+}
+
+class Dashboard extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,8 +30,8 @@ export default class Dashboard extends React.Component {
     }
 
     _logout() {
-        authHelper.clean();
-        this.props.history.push('/');
+        authHelper.clean()
+        this.props.goHome()
     }
 
     render() {
@@ -66,3 +74,5 @@ export default class Dashboard extends React.Component {
     }
 
 }
+
+export default connect(null, mapDispatchToProps)(Dashboard)

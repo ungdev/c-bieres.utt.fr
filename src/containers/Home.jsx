@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 import Beer             from '../components/home/Beer';
 import BeerList         from '../components/home/BeerList'
@@ -32,6 +33,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code)),
     register: (code) => dispatch(register(code)),
     unregister: (code) => dispatch(unregister(code)),
+    goOldEvents: () => dispatch(push('/olds')),
+    goDashboard: () => dispatch(push('/dashboard/event'))
   }
 }
 
@@ -45,7 +48,6 @@ class Home extends React.Component {
             width: window.innerWidth
         };
 
-        this.handleOldEventsClick = this.handleOldEventsClick.bind(this);
         this._handleWindowSizeChange = this._handleWindowSizeChange.bind(this);
         this.handleBannerClick = this.handleBannerClick.bind(this);
         this.handleAdminClick = this.handleAdminClick.bind(this);
@@ -98,15 +100,11 @@ class Home extends React.Component {
     handleAdminClick() {
       if (this.props.isAdmin) {
         // use pushState to remove the authorization_code from url
-        window.history.pushState("yolo", "yolo", "/");
-        this.props.history.push('/dashboard/event');
+        window.history.pushState("yolo", "yolo", "/")
+        this.props.goDashboard()
       } else {
         this.props.fetchRedirectLink("login");
       }
-    }
-
-    handleOldEventsClick() {
-      this.props.history.push("/olds");
     }
 
     render() {
@@ -129,7 +127,7 @@ class Home extends React.Component {
                 nextEventDate &&
                 <BeerList beers={this.props.nextEvent.beers} diplayColumn={diplayColumn} />
               }
-              <ShowOldEvents onClick={this.handleOldEventsClick} />
+              <ShowOldEvents onClick={this.props.goOldEvents} />
               <Footer onAdminClick={this.handleAdminClick} />
             </div>
         );

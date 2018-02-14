@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import Beer from '../home/Beer'
 
@@ -17,23 +18,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchEvents: () => dispatch(fetchEvents())
+    fetchEvents: () => dispatch(fetchEvents()),
+    goOldEvents: () => dispatch(push('/olds'))
   }
 }
 
 class OldEvent extends React.Component {
 
-  constructor() {
-      super();
-      this._handleClick = this._handleClick.bind(this);
-  }
-
   componentDidMount() {
     this.props.fetchEvents()
-  }
-
-  _handleClick() {
-      this.props.history.push('/olds');
   }
 
   render() {
@@ -54,7 +47,7 @@ class OldEvent extends React.Component {
             <h2 className="display-4">{event.name}</h2>
             <p>Le <b>{humanDate}</b></p>
             <button className="btn btn-light old-event__header__inner__button--right"
-                  onClick={this._handleClick}>
+                  onClick={this.props.goOldEvents}>
               Retour à la liste
             </button>
           </div>

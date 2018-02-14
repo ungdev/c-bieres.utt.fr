@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import OldEventsListItem from './OldEventsListItem'
 import { fetchEvents } from '../../actions'
@@ -17,23 +18,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchEvents: () => dispatch(fetchEvents())
+    fetchEvents: () => dispatch(fetchEvents()),
+    goOldEvent: (id) => dispatch(push(`/olds/${id}`))
   }
 }
 
 class OldEventsList extends React.Component {
 
-  constructor() {
-    super();
-    this._showOldEvent = this._showOldEvent.bind(this);
-  }
-
   componentDidMount() {
     this.props.fetchEvents()
-  }
-
-  _showOldEvent(id) {
-    this.props.history.push(`/olds/${id}`);
   }
 
   render() {
@@ -45,7 +38,7 @@ class OldEventsList extends React.Component {
                                                 key={i}
                                                 event={event}
                                                 eventDate={new Date(event.when)}
-                                                onClick={this._showOldEvent} />)}
+                                                onClick={this.props.goOldEvent} />)}
           </tbody>
         </table>
       </div>
