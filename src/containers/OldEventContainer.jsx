@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import OldEvent from '../components/olds/OldEvent'
+import OldEvent from '../components/OldEvent'
 
 import { fetchEvents } from '../actions'
 

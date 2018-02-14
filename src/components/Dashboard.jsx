@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import Event        from '../components/dashboard/event/Event';
 import UpdateEvent  from '../components/dashboard/event/UpdateEvent';
 import ShowEvent    from '../components/dashboard/event/ShowEvent';
-import Admin        from '../components/dashboard/admin/Admin';
+import AdminsContainer from '../containers/AdminsContainer'
 import Sidebar      from '../components/dashboard/Sidebar';
 import SidebarItem  from '../components/dashboard/SidebarItem';
 
@@ -34,7 +34,7 @@ const Dashboard = ({ logout, location }) => (
             <Route path='/dashboard/event/:id/update' component={UpdateEvent}/>
             <Route path='/dashboard/event/:id' component={ShowEvent}/>
             <Route path='/dashboard/event' component={Event}/>
-            <Route path='/dashboard/admin' component={Admin}/>
+            <Route path='/dashboard/admin' component={AdminsContainer}/>
           </Switch>
         </main>
       </div>
