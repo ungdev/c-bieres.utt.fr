@@ -5,8 +5,7 @@ import Event        from '../components/dashboard/event/Event';
 import UpdateEvent  from '../components/dashboard/event/UpdateEvent';
 import ShowEvent    from '../components/dashboard/event/ShowEvent';
 import AdminsContainer from '../containers/AdminsContainer'
-import Sidebar      from '../components/dashboard/Sidebar';
-import SidebarItem  from '../components/dashboard/SidebarItem';
+import Sidebar from './Sidebar'
 
 import '../styles/css/dashboard.css';
 
