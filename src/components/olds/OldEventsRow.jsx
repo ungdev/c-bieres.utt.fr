@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Button from '../pieces/Button'
 
-const OldEventsListItem = ({ event, eventDate, onClick }) => (
+const OldEventsRow = ({ event, eventDate, onClick }) => (
   <tr>
     <th scope="row">
       {event.name}
@@ -16,7 +16,7 @@ const OldEventsListItem = ({ event, eventDate, onClick }) => (
   </tr>
 )
 
-OldEventsListItem.propTypes = {
+OldEventsRow.propTypes = {
   event: PropTypes.shape({
     _id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
@@ -24,4 +24,4 @@ OldEventsListItem.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export default OldEventsListItem
+export default OldEventsRow
