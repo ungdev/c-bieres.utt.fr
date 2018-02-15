@@ -4,3 +4,5 @@
 .env
 
 /src/**/*.css
+
+yarn-error.log
