@@ -1,29 +1,22 @@
 import React from 'react'
 
-import EventsListItem   from './EventsListItem'
-import Alert            from '../../pieces/Alert'
+import EventsTableRow   from './EventsTableRow'
+import Alert            from './pieces/Alert'
 
-const EventsList = ({ events }) => {
+const EventsTable = ({ events }) => {
   if (events.length) {
     return (
       <div className="table-responsive">
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Nom</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {
-              events.map(event => {
-                return <EventsListItem
-                          key={event._id}
-                          event={event}
-                          eventDate={new Date(event.when)} />
-              })
-            }
+            {events.map((event, i) => <EventsTableRow key={i} event={event} />)}
           </tbody>
         </table>
       </div>
@@ -38,4 +31,4 @@ const EventsList = ({ events }) => {
   )
 }
 
-export default EventsList
+export default EventsTable

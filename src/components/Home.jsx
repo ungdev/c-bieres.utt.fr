@@ -11,12 +11,13 @@ import Banner           from '../components/home/Banner'
 import Footer           from '../components/home/Footer'
 import ShowOldEvents    from '../components/home/ShowOldEvents'
 
-import { monthToString }    from '../helpers/dateHelper';
-import registrationHelper   from '../helpers/localStorage/registrationHelper';
-import redirectHelper       from '../helpers/localStorage/redirectHelper';
+import { monthToString }    from '../helpers/dateHelper'
+import registrationHelper   from '../helpers/localStorage/registrationHelper'
+import redirectHelper       from '../helpers/localStorage/redirectHelper'
+import { toHumanDate }      from '../helpers/dateHelper'
 
-import '../scripts/covervid.js';
-import '../scripts/main.js';
+import '../scripts/covervid.js'
+import '../scripts/main.js'
 
 const Home = createReactClass({
   getInitialState() {
@@ -75,11 +76,7 @@ const Home = createReactClass({
   render() {
     const diplayColumn = this.state.width <= 900;
 
-    let nextEventDate = null;
-    if (this.props.nextEvent) {
-      let when = new Date(this.props.nextEvent.when);
-      nextEventDate = `${when.getDate()} ${monthToString(when.getMonth())}`;
-    }
+    let nextEventDate = this.props.nextEvent ? toHumanDate(this.props.nextEvent.when) : null
 
     return (
       <div>

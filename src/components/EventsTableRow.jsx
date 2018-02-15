@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { toHumanDate } from '../helpers/dateHelper'
 
-import { Link } from 'react-router-dom';
-
-const EventsListItem = ({ event, eventDate }) => (
+const EventsTableRow = ({ event, eventDate }) => (
   <tr>
     <td>{event.name}</td>
-    <td>{`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}</td>
+    <td>{toHumanDate(event.when)}</td>
     <td>
       <div className="btn-group" role="group" aria-label="actions">
         <Link className="btn btn-primary"
@@ -16,11 +16,11 @@ const EventsListItem = ({ event, eventDate }) => (
         <Link className="btn btn-primary"
               role="button"
               to={`/dashboard/event/${event._id}/update`}>
-          Modifier
+          Informations
         </Link>
       </div>
     </td>
   </tr>
 )
 
-export default EventsListItem
+export default EventsTableRow

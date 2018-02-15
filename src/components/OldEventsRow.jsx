@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import Button from './pieces/Button'
+import { toHumanDate } from '../helpers/dateHelper'
 
 const OldEventsRow = ({ event, eventDate, onClick }) => (
   <tr>
@@ -8,7 +9,7 @@ const OldEventsRow = ({ event, eventDate, onClick }) => (
       {event.name}
     </th>
     <td className="old-events__table__col">
-      {`${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`}
+      {toHumanDate(event.when)}
     </td>
     <td className="old-events__table__col">
       <Button theme="link" content="Voir" onClick={_ => onClick(event._id)} />

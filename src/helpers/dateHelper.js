@@ -1,4 +1,4 @@
-exports.monthToString = function(i) {
+exports.monthToString = (i) => {
     const months = {
         0: "janvier",
         1: "février",
@@ -15,4 +15,13 @@ exports.monthToString = function(i) {
     }
 
     return months[i];
+}
+
+exports.toHumanDate = (date) => {
+  const eventDate = new Date(date)
+  return `${eventDate.getUTCDate()}/${eventDate.getUTCMonth() + 1}/${eventDate.getUTCFullYear()}`
+}
+
+exports.isPast = (date) => {
+  return new Date(date).getTime() <= new Date().getTime() - 24*60*60*1000
 }

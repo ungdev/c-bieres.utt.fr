@@ -1,13 +1,13 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import Event        from '../components/dashboard/event/Event';
-import UpdateEvent  from '../components/dashboard/event/UpdateEvent';
-import ShowEvent    from '../components/dashboard/event/ShowEvent';
+import EventsContainer from '../containers/EventsContainer'
+import UpdateEventContainer from '../containers/UpdateEventContainer'
+import EventContainer from '../containers/EventContainer'
 import AdminsContainer from '../containers/AdminsContainer'
 import Sidebar from './Sidebar'
 
-import '../styles/css/dashboard.css';
+import '../styles/css/dashboard.css'
 
 const Dashboard = ({ logout, location }) => (
   <div>
@@ -30,9 +30,9 @@ const Dashboard = ({ logout, location }) => (
         <Sidebar location={location} />
         <main className="col-sm-9 ml-sm-auto col-md-10 pt-3 dashboard-main" role="main">
           <Switch>
-            <Route path='/dashboard/event/:id/update' component={UpdateEvent}/>
-            <Route path='/dashboard/event/:id' component={ShowEvent}/>
-            <Route path='/dashboard/event' component={Event}/>
+            <Route path='/dashboard/event/:id/update' component={UpdateEventContainer}/>
+            <Route path='/dashboard/event/:id' component={EventContainer}/>
+            <Route path='/dashboard/event' component={EventsContainer}/>
             <Route path='/dashboard/admin' component={AdminsContainer}/>
           </Switch>
         </main>
