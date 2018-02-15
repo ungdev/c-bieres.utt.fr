@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import OldEvents from '../components/OldEvents'
 
 import { fetchEvents } from '../actions'
@@ -15,9 +14,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    goHome: () => dispatch(push('/')),
     fetchEvents: () => dispatch(fetchEvents()),
-    goOldEvent: (id) => dispatch(push(`/olds/${id}`))
   }
 }
 

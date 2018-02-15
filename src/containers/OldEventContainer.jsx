@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import OldEvent from '../components/OldEvent'
 
 import { fetchEvents } from '../actions'
@@ -11,17 +10,9 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    goHome: () => dispatch(push('/')),
-    goOldEvents: () => dispatch(push('/olds')),
-    fetchEvents: () => dispatch(fetchEvents())
-  }
-}
-
 const OldEventContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(OldEvent)
 
 export default OldEventContainer

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Button from './Button'
 
-const ShowOldEvents = ({ onClick }) => (
+const ShowOldEvents = () => (
   <div className="show-old-events">
     <div className="container text-center">
       <p>
@@ -12,13 +13,9 @@ const ShowOldEvents = ({ onClick }) => (
         Tu peux trouver les bières que tu as rencontré aux précédents club bières en
         consultant les anciens évènements.
       </p>
-      <Button content="Voir les anciens évènements" theme="primary" classes="btn-lg" onClick={onClick} />
+      <Link to="/olds" className="btn btn-primary">Voir les anciens évènements</Link>
     </div>
   </div>
 )
-
-ShowOldEvents.propTypes = {
-  onClick: PropTypes.func.isRequired,
-}
 
 export default ShowOldEvents

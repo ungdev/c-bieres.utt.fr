@@ -1,9 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Button from './Button'
 import { toHumanDate } from '../helpers/dateHelper'
 
-const OldEventsRow = ({ event, eventDate, onClick }) => (
+const OldEventsRow = ({ event }) => (
   <tr>
     <th scope="row">
       {event.name}
@@ -12,7 +12,7 @@ const OldEventsRow = ({ event, eventDate, onClick }) => (
       {toHumanDate(event.when)}
     </td>
     <td className="old-events__table__col">
-      <Button theme="link" content="Voir" onClick={_ => onClick(event._id)} />
+      <Link class="btn btn-link" to={`/olds/${event._id}`}>Voir</Link>
     </td>
   </tr>
 )
@@ -21,8 +21,7 @@ OldEventsRow.propTypes = {
   event: PropTypes.shape({
     _id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
+  }).isRequired
 }
 
 export default OldEventsRow

@@ -18,7 +18,6 @@ const mapDispatchToProps = dispatch => {
     sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code)),
     register: (code) => dispatch(register(code)),
     unregister: (code) => dispatch(unregister(code)),
-    goOldEvents: () => dispatch(push('/olds')),
     goDashboard: () => dispatch(push('/dashboard/event'))
   }
 }

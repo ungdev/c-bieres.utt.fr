@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import createReactClass from 'create-react-class'
 
 import { Link } from 'react-router-dom'
@@ -66,7 +65,6 @@ const Home = createReactClass({
   handleAdminClick() {
     if (this.props.isAdmin) {
       // use pushState to remove the authorization_code from url
-      window.history.pushState("yolo", "yolo", "/")
       this.props.goDashboard()
     } else {
       this.props.fetchRedirectLink("login");
@@ -88,7 +86,7 @@ const Home = createReactClass({
           nextEventDate &&
           <BeerList beers={this.props.nextEvent.beers} diplayColumn={diplayColumn} />
         }
-        <ShowOldEvents onClick={this.props.goOldEvents} />
+        <ShowOldEvents />
         <Footer onAdminClick={this.handleAdminClick} />
       </div>
     )

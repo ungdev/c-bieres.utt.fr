@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Beer from './Beer'
 import { toHumanDate } from '../helpers/dateHelper'
 
-const OldEvent = ({ event, goHome, goOldEvents, fetchEvents }) => {
+const OldEvent = ({ event }) => {
   if (!event) {
-      return null;
+      return null
   }
 
   return (
@@ -14,9 +15,9 @@ const OldEvent = ({ event, goHome, goOldEvents, fetchEvents }) => {
         <div className="container old-event__header__inner">
           <h2 className="display-4">{event.name}</h2>
           <p>Le <b>{toHumanDate(event.when)}</b></p>
-          <button className="btn btn-light old-event__header__inner__button--right" onClick={goOldEvents}>
+          <Link to="/olds" className="btn btn-light old-event__header__inner__button--right">
             Retour à la liste
-          </button>
+          </Link>
         </div>
       </div>
       <div className="container old-event__beers">

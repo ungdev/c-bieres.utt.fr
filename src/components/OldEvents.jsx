@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import OldEventsRow from './OldEventsRow'
 
 class OldEvents extends React.Component {
@@ -19,20 +20,14 @@ class OldEvents extends React.Component {
             </p>
             <hr className="my-4" />
             <p>
-              <button type="button" onClick={this._handleClick} className="btn btn-primary">
-                Retour à la page principal
-              </button>
+              <Link className="btn btn-primary" to="/">Retour à la page principal</Link>
             </p>
           </div>
         </div>
         <div className="container">
           <table className="table table-hover table-striped old-events__table">
             <tbody>
-              {this.props.events.map((event, i) => <OldEventsRow
-                                                  key={i}
-                                                  event={event}
-                                                  eventDate={new Date(event.when)}
-                                                  onClick={this.props.goOldEvent} />)}
+              {this.props.events.map((event, i) => <OldEventsRow key={i} event={event} />)}
             </tbody>
           </table>
         </div>
