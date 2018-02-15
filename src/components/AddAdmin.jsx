@@ -1,6 +1,6 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
-import SelectList from './pieces/SelectList'
+import SelectList from './SelectList'
 
 const AddAdmin = ({ matches, showForm, toggle, fetchMatches, addAdmin }) => {
   if (!showForm) {

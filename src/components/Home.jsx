@@ -5,16 +5,15 @@ import createReactClass from 'create-react-class'
 
 import { Link } from 'react-router-dom'
 
-import Beer             from '../components/home/Beer';
-import BeerList         from '../components/home/BeerList'
-import Banner           from '../components/home/Banner'
-import Footer           from '../components/home/Footer'
-import ShowOldEvents    from '../components/home/ShowOldEvents'
+import Beer from './Beer'
+import BeerList from './BeerList'
+import Banner from './Banner'
+import Footer from './Footer'
+import ShowOldEvents from './ShowOldEvents'
 
-import { monthToString }    from '../helpers/dateHelper'
-import registrationHelper   from '../helpers/localStorage/registrationHelper'
-import redirectHelper       from '../helpers/localStorage/redirectHelper'
-import { toHumanDate }      from '../helpers/dateHelper'
+import { toHumanDate, monthToString } from '../helpers/dateHelper'
+import registrationHelper from '../helpers/localStorage/registrationHelper'
+import redirectHelper from '../helpers/localStorage/redirectHelper'
 
 import '../scripts/covervid.js'
 import '../scripts/main.js'

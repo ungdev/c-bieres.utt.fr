@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import createReactClass from 'create-react-class'
 
-import CreateDrinker from './CreateDrinker';
-import SelectList from './pieces/SelectList';
+import CreateDrinker from './CreateDrinker'
+import SelectList from './SelectList'
 
 const AddDrinker = createReactClass({
   getInitialState() {

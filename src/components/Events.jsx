@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import createReactClass from 'create-react-class'
 
-import CreateEvent          from './CreateEvent';
-import EventsTable           from './EventsTable';
-import Alert                from './pieces/Alert';
+import CreateEvent from './CreateEvent'
+import EventsTable from './EventsTable'
+import Alert from './Alert'
 
 const Events = createReactClass({
   getInitialState() {

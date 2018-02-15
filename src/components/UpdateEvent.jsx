@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import createReactClass from 'create-react-class'
 import { isPast } from '../helpers/dateHelper'
 import CreateBeer from './CreateBeer'
-import Beer from './Beer'
+import DashboardBeer from './DashboardBeer'
 import UpdateBeer from './UpdateBeer'
 
 const UpdateEvent = createReactClass({
@@ -105,7 +105,7 @@ const UpdateEvent = createReactClass({
                 return <UpdateBeer key={i} update={this.props.updateBeer} close={this.closeUpdateBeerForm}
                   beer={beer} />
               } else {
-                return <Beer key={i} showActions={!isPast} beer={beer} update={this.showUpdateBeerForm}
+                return <DashboardBeer key={i} showActions={!isPast} beer={beer} update={this.showUpdateBeerForm}
                   delete={this.props.deleteBeer} />
               }
             })

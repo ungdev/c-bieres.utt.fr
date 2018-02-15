@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 import EventsContainer from '../containers/EventsContainer'
 import UpdateEventContainer from '../containers/UpdateEventContainer'
@@ -12,7 +12,7 @@ import '../styles/css/dashboard.css'
 const Dashboard = ({ logout, location }) => (
   <div>
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a className="navbar-brand">HomePage</a>
+      <Link className="navbar-brand" to="/">HomePage</Link>
       <button className="navbar-toggler d-lg-none"
               type="button"
               data-toggle="collapse"

@@ -2,7 +2,7 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 
 import AddAdmin from './AddAdmin'
-import Alert    from './pieces/Alert'
+import Alert    from './Alert'
 
 const Admins = createReactClass({
   getInitialState() {

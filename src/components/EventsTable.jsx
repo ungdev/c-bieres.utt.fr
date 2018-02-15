@@ -1,7 +1,7 @@
 import React from 'react'
 
-import EventsTableRow   from './EventsTableRow'
-import Alert            from './pieces/Alert'
+import EventsTableRow from './EventsTableRow'
+import Alert from './Alert'
 
 const EventsTable = ({ events }) => {
   if (events.length) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Beer from './home/Beer'
+import Beer from './Beer'
 import { toHumanDate } from '../helpers/dateHelper'
 
 const OldEvent = ({ event, goHome, goOldEvents, fetchEvents }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '../pieces/Button'
+import Button from './Button'
 
 const Banner = ({ event, date, registration, onClick }) => (
   <section className="banner">
