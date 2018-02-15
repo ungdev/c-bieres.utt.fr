@@ -21,15 +21,13 @@ class EventService extends BaseService {
     /**
      * Register the user to the next event
      *
-     * @param string authorization_code
      * @return {Promise}
      */
-    register(authorization_code) {
-        return this.makeRequest({
-            method: 'post',
-            url: this._baseUrl + '/next/register',
-            data: {authorization_code}
-        });
+    register() {
+      return this.makeRequest({
+        method: 'post',
+        url: this._baseUrl + '/next/register'
+      })
     }
 
     registerById(data) {
@@ -43,15 +41,13 @@ class EventService extends BaseService {
     /**
      * Unregister a user to the next event
      *
-     * @param {object} data
      * @return {Promise}
      */
-    unregister(data) {
-        return this.makeRequest({
-            method: 'post',
-            url: this._baseUrl + '/next/unregister',
-            data
-        });
+    unregister() {
+      return this.makeRequest({
+        method: 'post',
+        url: this._baseUrl + '/next/unregister',
+      })
     }
 
     /**

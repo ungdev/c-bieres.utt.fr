@@ -102,10 +102,10 @@ export const unregisterById = (data) => {
   }
 }
 
-export const register = (authorizationCode) => {
+export const register = () => {
   return dispatch => {
     dispatch(drinkerBeingRegistered())
-    return EventService.register(authorizationCode)
+    return EventService.register()
       .then(response => response.data)
       .then(data => {
         registrationHelper.set(data.event._id)
@@ -121,10 +121,10 @@ export const register = (authorizationCode) => {
   }
 }
 
-export const unregister = (authorizationCode) => {
+export const unregister = () => {
   return dispatch => {
     dispatch(drinkerBeingUnregistered())
-    return EventService.unregister(authorizationCode)
+    return EventService.unregister()
       .then(response => response.data)
       .then(data => {
         registrationHelper.clean()

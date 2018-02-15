@@ -25,6 +25,9 @@ const Home = createReactClass({
     }
   },
   componentDidMount() {
+    // check if jwt in localStorage
+    this.props.checkExistingJWT()
+
     // check if there is an authorization code
     const fullUrl = window.location.href;
     const searchPart = fullUrl.split('?')[1];
@@ -36,38 +39,36 @@ const Home = createReactClass({
         .map(p => p.split('='))
         .find(p => p[0] === "authorization_code");
 
-      // if there is an authorization_code, send it to get an access token
+      // if there is an authorization_code, auth the user
       if (authorization_code) {
-        let lastAction = redirectHelper.get();
-        if (lastAction == "register") {
-          this.props.register(authorization_code[1]);
-        } else if (lastAction == "unregister") {
-          this.props.unregister({authorization_code: authorization_code[1]});
-        } else if (lastAction == "login") {
-          this.props.sendAuthorizationCode(authorization_code[1]);
-        }
+        this.props.sendAuthorizationCode(authorization_code[1])
       }
     }
     // trigger action for the store to load the event
     this.props.fetchNextEvent()
     // window resize listenner
-    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener('resize', this.handleWindowSizeChange)
   },
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener('resize', this.handleWindowSizeChange)
   },
   handleWindowSizeChange() {
-    this.setState({ width: window.innerWidth });
+    this.setState({ width: window.innerWidth })
   },
-  handleBannerClick() {
-    this.props.fetchRedirectLink(this.state.registration ? "unregister" : "register")
+  onBannerClick() {
+    if (this.props.jwt) {
+      this.state.registration
+        ? this.props.unregister()
+        : this.props.register()
+    } else {
+      this.props.login()
+    }
   },
-  handleAdminClick() {
+  onDashboardLinkClick() {
     if (this.props.isAdmin) {
-      // use pushState to remove the authorization_code from url
       this.props.goDashboard()
     } else {
-      this.props.fetchRedirectLink("login");
+      this.props.login()
     }
   },
   render() {
@@ -81,13 +82,13 @@ const Home = createReactClass({
           event={this.props.nextEvent}
           date={nextEventDate}
           registration={this.state.registration}
-          onClick={this.handleBannerClick} />
+          onClick={this.onBannerClick} />
         {
           nextEventDate &&
           <BeerList beers={this.props.nextEvent.beers} diplayColumn={diplayColumn} />
         }
         <ShowOldEvents />
-        <Footer onAdminClick={this.handleAdminClick} />
+        <Footer onAdminClick={this.onDashboardLinkClick} />
       </div>
     )
   }

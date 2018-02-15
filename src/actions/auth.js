@@ -32,15 +32,19 @@ export const authorizationCodeSuccess = (jwt, payload) => {
   }
 }
 
-/**
- * @param  {string} action There is many cases for which a user want to
- * authenticate himself: auth to dashboard, register/unregister to an event.
- * This case has to be save in the localStorage
- */
-export const fetchRedirectLink = (action) => {
+export const checkExistingJWT = () => {
+  return dispatch => {
+    const jwt = authHelper.get()
+    if (jwt) {
+      console.log(jwtDecode(jwt))
+      dispatch(authorizationCodeSuccess(jwt, jwtDecode(jwt)))
+    }
+  }
+}
+
+export const login = () => {
   return dispatch => {
     dispatch(redirectLinkIsLoading())
-    redirectHelper.set(action)
     return AuthService.getRedirectLink()
       .then(response => response.data.redirectUri)
       .then(link => window.location.replace(link))
