@@ -36,7 +36,6 @@ export const checkExistingJWT = () => {
   return dispatch => {
     const jwt = authHelper.get()
     if (jwt) {
-      console.log(jwtDecode(jwt))
       dispatch(authorizationCodeSuccess(jwt, jwtDecode(jwt)))
     }
   }

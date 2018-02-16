@@ -51,10 +51,9 @@ export const registerDrinkerError = () => {
     type: 'REGISTER_DRINKER_ERROR'
   }
 }
-export const registerDrinkerSuccess = (drinkerId, eventId) => {
+export const registerDrinkerSuccess = (eventId) => {
   return {
     type: 'REGISTER_DRINKER_SUCCESS',
-    drinkerId,
     eventId
   }
 }
@@ -79,6 +78,15 @@ export const unregisterDrinkerSuccess = (drinkerId, eventId) => {
     type: 'UNREGISTER_DRINKER_SUCCESS',
     drinkerId,
     eventId
+  }
+}
+
+export const checkRegistration = () => {
+  return dispatch => {
+    const registration = registrationHelper.get()
+    if (registration) {
+      dispatch(registerDrinkerSuccess(registration))
+    }
   }
 }
 
@@ -109,7 +117,7 @@ export const register = () => {
       .then(response => response.data)
       .then(data => {
         registrationHelper.set(data.event._id)
-        return dispatch(registerDrinkerSuccess(data.drinker._id, data.event._id))
+        return dispatch(registerDrinkerSuccess(data.event._id))
       })
       .catch(err => {
         if (err.response.status == 409) {

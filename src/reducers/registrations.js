@@ -74,7 +74,8 @@ const registrations = (state = initialState, action) => {
       return Object.assign({}, state, {
         beingRegistered: false,
         registerError: false,
-        registerSuccess: true
+        registerSuccess: true,
+        registration: action.eventId
       })
     case "ALREADY_REGISTERED":
       return Object.assign({}, state, {

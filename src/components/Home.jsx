@@ -11,7 +11,6 @@ import Footer from './Footer'
 import ShowOldEvents from './ShowOldEvents'
 
 import { toHumanDate, monthToString } from '../helpers/dateHelper'
-import registrationHelper from '../helpers/localStorage/registrationHelper'
 import redirectHelper from '../helpers/localStorage/redirectHelper'
 
 import '../scripts/covervid.js'
@@ -20,13 +19,14 @@ import '../scripts/main.js'
 const Home = createReactClass({
   getInitialState() {
     return {
-      registration: registrationHelper.get(),
       width: window.innerWidth
     }
   },
   componentDidMount() {
     // check if jwt in localStorage
     this.props.checkExistingJWT()
+    // check if already registered to next event
+    this.props.checkRegistration()
 
     // check if there is an authorization code
     const fullUrl = window.location.href;
@@ -56,8 +56,10 @@ const Home = createReactClass({
     this.setState({ width: window.innerWidth })
   },
   onBannerClick() {
+    console.log("jwt", this.props.jwt)
+    console.log("jwt", this.props.registration)
     if (this.props.jwt) {
-      this.state.registration
+      this.props.registration
         ? this.props.unregister()
         : this.props.register()
     } else {
@@ -81,7 +83,7 @@ const Home = createReactClass({
         <Banner
           event={this.props.nextEvent}
           date={nextEventDate}
-          registration={this.state.registration}
+          registration={this.props.registration}
           onClick={this.onBannerClick} />
         {
           nextEventDate &&
