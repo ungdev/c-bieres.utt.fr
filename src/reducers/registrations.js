@@ -11,7 +11,8 @@ const initialState = {
   beingRegistered: false,
   registerError: false,
   registerSuccess: false,
-  alreadyRegistered: false
+  alreadyRegistered: false,
+  registration: null
 }
 
 const registrations = (state = initialState, action) => {
@@ -59,7 +60,9 @@ const registrations = (state = initialState, action) => {
       return Object.assign({}, state, {
         beingUnregistered: false,
         unregisterError: false,
-        unregisterSuccess: true
+        unregisterSuccess: true,
+        alreadyRegistered: false,
+        registration: null
       })
     case "DRINKER_BEING_REGISTERED":
       return Object.assign({}, state, {

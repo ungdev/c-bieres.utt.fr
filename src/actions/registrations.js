@@ -93,7 +93,7 @@ export const checkRegistration = () => {
 export const registerById = (data) => {
   return dispatch => {
     dispatch(drinkerBeingRegisteredById())
-    return EventService.registerById(data)
+    return EventService.register(data)
       .then(response => response.data)
       .then(data => dispatch(registerDrinkerByIdSuccess(data.drinker._id, data.event._id)))
       .catch(_ => dispatch(registerDrinkerByIdError()))
@@ -103,7 +103,7 @@ export const registerById = (data) => {
 export const unregisterById = (data) => {
   return dispatch => {
     dispatch(drinkerBeingUnregisteredById())
-    return EventService.unregisterById(data)
+    return EventService.unregister(data)
       .then(response => response.data)
       .then(data => dispatch(unregisterDrinkerByIdSuccess(data.drinker._id, data.event._id)))
       .catch(_ => dispatch(unregisterDrinkerByIdError()))

@@ -40,7 +40,10 @@ const Event = createReactClass({
           <hr className="my-4" />
           <div className="row justify-content-md-center">
             <div className="col col-md-4">
-              {(!isPast(this.props.event.when)) && <AddDrinker eventId={this.props.event._id} />}
+              {(!isPast(this.props.event.when)) &&
+                <AddDrinker eventId={this.props.event._id} serverDrinkers={this.props.serverDrinkers}
+                  etuuttDrinkers={this.props.etuuttDrinkers} fetchDrinkers={this.props.fetchDrinkers}
+                  createDrinker={this.props.createDrinker} />}
             </div>
           </div>
         </div>
@@ -60,19 +63,19 @@ const Event = createReactClass({
             <tbody>
               <tr>
                 <td>
-                  <input onChange={e => this._setFilter('studentId', e)} value={this.state.filters.studentId || ""}
+                  <input onChange={this.setFilter} name="studentId" value={this.state.filters.studentId || ""}
                     type="text" className="form-control" placeholder="filtrer num étu" />
                 </td>
                 <td>
-                  <input onChange={e => this._setFilter('firstName', e)} value={this.state.filters.firstName || ""}
+                  <input onChange={this.setFilter} name="firstName" value={this.state.filters.firstName || ""}
                     type="text" className="form-control" placeholder="filtrer prénom" />
                 </td>
                 <td>
-                  <input onChange={e => this._setFilter('lastName', e)} value={this.state.filters.lastName || ""}
+                  <input onChange={this.setFilter} name="lastName" value={this.state.filters.lastName || ""}
                     type="text" className="form-control" placeholder="filtrer nom" />
                 </td>
                 <td>
-                  <button onClick={this._clearFilters} type="button" className="btn btn-primary">
+                  <button onClick={this.clearFilters} type="button" className="btn btn-primary">
                     Clear
                   </button>
                 </td>
