@@ -1,13 +1,13 @@
 import React from 'react'
 
-const UpdateEventBeer = ({ beer, showActions }) => (
+const UpdateEventBeer = ({ beer, showActions, updateBeer, deleteBeer }) => (
   <div className="showbeer-jumbotron jumbotron">
     <div className="row">
       <div className="col-3">
         {
-          (this.state.beer.image && this.state.beer.image != 'null')
+          (beer.image && beer.image != 'null')
           ?
-            <img className="img-fluid" src={process.env.REACT_APP_SERVER_URI + this.state.beer.image} />
+            <img className="img-fluid" src={process.env.REACT_APP_SERVER_URI + beer.image} />
           :
             <div className="showbeer-noimage">
               Clique sur "modifier" pour ajouter une image.
@@ -15,19 +15,19 @@ const UpdateEventBeer = ({ beer, showActions }) => (
         }
       </div>
       <div className="col-9">
-        <h4>{this.state.beer.name}</h4>
-        <span className="badge badge-primary">{this.state.beer.type}</span>
-        <span className="badge badge-warning">{this.state.beer.degree}</span>
-        <p className="showbeer-description">{this.state.beer.description}</p>
+        <h4>{beer.name}</h4>
+        <span className="badge badge-primary">{beer.type}</span>
+        <span className="badge badge-warning">{beer.degree}</span>
+        <p className="showbeer-description">{beer.description}</p>
         {
-          this.state.showActions &&
+          showActions &&
           <div className="btn-group" role="group">
             <button type="button" className="btn btn-primary"
-                onClick={_ => this.props.update(this.state.beer)}>
+                onClick={_ => updateBeer(beer)}>
               Modifier
             </button>
             <button type="button" className="btn btn-danger"
-                onClick={_ => this.props.delete(this.state.beer._id)}>
+                onClick={_ => deleteBeer(beer._id)}>
               Supprimer
             </button>
           </div>

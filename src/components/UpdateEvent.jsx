@@ -31,6 +31,9 @@ const UpdateEvent = createReactClass({
     this.setState({ showBeerForm: !this.state.showBeerForm });
   },
   render() {
+    if (!this.state.event || !this.props.event) {
+      return <div></div>
+    }
     return (
       <div>
         <div className="jumbotron">
@@ -105,8 +108,8 @@ const UpdateEvent = createReactClass({
                 return <UpdateBeer key={i} update={this.props.updateBeer} close={this.closeUpdateBeerForm}
                   beer={beer} />
               } else {
-                return <DashboardBeer key={i} showActions={!isPast} beer={beer} update={this.showUpdateBeerForm}
-                  delete={this.props.deleteBeer} />
+                return <DashboardBeer key={i} showActions={!isPast} beer={beer} updateBeer={this.showUpdateBeerForm}
+                  deleteBeer={this.props.deleteBeer} />
               }
             })
           }

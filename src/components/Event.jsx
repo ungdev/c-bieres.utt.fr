@@ -43,7 +43,7 @@ const Event = createReactClass({
               {(!isPast(this.props.event.when)) &&
                 <AddDrinker eventId={this.props.event._id} serverDrinkers={this.props.serverDrinkers}
                   etuuttDrinkers={this.props.etuuttDrinkers} fetchDrinkers={this.props.fetchDrinkers}
-                  createDrinker={this.props.createDrinker} />}
+                  createDrinker={this.props.createDrinker} registerById={this.props.registerById} />}
             </div>
           </div>
         </div>
