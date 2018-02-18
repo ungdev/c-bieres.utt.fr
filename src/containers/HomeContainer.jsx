@@ -6,6 +6,7 @@ import { fetchNextEvent, login, sendAuthorizationCode, register, unregister, che
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    nextEventId: state.events.next,
     nextEvent: state.events.items.filter(event => state.events.next === event._id)[0],
     isAdmin: state.auth.payload.isAdmin,
     jwt: state.auth.jwt,
@@ -18,8 +19,8 @@ const mapDispatchToProps = dispatch => {
     fetchNextEvent: () => dispatch(fetchNextEvent()),
     login: () => dispatch(login()),
     sendAuthorizationCode: (code) => dispatch(sendAuthorizationCode(code)),
-    register: () => dispatch(register()),
-    unregister: () => dispatch(unregister()),
+    register: (nextEventId) => dispatch(register(nextEventId)),
+    unregister: (nextEventId) => dispatch(unregister(nextEventId)),
     goDashboard: () => dispatch(push('/dashboard/event')),
     checkExistingJWT: () => dispatch(checkExistingJWT()),
     checkRegistration: () => dispatch(checkRegistration()),

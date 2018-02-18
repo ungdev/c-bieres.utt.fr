@@ -95,7 +95,7 @@ export const registerById = (data) => {
     dispatch(drinkerBeingRegisteredById())
     return EventService.register(data)
       .then(response => response.data)
-      .then(data => dispatch(registerDrinkerByIdSuccess(data.drinker._id, data.event._id)))
+      .then(_ => dispatch(registerDrinkerByIdSuccess(data.id, data.eventId)))
       .catch(_ => dispatch(registerDrinkerByIdError()))
   }
 }
@@ -105,24 +105,23 @@ export const unregisterById = (data) => {
     dispatch(drinkerBeingUnregisteredById())
     return EventService.unregister(data)
       .then(response => response.data)
-      .then(data => dispatch(unregisterDrinkerByIdSuccess(data.drinker._id, data.event._id)))
+      .then(_ => dispatch(unregisterDrinkerByIdSuccess(data.id, data.eventId)))
       .catch(_ => dispatch(unregisterDrinkerByIdError()))
   }
 }
 
-export const register = () => {
+export const register = (nextEventId) => {
   return dispatch => {
     dispatch(drinkerBeingRegistered())
     return EventService.register()
-      .then(response => response.data)
-      .then(data => {
-        registrationHelper.set(data.event._id)
-        return dispatch(registerDrinkerSuccess(data.event._id))
+      .then(_ => {
+        registrationHelper.set(nextEventId)
+        return dispatch(registerDrinkerSuccess(nextEventId))
       })
       .catch(err => {
         if (err.response.status == 409) {
-          registrationHelper.set(err.response.data.event._id)
-          return dispatch(drinkerAlreadyRegistered())
+          registrationHelper.set(nextEventId)
+          return dispatch(drinkerAlreadyRegistered(nextEventId))
         }
         return dispatch(registerDrinkerError())
       })
@@ -133,10 +132,9 @@ export const unregister = () => {
   return dispatch => {
     dispatch(drinkerBeingUnregistered())
     return EventService.unregister()
-      .then(response => response.data)
-      .then(data => {
+      .then(_ => {
         registrationHelper.clean()
-        return dispatch(unregisterDrinkerSuccess(data.drinker._id, data.event._id))
+        return dispatch(unregisterDrinkerSuccess())
       })
       .catch(_ => dispatch(unregisterDrinkerError()))
   }

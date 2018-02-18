@@ -45,11 +45,10 @@ export const createDrinkerError = () => {
     type: 'CREATE_DRINKER_ERROR'
   }
 }
-export const createDrinkerSuccess = (drinker, event) => {
+export const createDrinkerSuccess = (drinker) => {
   return {
     type: 'CREATE_DRINKER_SUCCESS',
-    drinker,
-    event
+    drinker
   }
 }
 
@@ -58,8 +57,8 @@ export const createDrinker = (data) => {
     dispatch(drinkerBeingCreated())
     return DrinkerService.create(data)
       .then(response => response.data)
-      .then(data => createDrinkerSuccess(data.drinker, data.event))
-      .catch(createDrinkerError)
+      .then(drinker => createDrinkerSuccess(drinker))
+      .catch(_ => dispatch(createDrinkerError()))
   }
 }
 

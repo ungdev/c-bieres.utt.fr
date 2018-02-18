@@ -56,12 +56,10 @@ const Home = createReactClass({
     this.setState({ width: window.innerWidth })
   },
   onBannerClick() {
-    console.log("jwt", this.props.jwt)
-    console.log("jwt", this.props.registration)
     if (this.props.jwt) {
       this.props.registration
-        ? this.props.unregister()
-        : this.props.register()
+        ? this.props.unregister(this.props.nextEventId)
+        : this.props.register(this.props.nextEventId)
     } else {
       this.props.login()
     }

@@ -75,6 +75,16 @@ export const fetchMatchesSuccess = (matches) => {
   }
 }
 
+export const fetchAdmins = () => {
+  return dispatch => {
+    dispatch(adminsAreLoading())
+    return AdminService.get()
+      .then(response => response.data)
+      .then(admins => dispatch(fetchAdminsSuccess(admins)))
+      .catch(() => dispatch(fetchAdminsError()))
+  }
+}
+
 export const fetchMatches = (pattern) => {
   return dispatch => {
     dispatch(matchesAreLoading(pattern))
@@ -101,15 +111,5 @@ export const deleteAdmin = (id) => {
     return AdminService.delete(id)
       .then(_ => dispatch(deleteAdminSuccess(id)))
       .catch(_ => dispatch(deleteAdminError(id)))
-  }
-}
-
-export const fetchAdmins = () => {
-  return dispatch => {
-    dispatch(adminsAreLoading())
-    return AdminService.get()
-      .then(response => response.data)
-      .then(admins => dispatch(fetchAdminsSuccess(admins)))
-      .catch(() => dispatch(fetchAdminsError()))
   }
 }

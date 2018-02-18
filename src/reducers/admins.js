@@ -1,80 +1,44 @@
 const initialState = {
   items: [],
-  matches: [],
-  itemsAreLoading: false,
-  itemsHaveFailed: false,
-  itemBeingAdded: false,
-  addHasFailed: false,
-  itemBeingDeleted: null,
-  deleteHasFailed: null,
-  matchesAreLoading: null,
-  matchesHaveFailed: null
+  matches: []
 }
 
 const admins = (state = initialState, action) => {
   switch (action.type) {
+    // fetch matches
     case 'MATCHES_ARE_LOADING':
-      return Object.assign({}, state, {
-        matchesAreLoading: action.pattern,
-        matchesHaveFailed: null
-      })
+      return Object.assign({}, state, {})
     case 'FETCH_MATCHES_ERROR':
-      return Object.assign({}, state, {
-        matchesAreLoading: null,
-        matchesHaveFailed: action.pattern
-      })
+      return Object.assign({}, state, {})
     case 'FETCH_MATCHES_SUCCESS':
       return Object.assign({}, state, {
-        matchesAreLoading: null,
-        matchesHaveFailed: null,
         matches: action.matches
       })
+    // fetch all admins
+    case 'ADMINS_ARE_LOADING':
+      return Object.assign({}, state, {})
+    case 'FETCH_ADMINS_ERROR':
+      return Object.assign({}, state, {})
     case 'FETCH_ADMINS_SUCCESS':
       return Object.assign({}, state, {
-        itemsAreLoading: false,
-        itemsHaveFailed: false,
         items: action.admins
       })
-    case 'FETCH_ADMINS_ERROR':
-      return Object.assign({}, state, {
-        itemsAreLoading: false,
-        itemsHaveFailed: true
-      })
-    case 'ADMINS_ARE_LOADING':
-      return Object.assign({}, state, {
-        itemsAreLoading: true,
-        itemsHaveFailed: false
-      })
+    // delete admin
     case 'ADMIN_BEING_DELETED':
-      return Object.assign({}, state, {
-        itemBeingDeleted: action.id,
-        deleteHasFailed: null
-      })
+      return Object.assign({}, state, {})
     case 'DELETE_ADMIN_ERROR':
-      return Object.assign({}, state, {
-        itemBeingDeleted: null,
-        deleteHasFailed: action.id
-      })
+      return Object.assign({}, state, {})
     case 'DELETE_ADMIN_SUCCESS':
       return Object.assign({}, state, {
-        itemBeingDeleted: null,
-        deleteHasFailed: null,
         items: state.items.filter(item => item._id != action.id)
       })
+    // add an admin
     case 'ADMIN_BEING_ADDED':
-      return Object.assign({}, state, {
-        itemBeingAdded: action.admin,
-        addHasFailed: null
-      })
+      return Object.assign({}, state, {})
     case 'ADD_ADMIN_ERROR':
-      return Object.assign({}, state, {
-        itemBeingAdded: null,
-        addHasFailed: action.admin
-      })
+      return Object.assign({}, state, {})
     case 'ADD_ADMIN_SUCCESS':
       return Object.assign({}, state, {
-        itemBeingAdded: null,
-        addHasFailed: null,
         items: [...state.items, action.admin]
       })
     default:

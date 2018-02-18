@@ -1,105 +1,60 @@
 const initialState = {
   items: [],
-  next: null,
-  itemsAreLoading: false,
-  itemsHaveFailed: false,
-  nextIsLoading: false,
-  nextHasFailed: false,
-  itemBeingCreated: false,
-  createHasFailed: false,
-  itemBeingDeleted: null,
-  deleteHasFailed: null,
-  itemBeingUpdated: null,
-  updateHasFailed: null,
+  next: null
 }
 
 const events = (state = initialState, action) => {
   switch (action.type) {
+    // update event
     case 'UPDATE_EVENT_SUCCESS':
       return Object.assign({}, state, {
-        itemBeingUpdated: false,
-        updateHasFailed: false,
         items: state.items.map(item => item._id == action.event._id ? action.event : item)
       })
     case 'UPDATE_EVENT_ERROR':
-      return Object.assign({}, state, {
-        itemBeingUpdated: null,
-        updateHasFailed: action.id
-      })
+      return Object.assign({}, state, {})
     case 'EVENT_BEING_UPDATED':
-      return Object.assign({}, state, {
-        itemBeingUpdated: action.id,
-        updateHasFailed: null
-      })
+      return Object.assign({}, state, {})
+    // create event
     case 'CREATE_EVENT_SUCCESS':
       return Object.assign({}, state, {
-        itemBeingCreated: false,
-        createHasFailed: false,
         items: [...state.items, action.event]
       })
     case 'CREATE_EVENT_ERROR':
-      return Object.assign({}, state, {
-        itemBeingCreated: false,
-        createHasFailed: true
-      })
+      return Object.assign({}, state, {})
     case 'EVENT_BEING_CREATED':
-      return Object.assign({}, state, {
-        itemBeingCreated: true,
-        createHasFailed: false
-      })
+      return Object.assign({}, state, {})
+    // delete event
     case 'DELETE_EVENT_SUCCESS':
       return Object.assign({}, state, {
-        itemBeingDeleted: null,
-        deleteHasFailed: null,
         items: state.items.filter(item => item._id !== action.id)
       })
     case 'DELETE_EVENT_ERROR':
-      return Object.assign({}, state, {
-        itemBeingDeleted: null,
-        deleteHasFailed: action.id
-      })
+      return Object.assign({}, state, {})
     case 'EVENT_BEING_DELETED':
-      return Object.assign({}, state, {
-        itemBeingDeleted: action.id,
-        deleteHasFailed: null
-      })
+      return Object.assign({}, state, {})
+    // fetch events
     case 'FETCH_EVENTS_SUCCESS':
       return Object.assign({}, state, {
-        itemsAreLoading: false,
-        itemsHaveFailed: false,
         items: action.events
       })
     case 'FETCH_EVENTS_ERROR':
-      return Object.assign({}, state, {
-        itemsAreLoading: false,
-        itemsHaveFailed: true
-      })
+      return Object.assign({}, state, {})
     case 'EVENTS_ARE_LOADING':
-      return Object.assign({}, state, {
-        itemsAreLoading: true,
-        itemsHaveFailed: false
-      })
+      return Object.assign({}, state, {})
+    // fetch next event
     case 'FETCH_NEXT_EVENT_SUCCESS':
       return Object.assign({}, state, {
-        nextIsLoading: false,
-        nextHasFailed: false,
         next: action.event._id,
         // push only if not already in
         items: state.items.filter(event => event._id === action.event._id).length
-              ? state.items
-              : [...state.items, action.event]
+          ? state.items
+          : [...state.items, action.event]
       })
     case 'FETCH_NEXT_EVENT_ERROR':
-      return Object.assign({}, state, {
-        nextIsLoading: false,
-        nextHasFailed: true
-      })
+      return Object.assign({}, state, {})
     case 'NEXT_EVENT_IS_LOADING':
-      return Object.assign({}, state, {
-        nextIsLoading: true,
-        nextHasFailed: false
-      })
-    // beers event
+      return Object.assign({}, state, {})
+    // delete beer
     case 'DELETE_BEER_SUCCESS':
       return Object.assign({}, state, {
         items: state.items.map(event => {
@@ -108,6 +63,7 @@ const events = (state = initialState, action) => {
           return event
         })
       })
+    // create beer
     case 'CREATE_BEER_SUCCESS':
       return Object.assign({}, state, {
         items: state.items.map(event => {
@@ -116,6 +72,7 @@ const events = (state = initialState, action) => {
           return event
         })
       })
+    // update beer
     case 'UPDATE_BEER_SUCCESS':
       return Object.assign({}, state, {
         items: state.items.map(event => {
@@ -125,6 +82,16 @@ const events = (state = initialState, action) => {
                 return action.beer
               return beer
             })
+          return event
+        })
+      })
+    // create drinker
+    case 'CREATE_DRINKER_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.drinker.events[0]) {
+            event.drinkers.push(action.drinker)
+          }
           return event
         })
       })

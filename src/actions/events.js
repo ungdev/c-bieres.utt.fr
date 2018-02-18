@@ -94,8 +94,8 @@ export const updateEvent = (event) => {
     dispatch(eventBeingUpdated())
     return EventService.update(event._id, event)
       .then(response => response.data)
-      .then(event => dispatch(updateEventSuccess(event)))
-      .catch(() => dispatch(updateEventError()))
+      .then(_ => dispatch(updateEventSuccess(event)))
+      .catch(_ => dispatch(updateEventError()))
   }
 }
 

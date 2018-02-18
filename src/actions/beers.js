@@ -60,9 +60,8 @@ export const updateBeer = (beer) => {
   return dispatch => {
     dispatch(beerBeingUpdated())
     return BeerService.update(beer._id, beer)
-      .then(response => response.data)
-      .then(beer => dispatch(updateBeerSuccess(beer)))
-      .catch(() => dispatch(updateBeerError()))
+      .then(_ => dispatch(updateBeerSuccess(beer)))
+      .catch(_ => dispatch(updateBeerError()))
   }
 }
 
@@ -72,7 +71,7 @@ export const createBeer = (data) => {
     return BeerService.create(data)
       .then(response => response.data)
       .then(beer => dispatch(createBeerSuccess(beer)))
-      .catch(() => dispatch(createBeerError()))
+      .catch(_ => dispatch(createBeerError()))
   }
 }
 

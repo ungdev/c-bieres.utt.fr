@@ -16,11 +16,7 @@ const AddDrinker = createReactClass({
     this.props.registerById({ id: drinker._id, eventId: this.props.eventId })
   },
   addDrinkerFromEtuutt(match) {
-    match.eventId = this.props.eventId;
-    this.props.createDrinker(match)
-  },
-  addDrinkerFromEtuutt(match) {
-    match.eventId = this.props.eventId;
+    match.eventId = this.props.eventId
     this.props.createDrinker(match)
   },
   toggleCreateForm() {
