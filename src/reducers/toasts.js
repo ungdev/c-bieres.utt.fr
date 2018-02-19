@@ -11,6 +11,9 @@ const newToast = (message, type) => {
 const newErrorToast = (message) => {
   return newToast(message, 'danger')
 }
+const newSuccessToast = (message) => {
+  return newToast(message, 'success')
+}
 
 const toasts = (state = initialState, action) => {
   switch (action.type) {
@@ -28,6 +31,10 @@ const toasts = (state = initialState, action) => {
     case "UNREGISTER_DRINKER_BY_ID_ERROR":
     case "UNREGISTER_DRINKER_ERROR":
       return [...state, newErrorToast("Erreur lors de la desinscription.")]
+    case "REGISTER_DRINKER_SUCCESS":
+      return [...state, newSuccessToast("Inscription réussite.")]
+    case "UNREGISTER_DRINKER_SUCCESS":
+      return [...state, newSuccessToast("Désinscription réussite.")]
     // events
     case "UPDATE_EVENT_ERROR":
       return [...state, newErrorToast("Erreur lors de la mise à jour de l'évènement.")]
