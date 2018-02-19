@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { toHumanDate } from '../helpers/dateHelper'
 
-const OldEventsRow = ({ event }) => (
+const OldEventsTableRow = ({ event }) => (
   <tr>
     <th scope="row">
       {event.name}
@@ -17,11 +17,11 @@ const OldEventsRow = ({ event }) => (
   </tr>
 )
 
-OldEventsRow.propTypes = {
+OldEventsTableRow.propTypes = {
   event: PropTypes.shape({
     _id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired
 }
 
-export default OldEventsRow
+export default OldEventsTableRow

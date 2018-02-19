@@ -1,8 +1,9 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
 import SelectList from './SelectList'
+import Loader from './Loader'
 
-const AddAdmin = ({ matches, showForm, toggle, fetchMatches, addAdmin }) => {
+const AddAdmin = ({ matches, showForm, toggle, fetchMatches, addAdmin, fetchingMatches }) => {
   if (!showForm) {
     return (
       <div>
@@ -32,7 +33,11 @@ const AddAdmin = ({ matches, showForm, toggle, fetchMatches, addAdmin }) => {
             className="form-control"
             id="pattern" />
         </div>
-        <SelectList items={matches} onClick={addAdmin} />
+        {
+          fetchingMatches
+            ? <Loader />
+            : <SelectList items={matches} onClick={addAdmin} />
+        }
       </form>
     </div>
   )

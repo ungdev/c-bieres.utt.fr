@@ -5,7 +5,9 @@ import Admins from '../components/Admins'
 const mapStateToProps = state => {
   return {
     admins: state.admins.items,
-    matches: state.admins.matches
+    matches: state.admins.matches,
+    fetchingAdmins: state.admins.fetchingAdmins,
+    fetchingMatches: state.admins.fetchingMatches,
   }
 }
 

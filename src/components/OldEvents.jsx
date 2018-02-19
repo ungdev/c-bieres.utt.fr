@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import OldEventsRow from './OldEventsRow'
+import createReactClass from 'create-react-class'
 
-class OldEvents extends React.Component {
+import OldEventsTable from './OldEventsTable'
+import Loader from './Loader'
 
+const OldEvents = createReactClass({
   componentDidMount() {
     this.props.fetchEvents()
-  }
-
+  },
   render() {
     return (
       <div>
@@ -25,15 +26,15 @@ class OldEvents extends React.Component {
           </div>
         </div>
         <div className="container">
-          <table className="table table-hover table-striped old-events__table">
-            <tbody>
-              {this.props.events.map((event, i) => <OldEventsRow key={i} event={event} />)}
-            </tbody>
-          </table>
+          {
+            this.props.fetchingEvents
+              ? <Loader />
+              : <OldEventsTable events={this.props.events} />
+          }
         </div>
       </div>
     )
   }
-}
+})
 
 export default OldEvents

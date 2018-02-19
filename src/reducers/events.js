@@ -1,6 +1,7 @@
 const initialState = {
   items: [],
-  next: null
+  next: null,
+  fetchingEvents: false
 }
 
 const events = (state = initialState, action) => {
@@ -35,12 +36,17 @@ const events = (state = initialState, action) => {
     // fetch events
     case 'FETCH_EVENTS_SUCCESS':
       return Object.assign({}, state, {
-        items: action.events
+        items: action.events,
+        fetchingEvents: false
       })
     case 'FETCH_EVENTS_ERROR':
-      return Object.assign({}, state, {})
+      return Object.assign({}, state, {
+        fetchingEvents: false
+      })
     case 'EVENTS_ARE_LOADING':
-      return Object.assign({}, state, {})
+      return Object.assign({}, state, {
+        fetchingEvents: true
+      })
     // fetch next event
     case 'FETCH_NEXT_EVENT_SUCCESS':
       return Object.assign({}, state, {

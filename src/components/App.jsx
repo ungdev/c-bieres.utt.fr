@@ -7,8 +7,9 @@ import OldEventsContainer from '../containers/OldEventsContainer'
 import OldEventContainer  from '../containers/OldEventContainer'
 import ToastsContainer    from '../containers/ToastsContainer';
 
-import '../styles/css/font-awesome.min.css';
-import '../styles/css/index.css';
+import '../styles/css/font-awesome.min.css'
+import '../styles/css/index.css'
+import '../styles/css/loader.css'
 
 const App = () => (
   <div>

@@ -7,7 +7,8 @@ const mapStateToProps = state => {
     // sort by date
     events: state.events.items
       .sort((a, b) => new Date(b.when) - new Date(a.when)),
-    showCreateForm: state.ui.showEventCreateForm
+    showCreateForm: state.ui.showEventCreateForm,
+    fetchingEvents: state.events.fetchingEvents
   }
 }
 

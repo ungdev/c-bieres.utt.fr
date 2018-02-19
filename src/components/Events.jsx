@@ -5,6 +5,7 @@ import createReactClass from 'create-react-class'
 import CreateEvent from './CreateEvent'
 import EventsTable from './EventsTable'
 import Alert from './Alert'
+import Loader from './Loader'
 
 const Events = createReactClass({
   componentDidMount() {
@@ -25,7 +26,11 @@ const Events = createReactClass({
             </div>
           </div>
         </div>
-        <EventsTable events={this.props.events} deleteEvent={this.props.deleteEvent} />
+        {
+          this.props.fetchingEvents
+            ? <Loader />
+            : <EventsTable events={this.props.events} deleteEvent={this.props.deleteEvent} />
+        }
       </div>
     )
   }

@@ -9,6 +9,7 @@ const mapStateToProps = state => {
     events: state.events.items
       .filter(event => new Date(event.when) < new Date())
       .sort((a, b) => new Date(b.when) - new Date(a.when)),
+    fetchingEvents: state.events.fetchingEvents
   }
 }
 

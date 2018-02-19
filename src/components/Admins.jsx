@@ -2,7 +2,8 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 
 import AddAdmin from './AddAdmin'
-import Alert    from './Alert'
+import AdminsTable from './AdminsTable'
+import Loader from './Loader'
 
 const Admins = createReactClass({
   getInitialState() {
@@ -29,44 +30,16 @@ const Admins = createReactClass({
                 toggle={this.toggleShowAddAdmin}
                 addAdmin={this.props.addAdmin}
                 fetchMatches={this.props.fetchMatches}
-                matches={this.props.matches} />
+                matches={this.props.matches}
+                fetchingMatches={this.props.fetchingMatches} />
             </div>
           </div>
         </div>
-        <div className="table-responsive">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Numéro étudiant</th>
-                <th>Nom</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                this.props.admins.map(admin => {
-                  return  <tr key={admin._id}>
-                            <td>{admin.studentId}</td>
-                            <td>{`${admin.firstName} ${admin.lastName}`}</td>
-                            <td>
-                              <div className="btn-group" role="group" aria-label="actions">
-                                <button type="button" onClick={_ => this.props.deleteAdmin(admin._id)} className="btn btn-danger">
-                                  Supprimer
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                })
-              }
-            </tbody>
-          </table>
-          {
-            (this.props.admins.length === 0) &&
-            <Alert type="info" message={
-                <div>Aucun administrateur. Tu peux en ajouter un en cliquant sur <b>ajouter un administrateur</b></div>
-            } />
-          }
-        </div>
+        {
+          this.props.fetchingAdmins
+            ? <Loader />
+            : <AdminsTable admins={this.props.admins} deleteAdmin={this.props.deleteAdmin} />
+        }
       </div>
     )
   }
