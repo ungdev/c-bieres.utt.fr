@@ -6,17 +6,17 @@ export const drinkerBeingRegisteredById = () => {
     type: 'DRINKER_BEING_REGISTERED_BY_ID'
   }
 }
-export const registerDrinkerByIdError = (drinkerId, eventId) => {
+export const registerDrinkerByIdError = (drinker, eventId) => {
   return {
     type: 'REGISTER_DRINKER_BY_ID_ERROR',
-    drinkerId,
+    drinker,
     eventId
   }
 }
-export const registerDrinkerByIdSuccess = (drinkerId, eventId) => {
+export const registerDrinkerByIdSuccess = (drinker, eventId) => {
   return {
     type: 'REGISTER_DRINKER_BY_ID_SUCCESS',
-    drinkerId,
+    drinker,
     eventId
   }
 }
@@ -81,6 +81,12 @@ export const unregisterDrinkerSuccess = (drinkerId, eventId) => {
   }
 }
 
+export const toggleRegistrationForm = () => {
+  return {
+    type: 'TOGGLE_REGISTRATION_FORM'
+  }
+}
+
 export const checkRegistration = () => {
   return dispatch => {
     const registration = registrationHelper.get()
@@ -90,13 +96,13 @@ export const checkRegistration = () => {
   }
 }
 
-export const registerById = (data) => {
+export const registerById = (drinker, eventId) => {
   return dispatch => {
     dispatch(drinkerBeingRegisteredById())
-    return EventService.register(data)
+    return EventService.register({id: drinker._id, eventId})
       .then(response => response.data)
-      .then(_ => dispatch(registerDrinkerByIdSuccess(data.id, data.eventId)))
-      .catch(_ => dispatch(registerDrinkerByIdError()))
+      .then(_ => dispatch(registerDrinkerByIdSuccess(drinker, eventId)))
+      .catch(_ => dispatch(registerDrinkerByIdError(drinker, eventId)))
   }
 }
 
@@ -106,7 +112,7 @@ export const unregisterById = (data) => {
     return EventService.unregister(data)
       .then(response => response.data)
       .then(_ => dispatch(unregisterDrinkerByIdSuccess(data.id, data.eventId)))
-      .catch(_ => dispatch(unregisterDrinkerByIdError()))
+      .catch(_ => dispatch(unregisterDrinkerByIdError(data.id, data.eventId)))
   }
 }
 

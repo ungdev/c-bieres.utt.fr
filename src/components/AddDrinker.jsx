@@ -7,20 +7,14 @@ import SelectList from './SelectList'
 
 const AddDrinker = createReactClass({
   getInitialState() {
-    return {searchPattern: "", showForm: false}
-  },
-  toggleForm() {
-    this.setState({ showForm: !this.state.showForm })
+    return {searchPattern: ""}
   },
   addDrinker(drinker) {
-    this.props.registerById({ id: drinker._id, eventId: this.props.eventId })
+    this.props.registerById(drinker, this.props.event._id)
   },
   addDrinkerFromEtuutt(match) {
-    match.eventId = this.props.eventId
+    match.eventId = this.props.this.props.event._id
     this.props.createDrinker(match)
-  },
-  toggleCreateForm() {
-    this.setState({ showCreateForm: !this.state.showCreateForm });
   },
   submitCreateForm(data) {
     this.props.createDrinker(data)
@@ -31,16 +25,16 @@ const AddDrinker = createReactClass({
       // refresh the matches
       this.props.fetchDrinkers({
         multifield: e.target.value,
-        event: this.props.eventId
+        event: this.props.event._id
       });
     }
   },
   render() {
-    if (!this.state.showForm) {
+    if (!this.props.showRegistrationForm) {
       return (
         <div>
           <button className="btn btn-primary btn-lg btn-block"
-              onClick={this.toggleForm}>
+              onClick={this.props.toggleRegistrationForm}>
             Ajouter un participant
           </button>
         </div>
@@ -49,7 +43,7 @@ const AddDrinker = createReactClass({
 
     return (
       <div>
-        <button className="btn btn-danger btn-lg btn-block" onClick={this.toggleForm}>
+        <button className="btn btn-danger btn-lg btn-block" onClick={this.props.toggleRegistrationForm}>
           Annuler
         </button>
         <form>
@@ -78,11 +72,11 @@ const AddDrinker = createReactClass({
         }
         <div className="container">
           {
-            this.state.showCreateForm
+            this.props.showCreateForm
             ?
-              <CreateDrinker submit={this.submitCreateForm} close={this.toggleCreateForm} />
+              <CreateDrinker submit={this.submitCreateForm} close={this.props.toggleCreateForm} />
             :
-              <button type="button" onClick={this.toggleCreateForm} className="btn btn-link">
+              <button type="button" onClick={this.props.toggleCreateForm} className="btn btn-link">
                 Pas trouvé ? créer et ajouter à l'évènement
               </button>
           }

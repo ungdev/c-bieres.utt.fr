@@ -41,9 +41,7 @@ const Event = createReactClass({
           <div className="row justify-content-md-center">
             <div className="col col-md-4">
               {(!isPast(this.props.event.when)) &&
-                <AddDrinker eventId={this.props.event._id} serverDrinkers={this.props.serverDrinkers}
-                  etuuttDrinkers={this.props.etuuttDrinkers} fetchDrinkers={this.props.fetchDrinkers}
-                  createDrinker={this.props.createDrinker} registerById={this.props.registerById} />}
+                <AddDrinker {...this.props}/>}
             </div>
           </div>
         </div>

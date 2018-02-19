@@ -59,7 +59,9 @@ const events = (state = initialState, action) => {
       return Object.assign({}, state, {
         items: state.items.map(event => {
           if (event._id == action.eventId)
-            event.beers = event.beers.filter(beer => beer._id != action.beerId)
+            return Object.assign({}, event, {
+              beers: event.beers.filter(beer => beer._id != action.beerId)
+            })
           return event
         })
       })
@@ -68,7 +70,9 @@ const events = (state = initialState, action) => {
       return Object.assign({}, state, {
         items: state.items.map(event => {
           if (event._id == action.beer.event_id)
-            event.beers = [...event.beers, action.beer]
+            return Object.assign({}, event, {
+              beers: [...event.beers, action.beer]
+            })
           return event
         })
       })
@@ -89,9 +93,31 @@ const events = (state = initialState, action) => {
     case 'CREATE_DRINKER_SUCCESS':
       return Object.assign({}, state, {
         items: state.items.map(event => {
-          if (event._id == action.drinker.events[0]) {
-            event.drinkers.push(action.drinker)
-          }
+          if (event._id == action.drinker.events[0])
+            return Object.assign({}, event, {
+              drinkers: [...event.drinkers, action.drinker]
+            })
+          return event
+        })
+      })
+    // registration / unregistration
+    case 'UNREGISTER_DRINKER_BY_ID_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.eventId)
+            return Object.assign({}, event, {
+              drinkers: event.drinkers.filter(drinker => drinker._id != action.drinkerId)
+            })
+          return event
+        })
+      })
+    case 'REGISTER_DRINKER_BY_ID_SUCCESS':
+      return Object.assign({}, state, {
+        items: state.items.map(event => {
+          if (event._id == action.eventId)
+            return Object.assign({}, event, {
+              drinkers: [...event.drinkers, action.drinker]
+            })
           return event
         })
       })

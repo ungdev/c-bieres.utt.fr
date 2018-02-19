@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { fetchEvents, unregisterById, fetchDrinkers, createDrinker, registerById } from '../actions'
+import { fetchEvents, unregisterById, fetchDrinkers, createDrinker, registerById, toggleRegistrationForm,
+  toggleDrinkerCreateForm } from '../actions'
 import Event from '../components/Event'
 
 const mapStateToProps = (state, ownProps) => {
@@ -7,6 +8,8 @@ const mapStateToProps = (state, ownProps) => {
     event: state.events.items.filter(item => item._id == ownProps.match.params.id)[0],
     etuuttDrinkers: state.drinkers.items.fromEtuutt,
     serverDrinkers: state.drinkers.items.fromServer,
+    showRegistrationForm: state.ui.showRegistrationForm,
+    showCreateForm: state.ui.showDrinkerCreateForm,
   }
 }
 
@@ -16,7 +19,9 @@ const mapDispatchToProps = dispatch => {
     unregisterById: (data) => dispatch(unregisterById(data)),
     fetchDrinkers: (fiters) => dispatch(fetchDrinkers(fiters)),
     createDrinker: (data) => dispatch(createDrinker(data)),
-    registerById: (drinkerId, eventId) => dispatch(registerById(drinkerId, eventId))
+    registerById: (drinker, eventId) => dispatch(registerById(drinker, eventId)),
+    toggleRegistrationForm: () => dispatch(toggleRegistrationForm()),
+    toggleCreateForm: () => dispatch(toggleDrinkerCreateForm()),
   }
 }
 

@@ -36,6 +36,11 @@ export const createBeerSuccess = (beer) => {
     beer
   }
 }
+export const toggleCreateBeerForm = () => {
+  return {
+    type: 'TOGGLE_CREATE_BEER_FORM'
+  }
+}
 
 export const beerBeingUpdated = (id) => {
   return {

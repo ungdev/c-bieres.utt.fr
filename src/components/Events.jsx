@@ -7,14 +7,8 @@ import EventsTable from './EventsTable'
 import Alert from './Alert'
 
 const Events = createReactClass({
-  getInitialState() {
-    return {showCreateForm: false}
-  },
   componentDidMount() {
     this.props.fetchEvents()
-  },
-  toggleCreateForm() {
-    this.setState({ showCreateForm: !this.state.showCreateForm })
   },
   render() {
     return (
@@ -26,12 +20,12 @@ const Events = createReactClass({
             <div className="col col-md-4">
               <CreateEvent
                 createEvent={this.props.createEvent}
-                showForm={this.state.showCreateForm}
-                toggle={this.toggleCreateForm} />
+                showForm={this.props.showCreateForm}
+                toggle={this.props.toggleCreateForm} />
             </div>
           </div>
         </div>
-        <EventsTable events={this.props.events} />
+        <EventsTable events={this.props.events} deleteEvent={this.props.deleteEvent} />
       </div>
     )
   }

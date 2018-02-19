@@ -6,6 +6,7 @@ import drinkers from './drinkers'
 import toasts from './toasts'
 import auth from './auth'
 import registrations from './registrations'
+import ui from './ui'
 
 const reducers = combineReducers({
   routing: routerReducer,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
   drinkers,
   toasts,
   auth,
-  registrations
+  registrations,
+  ui
 })
 
 export default reducers

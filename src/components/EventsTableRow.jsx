@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { toHumanDate } from '../helpers/dateHelper'
+import { toHumanDate, isPast } from '../helpers/dateHelper'
 
-const EventsTableRow = ({ event, eventDate }) => (
+const EventsTableRow = ({ event, eventDate, deleteEvent }) => (
   <tr>
     <td>{event.name}</td>
     <td>{toHumanDate(event.when)}</td>
@@ -18,6 +18,13 @@ const EventsTableRow = ({ event, eventDate }) => (
               to={`/dashboard/event/${event._id}/update`}>
           Informations
         </Link>
+        {!isPast(event.when) &&
+          <button
+            type="button"
+            onClick={_ => deleteEvent(event._id)}
+            className="btn btn-danger">
+            Supprimer
+          </button>}
       </div>
     </td>
   </tr>

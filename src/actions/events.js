@@ -69,6 +69,11 @@ export const createEventSuccess = (event) => {
     event
   }
 }
+export const toggleEventCreateForm = () => {
+  return {
+    type: 'TOGGLE_EVENT_CREATE_FORM'
+  }
+}
 
 export const eventBeingUpdated = (id) => {
   return {

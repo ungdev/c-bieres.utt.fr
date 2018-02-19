@@ -51,6 +51,11 @@ export const createDrinkerSuccess = (drinker) => {
     drinker
   }
 }
+export const toggleDrinkerCreateForm = () => {
+  return {
+    type: 'TOGGLE_DRINKER_CREATE_FORM'
+  }
+}
 
 export const createDrinker = (data) => {
   return dispatch => {

@@ -2,15 +2,18 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 
 const CreateBeer = createReactClass({
+  getInitialState() {
+    return {name: '', type: '', description: '', degree: 0, event_id: this.props.eventId}
+  },
   handleChange(e) {
-    this.setState()
+    this.setState({ [e.target.name]: e.target.value })
   },
   handleFileUpload(e) {
     this.setState({ file: e.target.files[0] })
   },
   submitCreateForm() {
     // Create a new FormData object and fill it with the state values
-    let form = new FormData();
+    let form = new FormData()
     Object.keys(this.state).map(attr => {
       form.append(attr, this.state[attr])
     })
@@ -26,15 +29,15 @@ const CreateBeer = createReactClass({
               <div className="form-row">
                 <div className="form-group col-md-4">
                   <label htmlFor="name">Nom</label>
-                  <input type="text" name="name" onChange={this.handleChange} className="form-control" id="name" />
+                  <input type="text" value={this.state.name} name="name" onChange={this.handleChange} className="form-control" id="name" />
                 </div>
                 <div className="form-group col-md-4">
                   <label htmlFor="type">Type</label>
-                  <input type="text" name="type" onChange={this.handleChange} className="form-control" id="type" />
+                  <input type="text" value={this.state.type} name="type" onChange={this.handleChange} className="form-control" id="type" />
                 </div>
                 <div className="form-group col-md-4">
                   <label htmlFor="degree">Degrés</label>
-                  <input type="number" name="degree" step="0.1" onChange={this.handleChange} className="form-control"
+                  <input type="number" value={this.state.degree} name="degree" step="0.1" onChange={this.handleChange} className="form-control"
                     id="degree" />
                 </div>
               </div>
@@ -42,6 +45,7 @@ const CreateBeer = createReactClass({
                 <label htmlFor="description">Description</label>
                 <textarea name="description" onChange={this.handleChange} className="form-control" id="description"
                   rows="3">
+                  {this.state.description}
                 </textarea>
               </div>
               <div className="form-group">

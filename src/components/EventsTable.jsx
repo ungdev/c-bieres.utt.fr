@@ -3,7 +3,7 @@ import React from 'react'
 import EventsTableRow from './EventsTableRow'
 import Alert from './Alert'
 
-const EventsTable = ({ events }) => {
+const EventsTable = ({ events, deleteEvent }) => {
   if (events.length) {
     return (
       <div className="table-responsive">
@@ -16,7 +16,7 @@ const EventsTable = ({ events }) => {
             </tr>
           </thead>
           <tbody>
-            {events.map((event, i) => <EventsTableRow key={i} event={event} />)}
+            {events.map((event, i) => <EventsTableRow key={i} event={event} deleteEvent={deleteEvent} />)}
           </tbody>
         </table>
       </div>

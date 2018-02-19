@@ -14,11 +14,11 @@ const CreateDrinker = createReactClass({
         <form>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <input type="text" value={this.state.firstName} name="firstname" onChange={this.handleChange}
+              <input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange}
                 className="form-control" id="firstName" placeholder="Prénom" />
             </div>
             <div className="form-group col-md-6">
-              <input type="text" value={this.state.lastName} name="lastname" onChange={this.handleChange}
+              <input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange}
                 className="form-control" id="lastName" placeholder="Nom" />
             </div>
           </div>
