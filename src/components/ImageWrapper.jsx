@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 const ImageWrapper = ({ path }) => (
   <div className="images-wrapper" style={{
-      backgroundImage: `url(${path ? (process.env.SERVER_URI+path) : 'images/beer.png'})`
-    }}>
+      backgroundImage: `url(${process.env.REACT_APP_SERVER_URI + (path || 'images/beer.png')})`
+    }} >
   </div>
 )
 

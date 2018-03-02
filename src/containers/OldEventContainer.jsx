@@ -10,9 +10,15 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchEvents: () => dispatch(fetchEvents())
+  }
+}
+
 const OldEventContainer = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(OldEvent)
 
 export default OldEventContainer
