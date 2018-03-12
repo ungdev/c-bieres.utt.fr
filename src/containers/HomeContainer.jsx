@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => {
     nextEvent: state.events.items.filter(event => state.events.next === event._id)[0],
     isAdmin: state.auth.payload.isAdmin,
     jwt: state.auth.jwt,
-    registration: state.registrations.registration
+    registration: state.registrations.registration,
+    registrationFailed: state.registrations.registrationFailed
   }
 }
 

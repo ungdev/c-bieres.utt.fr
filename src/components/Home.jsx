@@ -52,6 +52,9 @@ const Home = createReactClass({
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange)
   },
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.registrationFailed) this.props.login()
+  },
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth })
   },

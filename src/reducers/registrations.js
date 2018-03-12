@@ -28,7 +28,9 @@ const registrations = (state = initialState, action) => {
     case "DRINKER_BEING_REGISTERED":
       return Object.assign({}, state, {})
     case "REGISTER_DRINKER_ERROR":
-      return Object.assign({}, state, {})
+      return Object.assign({}, state, {
+        registrationFailed: true
+      })
     case "REGISTER_DRINKER_SUCCESS":
       return Object.assign({}, state, {
         registration: action.eventId
