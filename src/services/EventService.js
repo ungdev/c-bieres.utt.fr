@@ -46,6 +46,22 @@ class EventService extends BaseService {
     })
   }
 
+  /**
+   * Send a mail to all drinkers with the date of this event
+   *
+   * @param {String} id : eventId
+   * @return {Promise}
+   */
+  sendEventMail(eventId) {
+    return this.makeRequest({
+      method: 'post',
+      url: this._baseUrl + `/{eventId}/mail`,
+      data: {
+        eventId
+      }
+    })
+  }
+
 }
 
 export default new EventService()

@@ -26,7 +26,7 @@ const AddDrinker = createReactClass({
       this.props.fetchDrinkers({
         multifield: e.target.value,
         event: this.props.event._id
-      });
+      })
     }
   },
   render() {

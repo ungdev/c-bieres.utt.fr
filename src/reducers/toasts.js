@@ -64,6 +64,10 @@ const toasts = (state = initialState, action) => {
       return [...state, newErrorToast("Erreur lors de la suppression.")]
     case "ADD_ADMIN_ERROR":
       return [...state, newErrorToast("Erreur lors de l'ajout.")]
+    case "EVENT_MAIL_ERROR":
+      return [...state, newErrorToast("Erreur lors de l'envoie du mail.")]
+    case "EVENT_MAIL_SUCCESS":
+      return [...state, newSuccessToast("Mail envoyé !")]
     default:
       return state
   }

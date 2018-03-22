@@ -1,6 +1,7 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
 import AddDrinker from './AddDrinker'
+import SendMail from './SendMail'
 import { toHumanDate, isPast } from '../helpers/dateHelper'
 
 const Event = createReactClass({
@@ -38,12 +39,22 @@ const Event = createReactClass({
             à <b>{this.props.event.name}</b>, le <b>{toHumanDate(this.props.event.when)}</b>
           </div>
           <hr className="my-4" />
-          <div className="row justify-content-md-center">
-            <div className="col col-md-4">
-              {(!isPast(this.props.event.when)) &&
-                <AddDrinker {...this.props}/>}
-            </div>
-          </div>
+          {
+            !isPast(this.props.event.when) &&
+              <div>
+                <div className="row justify-content-md-center">
+                  <div className="col col-md-4">
+                    <SendMail {...this.props}/>
+                  </div>
+                </div>
+                <br />
+                <div className="row justify-content-md-center">
+                  <div className="col col-md-4">
+                    <AddDrinker {...this.props}/>
+                  </div>
+                </div>
+              </div>
+          }
         </div>
         <div className="alert alert-primary" role="alert">
           <b>{this.props.event.drinkers.length}</b> participants

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchEvents, unregisterById, fetchDrinkers, createDrinker, registerById, toggleRegistrationForm,
-  toggleDrinkerCreateForm } from '../actions'
+  toggleDrinkerCreateForm, sendEventMail } from '../actions'
 import Event from '../components/Event'
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchEvents: () => dispatch(fetchEvents()),
     unregisterById: (data) => dispatch(unregisterById(data)),
@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => {
     registerById: (drinker, eventId) => dispatch(registerById(drinker, eventId)),
     toggleRegistrationForm: () => dispatch(toggleRegistrationForm()),
     toggleCreateForm: () => dispatch(toggleDrinkerCreateForm()),
+    sendEventMail: () => dispatch(sendEventMail(ownProps.match.params.id))
   }
 }
 
