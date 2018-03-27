@@ -1,42 +1,61 @@
 @import "./_colors.scss";
 
-.footer {
-    position: relative;
-    background: $dark;
-    padding: 1em;
+$social-size: 1.5em;
+$link-size: 1.2em;
+$icon-width: 20%;
+$link-width: 30%;
+$footer-height: 100px;
+
+footer {
+  background-color: #eee;
+  width: 100%;
+  display: inline-block;
+  height: $footer-height;
+  .social {
+    border-top: 5px solid #222;
+    margin-top: 10px;
     width: 100%;
-    display: inline-block;
-    text-align: center;
+    a {
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+      float: left;
+      line-height: $footer-height;
+      text-decoration: none;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      background-color: #222;
+    }
+  }
 }
 
-.footer__list__item {
-    list-style: none;
-    padding-right: 1em;
-    display: inline;
-    text-align: left;
-    margin-right: 0.5em;
+.admin:hover {background-color: $green;}
+.admin {color: $green !important;}
+
+.facebook:hover {background-color: $facebook;}
+.facebook {color: $facebook !important;}
+
+.maillist:hover {background-color: $green;}
+.maillist {color: $green !important;}
+
+.support:hover {background-color: $dk-blue;}
+.support {color: $dk-blue !important;}
+
+.support, .facebook {
+  font-size: $social-size;
+  width: $icon-width;
 }
 
-.footer__list__item--right {
-    position: absolute;
-    right: 20px;
-    padding-top: 12px;
+.maillist, .admin {
+  font-size: $link-size;
+  width: $link-width;
+  font-weight: 0.8em;
 }
 
-.footer__list__item__link {
-    color: rgba($white, 0.4);
-    text-decoration: none;
-    font-size: 2em;
+.maillist, .admin, .support, .facebook {
+  transition: all .2s;
 }
-
-.footer__list__item--right__button {
-    color: rgba($white, 0.4);
-    text-decoration: none;
-}
-
-.footer__list__item__link:focus,
-.footer__list__item__link:hover,
-.footer__list__item--right__button:focus,
-.footer__list__item--right__button:hover {
-    color: $white;
+.maillist:hover, .admin:hover, .support:hover, .facebook:hover {
+  color: white !important;
 }

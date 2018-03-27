@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => {
     register: (nextEventId) => dispatch(register(nextEventId)),
     unregister: (nextEventId) => dispatch(unregister(nextEventId)),
     goDashboard: () => dispatch(push('/dashboard/event')),
+    goMailListSettings: () => dispatch(push('/maillist')),
     checkExistingJWT: () => dispatch(checkExistingJWT()),
     checkRegistration: () => dispatch(checkRegistration()),
   }

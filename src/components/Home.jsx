@@ -68,11 +68,14 @@ const Home = createReactClass({
     }
   },
   onDashboardLinkClick() {
-    if (this.props.isAdmin) {
-      this.props.goDashboard()
-    } else {
-      this.props.login()
-    }
+    this.props.isAdmin
+      ? this.props.goDashboard()
+      : this.props.login()
+  },
+  onMailListClick() {
+    this.props.jwt
+      ? this.props.goMailListSettings()
+      : this.props.login()
   },
   render() {
     const diplayColumn = this.state.width <= 900;
@@ -91,7 +94,9 @@ const Home = createReactClass({
           <BeerList beers={this.props.nextEvent.beers} diplayColumn={diplayColumn} />
         }
         <ShowOldEvents />
-        <Footer onAdminClick={this.onDashboardLinkClick} />
+        <Footer
+          onAdminClick={this.onDashboardLinkClick}
+          onMailListClick={this.onMailListClick} />
       </div>
     )
   }

@@ -32,3 +32,19 @@ body {
 @font-face {
     font-family: "Open Sans Condensed";
     src: url("../fonts/OpenSans-CondLight.ttf") format("truetype"); }
+
+.btn-primary, .nav-link.sidebar__tab__link.active, .btn-outline-primary:hover {
+  background-color: $dk-blue;
+}
+.nav-link.sidebar__tab__link, .btn-outline-primary, .btn-primary:hover {
+  color: $dk-blue;
+}
+.btn-outline-primary, .btn-primary:hover {
+  border-color: $dk-blue;
+}
+.btn-primary:hover {
+  background-color: white;
+}
+button:hover {
+  cursor: pointer;
+}

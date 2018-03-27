@@ -13,7 +13,7 @@ const ShowOldEvents = () => (
         Tu peux trouver les bières que tu as rencontré aux précédents club bières en
         consultant les anciens évènements.
       </p>
-      <Link to="/olds" className="btn btn-primary">Voir les anciens évènements</Link>
+      <Link to="/olds" className="btn btn-primary btn-lg">Voir les anciens évènements</Link>
     </div>
   </div>
 )

@@ -1,6 +1,7 @@
 const initialState = {
   alreadyRegistered: false,
-  registration: null
+  registration: null,
+  registrationFailed: false
 }
 
 const registrations = (state = initialState, action) => {
