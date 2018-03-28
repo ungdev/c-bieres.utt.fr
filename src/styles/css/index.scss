@@ -9,6 +9,7 @@
 @import "./footer.scss";
 @import "./old-events.scss";
 @import "./banner.scss";
+@import "./checkbox.scss";
 
 *, *::after, *::before {
     box-sizing: inherit;
@@ -47,4 +48,7 @@ body {
 }
 button:hover {
   cursor: pointer;
+}
+.btn {
+  border-radius: 0;
 }

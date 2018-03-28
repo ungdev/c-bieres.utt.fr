@@ -4,11 +4,6 @@ import { goHome } from '../actions'
 import authHelper from '../helpers/localStorage/authHelper'
 import Dashboard from '../components/Dashboard'
 
-const mapStateToProps = state => {
-  return {
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => {
@@ -18,9 +13,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const DashboardContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard)
+const DashboardContainer = connect(null, mapDispatchToProps)(Dashboard)
 
 export default DashboardContainer

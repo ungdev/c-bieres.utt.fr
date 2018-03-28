@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FooterLink from './FooterLink'
-import Button from './Button'
 
 const Footer = ({ onAdminClick, onMailListClick }) => (
   <footer>
@@ -12,7 +10,7 @@ const Footer = ({ onAdminClick, onMailListClick }) => (
       <a href="https://www.facebook.com/groups/806374509420087/?fref=ts" class="facebook">
         <i className="fa fa-facebook"></i>
       </a>
-      <a href="mailto:club-bieres@utt.fr" class="maillist">Mail List</a>
+      <a onClick={onMailListClick} class="maillist">Mail List</a>
       <a onClick={onAdminClick} class="admin">Admin</a>
     </div>
   </footer>

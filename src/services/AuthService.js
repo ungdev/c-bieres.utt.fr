@@ -1,26 +1,41 @@
-import BaseService from './BaseService';
+import BaseService from './BaseService'
 
 class AuthService extends BaseService {
 
-    constructor() {
-        super('oauth/etuutt');
-    }
+  constructor() {
+    super('oauth')
+  }
 
-    getRedirectLink() {
-        return this.makeRequest({
-            method: "get",
-            url: this._baseUrl + "/link"
-        });
-    }
+  getRedirectLink() {
+    return this.makeRequest({
+      method: "get",
+      url: this._baseUrl + "/etuutt/link"
+    })
+  }
 
-    sendAuthorizationCode(authorization_code) {
-        return this.makeRequest({
-            method: "post",
-            url: this._baseUrl + "/callback",
-            data: {authorization_code}
-        });
-    }
+  sendAuthorizationCode(authorization_code) {
+    return this.makeRequest({
+      method: "post",
+      url: this._baseUrl + "/etuutt/callback",
+      data: {authorization_code}
+    })
+  }
+
+  getAccount() {
+    return this.makeRequest({
+      method: "get",
+      url: this._baseUrl + "/account"
+    })
+  }
+
+  updateAccount(account) {
+    return this.makeRequest({
+      method: "put",
+      url: this._baseUrl + "/account",
+      data: {account}
+    })
+  }
 
 }
 
-export default new AuthService();
+export default new AuthService()

@@ -1,7 +1,39 @@
 import AuthService from '../services/AuthService'
-import redirectHelper from '../helpers/localStorage/redirectHelper'
 import authHelper from '../helpers/localStorage/authHelper'
 import jwtDecode from 'jwt-decode'
+
+export const accountBeingFetched = () => {
+  return {
+    type: "ACCOUNT_BEING_FETCHED"
+  }
+}
+export const fetchAccountError = () => {
+  return {
+    type: "FETCH_ACCOUNT_ERROR"
+  }
+}
+export const fetchAccountSuccess = (account) => {
+  return {
+    type: "FETCH_ACCOUNT_SUCCESS",
+    account
+  }
+}
+
+export const accountBeingUpdated = () => {
+  return {
+    type: "ACCOUNT_BEING_UPDATED"
+  }
+}
+export const updateAccountError = () => {
+  return {
+    type: "UPDATE_ACCOUNT_ERROR"
+  }
+}
+export const updateAccountSuccess = () => {
+  return {
+    type: "UPDATE_ACCOUNT_SUCCESS"
+  }
+}
 
 export const redirectLinkIsLoading = () => {
   return {
@@ -61,5 +93,25 @@ export const sendAuthorizationCode = (authorization_code) => {
         return dispatch(authorizationCodeSuccess(jwt, jwtDecode(jwt)))
       })
       .catch(_ => dispatch(authorizationCodeError()))
+  }
+}
+
+export const fetchAccount = () => {
+  return dispatch => {
+    dispatch(accountBeingFetched())
+    return AuthService.getAccount()
+      .then(response => response.data)
+      .then(account => dispatch(fetchAccountSuccess(account)))
+      .catch(() => dispatch(fetchAccountError()))
+  }
+}
+
+export const updateAccount = (account) => {
+  return dispatch => {
+    dispatch(accountBeingUpdated())
+    return AuthService.updateAccount(account)
+      .then(response => response.data)
+      .then(account => dispatch(updateAccountSuccess(account)))
+      .catch(() => dispatch(updateAccountError()))
   }
 }
