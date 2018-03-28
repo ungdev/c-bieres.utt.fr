@@ -4,7 +4,6 @@ import MailList from '../components/MailList'
 import { fetchAccount, updateAccount } from '../actions'
 
 const mapStateToProps = state => {
-  console.log("update account:", state.auth.account)
   return {
     account: state.auth.account
   }

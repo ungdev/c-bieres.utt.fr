@@ -44,8 +44,6 @@ const toasts = (state = initialState, action) => {
       return [...state, newErrorToast("Erreur lors de la suppression de l'évènement.")]
     case "FETCH_EVENTS_ERROR":
       return [...state, newErrorToast("Erreur lors de la récupération des évènements.")]
-    case "FETCH_NEXT_EVENT_ERROR":
-      return [...state, newErrorToast("Erreur lors de la récupération du prochain évènement.")]
     // drinkers
     case "ETUUTT_FETCH_DRINKERS_ERROR":
     case "SERVER_FETCH_DRINKERS_ERROR":
