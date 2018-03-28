@@ -1,17 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import createReactClass from 'create-react-class'
 
-import { Link } from 'react-router-dom'
-
-import Beer from './Beer'
 import BeerList from './BeerList'
 import Banner from './Banner'
 import Footer from './Footer'
 import ShowOldEvents from './ShowOldEvents'
 
-import { toHumanDate, monthToString } from '../helpers/dateHelper'
-import redirectHelper from '../helpers/localStorage/redirectHelper'
+import { toHumanDate } from '../helpers/dateHelper'
 
 import '../scripts/covervid.js'
 import '../scripts/main.js'
@@ -29,15 +24,15 @@ const Home = createReactClass({
     this.props.checkRegistration()
 
     // check if there is an authorization code
-    const fullUrl = window.location.href;
-    const searchPart = fullUrl.split('?')[1];
+    const fullUrl = window.location.href
+    const searchPart = fullUrl.split('?')[1]
 
     if (searchPart) {
-      const parameters = searchPart.split('&');
+      const parameters = searchPart.split('&')
 
       const authorization_code = parameters
         .map(p => p.split('='))
-        .find(p => p[0] === "authorization_code");
+        .find(p => p[0] === "authorization_code")
 
       // if there is an authorization_code, auth the user
       if (authorization_code) {
@@ -78,7 +73,7 @@ const Home = createReactClass({
       : this.props.login()
   },
   render() {
-    const diplayColumn = this.state.width <= 900;
+    const diplayColumn = this.state.width <= 900
 
     let nextEventDate = this.props.nextEvent ? toHumanDate(this.props.nextEvent.when) : null
 

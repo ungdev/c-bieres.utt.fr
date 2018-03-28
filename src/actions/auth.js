@@ -63,6 +63,11 @@ export const authorizationCodeSuccess = (jwt, payload) => {
     payload
   }
 }
+export const loginSuccess = () => {
+  return {
+    type: "LOGIN_SUCCESS"
+  }
+}
 
 export const checkExistingJWT = () => {
   return dispatch => {
@@ -90,6 +95,7 @@ export const sendAuthorizationCode = (authorization_code) => {
       .then(response => response.data)
       .then(jwt => {
         authHelper.set(jwt)
+        dispatch(loginSuccess())
         return dispatch(authorizationCodeSuccess(jwt, jwtDecode(jwt)))
       })
       .catch(_ => dispatch(authorizationCodeError()))

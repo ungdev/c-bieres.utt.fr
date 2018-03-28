@@ -32,9 +32,9 @@ const toasts = (state = initialState, action) => {
     case "UNREGISTER_DRINKER_ERROR":
       return [...state, newErrorToast("Erreur lors de la desinscription.")]
     case "REGISTER_DRINKER_SUCCESS":
-      return [...state, newSuccessToast("Inscription réussite.")]
+      return [...state, newSuccessToast("Inscription réussie.")]
     case "UNREGISTER_DRINKER_SUCCESS":
-      return [...state, newSuccessToast("Désinscription réussite.")]
+      return [...state, newSuccessToast("Désinscription réussie.")]
     // events
     case "UPDATE_EVENT_ERROR":
       return [...state, newErrorToast("Erreur lors de la mise à jour de l'évènement.")]
@@ -66,6 +66,8 @@ const toasts = (state = initialState, action) => {
       return [...state, newErrorToast("Erreur lors de l'envoie du mail.")]
     case "EVENT_MAIL_SUCCESS":
       return [...state, newSuccessToast("Mail envoyé !")]
+    case "LOGIN_SUCCESS":
+      return [...state, newSuccessToast("Authentification réussie !")]
     default:
       return state
   }
