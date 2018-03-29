@@ -20,7 +20,6 @@
   },
   "scripts": {
     "start": "node serve.js",
-    "install": "npm install",
     "postinstall": "npm run build",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
