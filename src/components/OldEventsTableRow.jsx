@@ -12,7 +12,7 @@ const OldEventsTableRow = ({ event }) => (
       {toHumanDate(event.when)}
     </td>
     <td className="old-events__table__col">
-      <Link class="btn btn-link" to={`/olds/${event._id}`}>Voir</Link>
+      <Link className="btn btn-link" to={`/olds/${event._id}`}>Voir</Link>
     </td>
   </tr>
 )

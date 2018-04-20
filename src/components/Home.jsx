@@ -5,6 +5,7 @@ import BeerList from './BeerList'
 import Banner from './Banner'
 import Footer from './Footer'
 import ShowOldEvents from './ShowOldEvents'
+import Nav from './Nav'
 
 import { toHumanDate } from '../helpers/dateHelper'
 
@@ -79,6 +80,7 @@ const Home = createReactClass({
 
     return (
       <div>
+        <Nav firstName={this.props.firstName} logout={this.props.logout} />
         <Banner
           event={this.props.nextEvent}
           date={nextEventDate}

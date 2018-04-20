@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 const Footer = ({ onAdminClick, onMailListClick }) => (
   <footer>
-    <div class="social">
-      <a href="mailto:club-bieres@utt.fr" class="support">
+    <div className="social">
+      <a href="mailto:club-bieres@utt.fr" className="support">
         <i className="fa fa-envelope"></i>
       </a>
-      <a href="https://www.facebook.com/groups/806374509420087/?fref=ts" class="facebook">
+      <a href="https://www.facebook.com/groups/806374509420087/?fref=ts" className="facebook">
         <i className="fa fa-facebook"></i>
       </a>
-      <a onClick={onMailListClick} class="maillist">Mail List</a>
-      <a onClick={onAdminClick} class="admin">Admin</a>
+      <a onClick={onMailListClick} className="maillist">Mail List</a>
+      <a onClick={onAdminClick} className="admin">Admin</a>
     </div>
   </footer>
 )

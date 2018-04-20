@@ -69,6 +69,13 @@ export const loginSuccess = () => {
   }
 }
 
+export const logout = () => {
+  authHelper.clean()
+  return {
+    type: 'LOGOUT'
+  }
+}
+
 export const checkExistingJWT = () => {
   return dispatch => {
     const jwt = authHelper.get()

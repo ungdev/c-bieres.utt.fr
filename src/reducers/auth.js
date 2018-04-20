@@ -6,16 +6,21 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case "AUTHORIZATION_CODE_SUCCESS":
+    case 'LOGOUT':
+      return Object.assign({}, state, {
+        jwt: null,
+        payload: {}
+      })
+    case 'AUTHORIZATION_CODE_SUCCESS':
       return Object.assign({}, state, {
         jwt: action.jwt,
         payload: action.payload
       })
-    case "FETCH_ACCOUNT_SUCCESS":
+    case 'FETCH_ACCOUNT_SUCCESS':
       return Object.assign({}, state, {
         account: action.account
       })
-    case "UPDATE_ACCOUNT_SUCCESS":
+    case 'UPDATE_ACCOUNT_SUCCESS':
       return Object.assign({}, state, {
         account: Object.assign({}, state.account, {
           inMailList: !state.account.inMailList
