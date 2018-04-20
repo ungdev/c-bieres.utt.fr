@@ -57,9 +57,10 @@ export const registerDrinkerSuccess = (eventId) => {
     eventId
   }
 }
-export const drinkerAlreadyRegistered = () => {
+export const drinkerAlreadyRegistered = (eventId) => {
   return {
-    type: 'DRINKER_ALREADY_REGISTERED'
+    type: 'DRINKER_ALREADY_REGISTERED',
+    eventId
   }
 }
 

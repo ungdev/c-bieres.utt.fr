@@ -1,5 +1,6 @@
 import AuthService from '../services/AuthService'
 import authHelper from '../helpers/localStorage/authHelper'
+import registrationHelper from '../helpers/localStorage/registrationHelper'
 import jwtDecode from 'jwt-decode'
 
 export const accountBeingFetched = () => {
@@ -71,6 +72,7 @@ export const loginSuccess = () => {
 
 export const logout = () => {
   authHelper.clean()
+  registrationHelper.clean()
   return {
     type: 'LOGOUT'
   }

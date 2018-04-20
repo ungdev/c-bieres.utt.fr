@@ -1,4 +1,4 @@
-const KEY_NAME = 'last_action';
+const KEY_NAME = 'last_action'
 
 export default {
 
@@ -8,7 +8,7 @@ export default {
      * @param string action: the last action
      */
     set(action) {
-      localStorage.setItem(KEY_NAME, action);
+      localStorage.setItem(KEY_NAME, action)
     },
 
     /**
@@ -17,7 +17,7 @@ export default {
      * @return string
      */
     get() {
-        return localStorage.getItem(KEY_NAME);
+        return localStorage.getItem(KEY_NAME)
     }
 
 }
