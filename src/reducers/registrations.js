@@ -18,6 +18,7 @@ const registrations = (state = initialState, action) => {
       })
     case 'REGISTER_DRINKER_SUCCESS':
     case 'DRINKER_ALREADY_REGISTERED':
+    case 'LOAD_REGISTRATION':
       return Object.assign({}, state, {
         registration: action.eventId
       })

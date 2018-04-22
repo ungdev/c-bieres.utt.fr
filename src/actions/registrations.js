@@ -57,6 +57,12 @@ export const registerDrinkerSuccess = (eventId) => {
     eventId
   }
 }
+export const loadRegistration = (eventId) => {
+  return {
+    type: 'LOAD_REGISTRATION',
+    eventId
+  }
+}
 export const drinkerAlreadyRegistered = (eventId) => {
   return {
     type: 'DRINKER_ALREADY_REGISTERED',
@@ -92,7 +98,7 @@ export const checkRegistration = () => {
   return dispatch => {
     const registration = registrationHelper.get()
     if (registration) {
-      dispatch(registerDrinkerSuccess(registration))
+      dispatch(loadRegistration(registration))
     }
   }
 }
